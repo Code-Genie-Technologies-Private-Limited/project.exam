@@ -2,10 +2,10 @@
 
 ``` bash
 # clone the repo
-$ git clone https://github.com/19008pk/core-ui
+$ git clone https://github.com/Code-Genie-Technologies-Private-Limited/project.aec.git
 
 # go into app's directory
-$ cd core-ui
+$ cd project.aec
 
 # install app's dependencies
 $ composer install
