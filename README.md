@@ -7,6 +7,9 @@ $ git clone https://github.com/Code-Genie-Technologies-Private-Limited/project.a
 # go into app's directory
 $ cd project.aec
 
+# create a branch of your name(praveen/shivam/ashutosh/kuldeep/ved/kuldeep)
+$ git checkout -b praveen
+
 # install app's dependencies
 $ composer install
 
