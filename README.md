@@ -2,10 +2,10 @@
 
 ``` bash
 # clone the repo
-$ git clone https://github.com/Code-Genie-Technologies-Private-Limited/project.aec.git
+$ git clone https://github.com/Code-Genie-Technologies-Private-Limited/project.exam.git
 
 # go into app's directory
-$ cd project.aec
+$ cd project.exam
 
 # create a branch of your name(praveen/shivam/ashutosh/kuldeep/ved/kuldeep)
 $ git checkout -b praveen
