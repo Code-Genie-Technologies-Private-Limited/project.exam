@@ -17,8 +17,10 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="name">Topic Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter Topic Name" autocomplete="topic" autofocus required value="{{ $topic->name }}">
-                                    <span class="help-block">Please enter topic name</span>
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter Topic Name" autocomplete="topic" autofocus required value="{{ old('name') ?? $topic->name }}">
+                                    @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -26,16 +28,22 @@
                                 <div class="col-md-9">
                                     <select class="form-control" id="subject_id" name="subject_id">
                                         @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}" {{ $subject->id == $topic->subject_id ? 'selected' : '' }}>{{ $subject->name }}</option>
+                                        <option value="{{ $subject->id }}" {{ (old('subject_id') ?? $topic->subject_id) == $subject->id ? 'selected' : '' }}> {{ $subject->name }} </option>
                                         @endforeach
                                     </select>
+                                    @error('subject_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="order">Priority Order</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="order" type="text" name="order" placeholder="Enter Priority Order" value="{{ $topic->order }}">
+                                    <input class="form-control" id="order" type="text" name="order" placeholder="Enter Priority Order" value="{{ old('order') ?? $topic->order }}">
                                     <span class="help-block">Please enter priority order</span>
+                                    @error('order')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -49,6 +57,9 @@
                                         <input class="form-check-input" id="in-active" type="radio" value="0" name="status" {{ $subject->status == 0 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="in-active">In Active</label>
                                     </div>
+                                    @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <button class="btn btn-success" type="submit">Update</button>

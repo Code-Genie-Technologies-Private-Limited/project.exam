@@ -15,8 +15,13 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $subject->name }}" />
+                                <label class="col-md-3 col-form-label" for="name">Subject Name</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter Subject Name" autocomplete="subject" autofocus required value="{{old('name')}}">
+                                    @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>

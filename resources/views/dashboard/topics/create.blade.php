@@ -17,7 +17,9 @@
                                 <label class="col-md-3 col-form-label" for="name">Topic Name</label>
                                 <div class="col-md-9">
                                     <input class="form-control" id="name" type="text" name="name" placeholder="Enter Topic Name" autocomplete="topic" autofocus required value="{{old('name')}}">
-                                    <span class="help-block">Please enter topic name</span>
+                                    @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -25,9 +27,12 @@
                                 <div class="col-md-9">
                                     <select class="form-control" id="subject_id" name="subject_id">
                                         @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        <option value="{{ $subject->id }}" {{ $subject->id == old('subject_id') ? 'selected' : '' }}>{{ $subject->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('subject_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>

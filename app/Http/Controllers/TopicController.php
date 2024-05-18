@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Subject;
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
 {
@@ -40,6 +41,17 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:1|max:64',
+            'subject_id' => 'required|exists:subjects,id',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         Topic::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
 
         $request->session()->flash('message', 'Topic created successfully.');
@@ -79,6 +91,17 @@ class TopicController extends Controller
      */
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:1|max:64',
+            'subject_id' => 'required|exists:subjects,id',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $topic->update($request->all());
 
         $request->session()->flash('message', 'Topic updated successfully.');
