@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
 {
@@ -15,7 +17,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::all();
+        $subjects = Subject::with('creator')->paginate(10);
         return view('dashboard.Subject.index', compact('subjects'));
         // $subject = Subject::all();
         // return view('dashboard.Subject.index', compact('subject'));
@@ -40,8 +42,18 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-        $data = $request->all();
-        Subject::create($request->all());
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:subjects|min:3|max:200',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+
+        Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+
+        $request->session()->flash('message', 'Subject Created Successfully');
         return redirect()->route('subjects.index');
     }
 
@@ -53,6 +65,7 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
+
         return view('dashboard.Subject.show', compact('subject'));
     }
 
@@ -64,6 +77,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
+
         return view('dashboard.Subject.edit', compact('subject'));
     }
 
@@ -76,6 +90,14 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:200',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $request->session()->flash('message', "update Successfully");
         $subject->update($request->all());
         return redirect()->route('subjects.index');
     }
@@ -86,9 +108,10 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject $subject)
+    public function destroy(Subject $subject, Request $request)
     {
         $subject->delete();
+        $request->session()->flash('message', 'Subject Delete Successfully !');
         return redirect()->route('subjects.index');
     }
 }

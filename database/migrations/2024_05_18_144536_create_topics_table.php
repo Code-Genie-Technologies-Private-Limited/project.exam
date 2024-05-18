@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubjectsTable extends Migration
+class CreateTopicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->integer('order');
+            $table->string('name')->nullable(true);
+            $table->string('subject_id')->nullable(true);
             $table->boolean('status')->default(1);
-            $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
+            $table->integer('created_by')->nullable(true);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('topics');
     }
 }

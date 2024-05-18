@@ -13,10 +13,13 @@
                     <div class="card-body">
                         <h4>Name</h4>
                         <p>{{ $subject->name }}</p>
-                        <h4>Subject</h4>
-                        <p>{{ $subject->mobile_number }}</p>
-                        <h4>Content</h4>
-                        <p>{{ $subject->roll_number }}</p>
+                        <h4>Order</h4>
+                        <p>{{ $subject->order }}</p>
+                        <h4>Status</h4>
+                        <p>{{ $subject->status==1?'active':'deactive'; }}</p>
+                        <h4>Created By</h4>
+                        <p>{{ $subject->creator->name }}</p>
+                        
                         <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>

@@ -8,22 +8,22 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Add Student</h4>
+                        <h4>Add Subject</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('subjects.store') }}">
+                        <form method="POST" action="{{ route('topics.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label>Name</label>
                                 <input class="form-control" type="text" placeholder="Name" name="name" required autofocus />
                             </div>
                             <div class="form-group row">
-                                <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Order" name="order" required autofocus />
+                                <label>Name</label>
+                                <input class="form-control" type="text" placeholder="Number" name="subject" required autofocus />
                             </div>
                             
                             <button class="btn btn-success" type="submit">Add</button>
-                            <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
+                            <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
                 </div>

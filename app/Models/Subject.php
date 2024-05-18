@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     use HasFactory;
-    protected $fillable=['name','created_by'];
+    protected $guarded = [];
+
+    public function creator()
+    {
+        return $this->belongsTo(user::class, 'created_by');
+    }
 }

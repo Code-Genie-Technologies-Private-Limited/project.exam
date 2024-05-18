@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Subject List
+                        <i class="fa fa-align-justify"></i>Student List
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
@@ -19,36 +19,34 @@
                         </div>
                         @endif
                         <div class="row">
-                            <a href="{{ route('subjects.create') }}" class="btn btn-primary m-2">Add Subject</a>
+                            <a href="{{ route('topics.create') }}" class="btn btn-primary m-2">Add Student</a>
                         </div>
                         <br>
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Order</th>
                                     <th>Status</th>
-                                    <th>Created_by</th>
-                                    <th>View</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>created_by</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($subjects as $subject)
+                                @foreach($topics as $topic)
                                 <tr>
-                                    <td><strong>{{ $subject->name }}</strong></td>
-                                    <td><strong>{{ $subject->order }}</strong></td>
-                                    <td><strong>{{ $subject->status==1?'Active':'Deactive'; }}</strong></td>
-                                    <td><strong>{{ $subject->creator->name }}</strong></td>
+                                    <td><strong>{{ $topic->name }}</strong></td>
+                                    <td><strong>{{ $topic->status }}</strong></td>
+                                    <td><strong></strong></td>
                                     <td>
-                                        <a href="{{ url('/subjects/' . $subject->id) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/subjects/' . $subject->id . '/edit') }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('/topics/' . $topic->id . '/edit') }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('subjects.destroy', $subject->id ) }}" method="POST">
+                                        <form action="{{ route('topics.destroy', $topic->id ) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-danger">Delete</button>
@@ -58,7 +56,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- {{ $subjects->links() }} --}}
+                        {{-- {{ $topics->links() }} --}}
                     </div>
                 </div>
             </div>
