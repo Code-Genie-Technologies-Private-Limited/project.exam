@@ -17,7 +17,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::with(['user', 'subject'])->paginate(20);
+        $topics = Topic::with(['user', 'subject'])->orderBy('order', 'asc')->paginate(20);
 
         return view('dashboard.topics.index', compact('topics'));
     }
@@ -44,6 +44,7 @@ class TopicController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required|min:3|max:50|string|unique:topics,name',
             'order' => 'nullable|min:1|max:8',
+            'subject_id' => 'required|integer',
         ]);
 
         if ($validation->fails()) {
@@ -99,6 +100,7 @@ class TopicController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required|min:3|max:50|string',
             'order' => 'nullable|min:1|max:8',
+            'subject_id' => 'required|integer',
         ]);
 
         if ($validation->fails()) {
