@@ -50,6 +50,7 @@ class SubjectController extends Controller
         }
 
         Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+
         $request->session()->flash('message', 'Successfully created subject.');
         return redirect()->route('subjects.index');
     }
@@ -96,6 +97,8 @@ class SubjectController extends Controller
         }
 
         $subject->update($request->all());
+
+        $request->session()->flash('message', 'Subject successfully updated.');
         return redirect()->route('subjects.index');
     }
 
@@ -107,15 +110,18 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject, Request $request)
     {
-        // if ($subject->has('topics')->exists()) {
-        //     $request->session()->flash('message', "Can't delete. Subject has assigned one or more topics.");
-        //     $request->session()->flash('back', 'roles.index');
-        //     return view('dashboard.shared.universal-info');
-        // }
+        // Check if the subject has any related topics
+        $hasTopics = $subject->topics()->exists();
+
+        // Flash an error message and redirect if the subject has topics
+        if ($hasTopics) {
+            $request->session()->flash('error', "Can't delete. Subject has assigned one or more topics.");
+            return redirect()->route('subjects.index');
+        }
 
         $subject->delete();
-        $request->session()->flash('message', "Can't delete. Subject has assigned one or more topics.");
-        $request->session()->flash('back', 'roles.index');
+
+        $request->session()->flash('message', "Subject has been deleted.");
         return redirect()->route('subjects.index');
     }
 }

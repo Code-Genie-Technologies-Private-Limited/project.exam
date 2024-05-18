@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Subject List
+                        <i class="fa fa-align-justify"></i>Topic List
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
@@ -18,45 +18,39 @@
                             </div>
                         </div>
                         @endif
-
-                        @if(Session::has('error'))
                         <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
-                            </div>
-                        </div>
-                        @endif
-                        <div class="row">
-                            <a href="{{ route('subjects.create') }}" class="btn btn-primary m-2">Add Subject</a>
+                            <a href="{{ route('topics.create') }}" class="btn btn-primary m-2">Add Topic</a>
                         </div>
                         <br>
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Order</th>
+                                    <th>Subject</th>
                                     <th>Status</th>
-                                    <th>Created By</th>
+                                    <th>Order</th>
+                                    <th>Created By User</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($subjects as $subject)
+                                @foreach($topics as $topic)
                                 <tr>
-                                    <td>{{ $subject->name }}</td>
-                                    <td>{{ $subject->order }}</td>
-                                    <td>{{ $subject->status }}</td>
-                                    <td>{{ $subject->creator->name }}</td>
+                                    <td>{{ $topic->name }}</td>
+                                    <td>{{ $topic->subject->name }}</td>
+                                    <td>{{ $topic->status }}</td>
+                                    <td>{{ $topic->order }}</td>
+                                    <td>{{ $topic->creator->name }}</td>
                                     <td>
-                                        <a href="{{ url('/subjects/' . $subject->id) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/subjects/' . $subject->id . '/edit') }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('/topics/' . $topic->id . '/edit') }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('subjects.destroy', $subject->id ) }}" method="POST">
+                                        <form action="{{ route('topics.destroy', $topic->id ) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-danger">Delete</button>
@@ -66,7 +60,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $subjects->links() }}
+                        {{ $topics->links() }}
                     </div>
                 </div>
             </div>
