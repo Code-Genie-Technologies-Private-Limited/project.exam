@@ -11,6 +11,18 @@ class Subject extends Model
 
     protected $guarded = [];
 
+    // Automatically set the 'order' field when adding
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($subject) {
+            // Set 'order' to the next available number
+            $maxOrder = Subject::max('order');
+            $subject->order = $maxOrder ? $maxOrder + 1 : 1;
+        });
+    }
+
     public function topics()
     {
         return $this->hasMany(Topic::class);

@@ -17,7 +17,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::with('subject')->paginate(10);
+        $topics = Topic::with(['subject', 'creator'])->paginate(10);
         return view('dashboard.topics.index', compact('topics'));
     }
 
@@ -28,8 +28,7 @@ class TopicController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::where('status', 1)->orderByDesc('order')->get();
-
+        $subjects = Subject::where('status', 1)->orderBy('order')->get();
         return view('dashboard.topics.create', compact('subjects'));
     }
 
@@ -55,7 +54,7 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        $subjects = Subject::where('status', 1)->orderByDesc('order')->get();
+        $subjects = Subject::where('status', 1)->orderBy('order')->get();
         return view('dashboard.topics.show', compact('topic', 'subjects'));
     }
 
@@ -67,7 +66,7 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        $subjects = Subject::where('status', 1)->orderByDesc('order')->get();
+        $subjects = Subject::where('status', 1)->orderBy('order')->get();
         return view('dashboard.topics.edit', compact('topic', 'subjects'));
     }
 
@@ -94,12 +93,17 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic, Request $request)
     {
-        // if ($topic->has('questions')->exists()) {
-        //     $request->session()->flash('message', "Can't delete. Topic has assigned one or more questions.");
-        //     return redirect()->route('topics.index');
-        // }
+        // Check if the subject has any related topics
+        $hasQuestions = $topic->questions()->exists();
+
+        // Flash an error message and redirect if the subject has topics
+        if ($hasQuestions) {
+            $request->session()->flash('error', "Can't delete. Topic has assigned one or more questions.");
+            return redirect()->route('topics.index');
+        }
 
         $topic->delete();
+
         $request->session()->flash('message', "Topic has been deleted.");
         return redirect()->route('topics.index');
     }
