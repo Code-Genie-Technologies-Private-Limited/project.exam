@@ -18,7 +18,7 @@
                         <h4>Priority Order</h4>
                         <p>{{ $topic->order }}</p>
                         <h4>Status</h4>
-                        <p>{{ $topic->status }}</p>
+                        <p>{{ $topic->status == 1 ? "Active": "In Active" }}</p>
                         <h4>Created By User</h4>
                         <p>{{ $topic->creator->name }}</p>
                         <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>

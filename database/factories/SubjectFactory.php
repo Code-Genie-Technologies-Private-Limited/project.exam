@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubjectFactory extends Factory
@@ -14,7 +15,10 @@ class SubjectFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->sentence,
+            'order' => $this->faker->randomFloat(2, 1, 100),
+            'status' => $this->faker->boolean,
+            'created_by' => User::factory(),
         ];
     }
 }

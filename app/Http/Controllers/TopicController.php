@@ -42,7 +42,7 @@ class TopicController extends Controller
     public function store(StoreTopicRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:64',
+            'name' => 'required|min:1|max:160',
             'subject_id' => 'required|exists:subjects,id',
         ]);
 
@@ -92,7 +92,7 @@ class TopicController extends Controller
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:64',
+            'name' => 'required|min:1|max:160',
             'subject_id' => 'required|exists:subjects,id',
         ]);
 

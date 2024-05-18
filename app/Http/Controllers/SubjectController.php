@@ -40,7 +40,7 @@ class SubjectController extends Controller
     public function store(StoreSubjectRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:64',
+            'name' => 'required|min:1|max:160',
         ]);
 
         if ($validator->fails()) {
@@ -87,7 +87,7 @@ class SubjectController extends Controller
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:64',
+            'name' => 'required|min:1|max:160',
         ]);
 
         if ($validator->fails()) {

@@ -17,15 +17,21 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="name">Subject Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter Subject Name" autocomplete="subject" autofocus required value="{{old('name')}}">
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter Subject Name" autocomplete="subject" autofocus required value="{{ old('name') ?? $subject->name }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Mobile Number" name="order" value="{{ $subject->order }}" />
+                                <label class="col-md-3 col-form-label" for="order">Priority Order</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="order" type="text" name="order" placeholder="Enter Priority Order" value="{{ old('order') ?? $subject->order }}">
+                                    <span class="help-block">Please enter priority order</span>
+                                    @error('order')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>
@@ -38,6 +44,9 @@
                                         <input class="form-check-input" id="in-active" type="radio" value="0" name="status" {{ $subject->status == 0 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="in-active">In Active</label>
                                     </div>
+                                    @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <button class="btn btn-success" type="submit">Update</button>

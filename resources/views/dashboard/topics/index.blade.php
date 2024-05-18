@@ -27,20 +27,18 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Subject</th>
-                                    <th>Status</th>
                                     <th>Order</th>
                                     <th>Created By User</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($topics as $topic)
                                 <tr>
-                                    <td>{{ $topic->name }}</td>
+                                    <td>{{ $topic->name }}<span class="badge {{ $topic->status == 1 ? 'badge-secondary': 'badge-warning' }}">{{ $topic->status == 1 ? "Active": "In Active" }}</span></td>
                                     <td>{{ $topic->subject->name }}</td>
-                                    <td>{{ $topic->status }}</td>
                                     <td>{{ $topic->order }}</td>
                                     <td>{{ $topic->creator->name }}</td>
                                     <td>

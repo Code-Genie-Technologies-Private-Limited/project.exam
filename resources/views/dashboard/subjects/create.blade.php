@@ -16,7 +16,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="name">Subject Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter Subject Name" autocomplete="subject" autofocus required value="{{old('name')}}">
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter Subject Name" length="160" autocomplete="subject" autofocus required value="{{old('name')}}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

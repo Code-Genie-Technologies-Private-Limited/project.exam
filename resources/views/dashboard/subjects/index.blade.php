@@ -35,19 +35,17 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Order</th>
-                                    <th>Status</th>
                                     <th>Created By</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($subjects as $subject)
                                 <tr>
-                                    <td>{{ $subject->name }}</td>
+                                    <td>{{ $subject->name }}<span class="badge {{ $subject->status == 1 ? 'badge-secondary': 'badge-warning' }}">{{ $subject->status == 1 ? "Active": "In Active" }}</span></td>
                                     <td>{{ $subject->order }}</td>
-                                    <td>{{ $subject->status }}</td>
                                     <td>{{ $subject->creator->name }}</td>
                                     <td>
                                         <a href="{{ url('/subjects/' . $subject->id) }}" class="btn btn-primary">View</a>
