@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     use HasFactory;
-    public function topics() {
-    return $this->hasMany(Topic::class);
+    protected $guarded = [];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

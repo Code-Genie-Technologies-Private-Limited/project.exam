@@ -15,7 +15,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::all()->paginate;
+        $subjects = Subject::with('creator')->paginate(10);
         return view('dashboard.subjects.index', compact('subjects'));
     }
 
@@ -26,7 +26,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        retrun view('dashboard.subjects.create');
+        return view('dashboard.subjects.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-        subject::create($request->all());
+        subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
         return redirect()->route('subjects.index');
     }
 

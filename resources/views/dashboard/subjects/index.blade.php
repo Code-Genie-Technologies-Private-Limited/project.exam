@@ -26,8 +26,9 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Status</th>
                                     <th>Order</th>
+                                    <th>Status</th>
+                                    <th>Created By User</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -37,8 +38,9 @@
                                 @foreach($subjects as $subject)
                                 <tr>
                                     <td><strong>{{ $subject->name }}</strong></td>
-                                    <td><strong>{{ $subject->status }}</strong></td>
                                     <td><strong>{{ $subject->order }}</strong></td>
+                                    <td><strong>{{ $subject->status }}</strong></td>
+                                    <td><strong>{{ $subject->creator->name }}</strong></td>
                                     <td>
                                         <a href="{{ url('/subjects/' . $subject->id) }}" class="btn btn-primary">View</a>
                                     </td>

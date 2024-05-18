@@ -18,8 +18,8 @@ class CreateSubjectsTable extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('status')->default(1);
-            $table->decimal('order')->nullable(true);
-            // $table->foreignIdFor(Topic::class);
+            $table->decimal('order')->default(0.00);
+            $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
         });
     }

@@ -19,12 +19,21 @@
                                 <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $subject->name }}" />
                             </div>
                             <div class="form-group row">
-                                <label>Status</label>
-                                <input class="form-control" type="text" placeholder="Status" name="status" required value="{{ $subject->status }}" />
+                                <label class="col-md-3 col-form-label">Status</label>
+                                <div class="col-md-9 col-form-label">
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" {{ $subject->status == 1 ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="active">Active</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="in-active" type="radio" value="0" name="status" {{ $subject->status == 0 ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="in-active">In Active</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Order" name="order" required value="{{ $subject->order }}" />
+                                <input class="form-control" type="number" placeholder="Order" name="order" required value="{{ $subject->order }}" />
                             </div>
                             <button class="btn btn-success" type="submit">Edit</button>
                             <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>

@@ -17,8 +17,8 @@ class CreateTopicsTable extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('order');
-            $table->foreignIdFor(Subject::class);
-            $table->foreignIdFor('created_by');
+            $table->foreignId('subjecct_id');
+            $table->foreignId('created_by');
             $table->boolean('status');
             $table->timestamps();
         });
