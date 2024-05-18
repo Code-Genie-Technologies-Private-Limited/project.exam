@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Matcher\Subset;
 
-class Subject extends Model
+class Topic extends Model
 {
     use HasFactory;
 
@@ -16,8 +17,8 @@ class Subject extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function topic()
+    public function subject()
     {
-        return $this->hasMany(Topic::class);
+        return $this->belongsTo(Subject::class);
     }
 }

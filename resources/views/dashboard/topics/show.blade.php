@@ -8,24 +8,26 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Subject: {{ $subject->name }}</h4>
+                        <h4>Topic: {{ $topic->name }}</h4>
                     </div>
                     <div class="card-body">
+                        <h4>Topic Name</h4>
+                        <p>{{ $topic->name }}</p>
                         <h4>Subject Name</h4>
-                        <p>{{ $subject->name }}</p>
+                        <p>{{ $topic->subject->name }}</p>
                         <h4>Order</h4>
-                        <p>{{ $subject->order != '' ? $subject->order : 'N/A' }}</p>
+                        <p>{{ $topic->order != '' ? $topic->order : 'N/A' }}</p>
                         <h4>Status</h4>
                         <p>
-                            @if($subject->status == 1)
+                            @if($topic->status == 1)
                             Active
                             @else
                             InActive
                             @endif
                         </p>
                         <h4>Created By</h4>
-                        <p>{{ $subject->user->name }}</p>
-                        <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
+                        <p>{{ $topic->user->name }}</p>
+                        <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>
             </div>

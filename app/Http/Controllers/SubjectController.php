@@ -67,6 +67,7 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
+        $subject->with('user')->get();
         return view('dashboard.subjects.show', compact('subject'));
     }
 
@@ -113,7 +114,6 @@ class SubjectController extends Controller
     public function destroy(Subject $subject)
     {
         $subject->delete();
-
         return redirect()->route('subjects.index')->with('subject_message', 'Subject deleted successfully.');
     }
 }
