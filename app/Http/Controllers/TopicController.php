@@ -29,7 +29,7 @@ class TopicController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::query()->get();
+        $subjects = Subject::where('status', 1)->get();
         return view('dashboard.topics.create', compact('subjects'));
     }
 
