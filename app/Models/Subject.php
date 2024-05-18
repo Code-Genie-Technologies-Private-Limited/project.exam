@@ -9,4 +9,9 @@ class Subject extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function creator()
+    {
+        return $this->belongsTo(user::class, 'created_by');
+    }
 }

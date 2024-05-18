@@ -16,14 +16,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $validator = Validator::make($request->all(),[
-      'name' => 'required|min:3|max:160',
-        ]);
-        if($validator -> fials()){
-         return response()->json($validator->errors());
-        }
         $topics = Topic::all();
-        return view('dashboard.topics.index',compact('topics'));
+        return view('dashboard.topics.index', compact('topics'));
     }
 
     /**
@@ -56,7 +50,7 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        return view('dashboard.topics.show',compact('topic'));
+        return view('dashboard.topics.show', compact('topic'));
     }
 
     /**
@@ -67,7 +61,7 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        return view('dashboard.topics.edit',compact('topic'));
+        return view('dashboard.topics.edit', compact('topic'));
     }
 
     /**

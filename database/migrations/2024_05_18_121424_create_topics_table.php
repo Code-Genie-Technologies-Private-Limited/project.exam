@@ -16,10 +16,10 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor('subject_id');
+            $table->foreignId('subject_id');
             $table->decimal('order');
             $table->boolean('status')->default(1);
-            $table->foreignIdFor('created_by');
+            $table->foreignId('created_by');
             $table->timestamps();
         });
     }
