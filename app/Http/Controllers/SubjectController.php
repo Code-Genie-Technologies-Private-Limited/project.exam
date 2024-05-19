@@ -17,8 +17,11 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::with('creator')->paginate(4);
-        return view('dashboard.Subject.index', compact('subjects'));
+        $subjects = Subject::with('creator')
+            ->orderBy('id', 'desc')
+            ->paginate(4);
+
+        return view('dashboard.subject.index', compact('subjects'));
     }
 
     /**
