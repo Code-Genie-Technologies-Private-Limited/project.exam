@@ -28,7 +28,7 @@
                                 <div class="col-md-9">
                                     <select class="form-control" id="subject_id" name="subject_id">
                                         @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}" {{ (old('subject_id') ?? $topic->subject_id) == $subject->id ? 'selected' : '' }}> {{ $subject->name }} </option>
+                                        <option value="{{ $subject->id }}" @if (( old('subject_id') ?? $topic->subject_id) == $subject->id) selected @endif > {{ $subject->name }} </option>
                                         @endforeach
                                     </select>
                                     @error('subject_id')
@@ -50,7 +50,7 @@
                                 <label class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" {{ $subject->status == 1 ? 'checked' : '' }}>
+                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" @if $subject->status == 1 'checked' @endif>
                                         <label class="form-check-label" for="active">Active</label>
                                     </div>
                                     <div class="form-check form-check-inline mr-1">

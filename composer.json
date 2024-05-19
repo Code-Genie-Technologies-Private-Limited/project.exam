@@ -9,27 +9,32 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "fideloper/proxy": "^4.2",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.0",
-        "laravel/telescope": "^5.0",
-        "laravel/tinker": "^2.3.0",
-        "laravel/ui": "^3.0",
-        "spatie/laravel-medialibrary": "^8.7.2",
-        "spatie/laravel-permission": "^3.17"
+        "guzzlehttp/guzzle": "^7.8",
+        "laravel/framework": "^11.0",
+        "laravel/telescope": "*",
+        "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.5",
+        "spatie/laravel-medialibrary": "^11.5",
+        "spatie/laravel-permission": "^6.7"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.7",
-        "facade/ignition": "^2.3.6",
+        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
-        "mockery/mockery": "^1.3.1",
-        "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.0"
+        "laravel/pint": "^1.13",
+        "laravel/sail": "^1.26",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-laravel": "^2.4",
+        "spatie/laravel-ignition": "^2.7"
     },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {
@@ -47,9 +52,7 @@
             "database/seeders",
             "database/factories"
         ],
-        "files": [
-
-        ]
+        "files": []
     },
     "autoload-dev": {
         "psr-4": {

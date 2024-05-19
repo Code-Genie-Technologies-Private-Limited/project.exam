@@ -117,13 +117,13 @@ class TopicController extends Controller
     public function destroy(Topic $topic, Request $request)
     {
         // Check if the subject has any related topics
-        $hasQuestions = $topic->questions()->exists();
+        // $hasQuestions = $topic->questions()->exists();
 
         // Flash an error message and redirect if the subject has topics
-        if ($hasQuestions) {
-            $request->session()->flash('error', "Can't delete. Topic has assigned one or more questions.");
-            return redirect()->route('topics.index');
-        }
+        // if ($hasQuestions) {
+        //     $request->session()->flash('error', "Can't delete. Topic has assigned one or more questions.");
+        //     return redirect()->route('topics.index');
+        // }
 
         $topic->delete();
 
