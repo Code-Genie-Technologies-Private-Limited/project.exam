@@ -17,10 +17,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::with('creator')->paginate(10);
+        $subjects = Subject::with('creator')->paginate(4);
         return view('dashboard.Subject.index', compact('subjects'));
-        // $subject = Subject::all();
-        // return view('dashboard.Subject.index', compact('subject'));
     }
 
     /**
@@ -47,12 +45,11 @@ class SubjectController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            // return response()->json(['errors' => $validator->errors()], 422);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-
         Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
-
         $request->session()->flash('message', 'Subject Created Successfully');
         return redirect()->route('subjects.index');
     }
@@ -95,7 +92,8 @@ class SubjectController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            // return response()->json(['errors' => $validator->errors()], 422);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
         $request->session()->flash('message', "update Successfully");
         $subject->update($request->all());

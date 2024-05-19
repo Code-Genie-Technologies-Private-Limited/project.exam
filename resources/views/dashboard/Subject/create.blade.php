@@ -15,13 +15,17 @@
                             @csrf
                             <div class="form-group row">
                                 <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus />
+                                <input class="form-control" type="text" placeholder="Name" name="name" value="{{old('name')}}" required autofocus />
+                                @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
-                            <div class="form-group row">
+
+                            <!-- <div class="form-group row">
                                 <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Order" name="order" required autofocus />
-                            </div>
-                            
+                                <input class="form-control" type="text" placeholder="Order" name="order" value="{{old('order')}}" required />
+                            </div> -->
+
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
                         </form>

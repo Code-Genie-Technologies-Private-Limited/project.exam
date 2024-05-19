@@ -16,7 +16,7 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->integer('order');
+            $table->integer('order')->nullable(true);
             $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();

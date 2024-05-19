@@ -24,6 +24,9 @@
                                     <div class="form-check">
                                         <input class="form-check-input" id="radio1" type="radio" value="1" name="status" {{$subject->status==1?'checked':''}}>
                                         <label class="form-check-label" for="radio1">Active</label>
+                                        @if ($errors->has('name'))
+                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                        @endif
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" id="radio2" type="radio" value="0" name="status" {{$subject->status==0?'checked':''}}>
