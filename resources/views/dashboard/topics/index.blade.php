@@ -18,6 +18,13 @@
                             </div>
                         </div>
                         @endif
+                        @if(Session::has('error'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="row">
                             <a href="{{ route('topics.create') }}" class="btn btn-primary m-2">Add Topic</a>
                         </div>
