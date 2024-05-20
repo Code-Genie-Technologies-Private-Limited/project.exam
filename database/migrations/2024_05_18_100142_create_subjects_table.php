@@ -16,7 +16,7 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->boolean('status')->default(1);
             $table->decimal('order')->default(0.00);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
