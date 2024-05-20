@@ -16,7 +16,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::all();
+        $topics = Topic::with('creator','subject')->paginate(10);
         return view('dashboard.topics.index', compact('topics'));
     }
 
@@ -38,7 +38,7 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
-        Topic::create($request->all());
+        Topic::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
         return redirect()->route('topics.index');
     }
 

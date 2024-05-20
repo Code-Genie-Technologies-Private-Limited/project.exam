@@ -9,4 +9,13 @@ class Topic extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function creator()
+    {
+        return $this->belongsTo(user::class, 'created_by');
+    }
+    public function subject()
+    {
+        return $this->belongsTo(subject::class, 'subject_id');
+    }
 }
