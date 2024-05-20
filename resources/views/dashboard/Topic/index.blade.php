@@ -29,7 +29,7 @@
                                     <th>Name</th>
                                     <th>Created by</th>
                                     <th>Subject</th>
-                                   
+
                                     <th>View</th>
                                     <th>Del</th>
                                 </tr>
@@ -43,6 +43,7 @@
                                     <td><strong>{{ $topic->name }}</strong></td>
                                     <td><strong>{{ $topic->creator->name }}</strong></td>
                                     <td> <b>{{$topic->subject->name}}</b></td>
+                                    <td>{{ $topic->status == 1 ? 'Active' : 'Deactive' }}</td>
                                     <td>
                                         <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
                                         <a href="{{ url('/topics/' . $topic->id . '/edit') }}" class="btn btn-primary">Edit</a>

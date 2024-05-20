@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Topic;
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
@@ -16,7 +18,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::with('creator', 'subject')->orderBy('id', 'desc') ->paginate(4);
+        $topics = Topic::with('creator', 'subject')->orderBy('id', 'desc')->paginate(4);
         return view('dashboard.Topic.index', compact('topics'));
     }
 
@@ -30,7 +32,6 @@ class TopicController extends Controller
     {
         $subjects = Subject::all();
         return view('dashboard.Topic.create', compact('subjects'));
-        
     }
 
     /**
@@ -49,10 +50,9 @@ class TopicController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->all();
-        Topic::create(array_merge($request->all(), ['created_by' =>auth()->user()->id]));
-        $request->session()->flash('message', 'Subject Created Successfully');
+        Topic::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        $request->session()->flash('message', 'Topic Created Successfully');
         return redirect()->route('topics.index');
-
     }
 
     /**
@@ -88,6 +88,7 @@ class TopicController extends Controller
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
         $topic->update($request->all());
+        $request->session()->flash('message', 'Topic Updated Successfully');
         return redirect()->route('topics.index');
     }
 
@@ -97,9 +98,10 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic)
+    public function destroy(Topic $topic, Request $request)
     {
         $topic->delete();
+        $request->session()->flash('message', 'Topic Delete Success');
         return redirect()->route('topics.index');
     }
 }

@@ -21,16 +21,14 @@
                                 @endif
                             </div>
                             <div class="form-group row">
-                                <!-- <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Number" name="subject" required autofocus /> -->
-                                <!-- <div class="form-group"> -->
+                               
                                 <label for="subject_id">Subject</label>
                                 <select name="subject_id" class="form-control" id="subject_id" required>
                                     @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                     @endforeach
                                 </select>
-                                <!-- </div> -->
+                               
                             </div>
 
                             <button class="btn btn-success" type="submit">Add</button>

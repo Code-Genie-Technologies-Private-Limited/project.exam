@@ -18,6 +18,7 @@ class CreateTopicsTable extends Migration
             $table->string('name')->nullable(true);
             $table->foreignId('subject_id')->constrained('subjects')->restrictOnDelete();
             $table->boolean('status')->default(1);
+            $table->integer('order')->default(0.00);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
         });
