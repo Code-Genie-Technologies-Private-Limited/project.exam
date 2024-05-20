@@ -16,9 +16,9 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(true);
-            $table->string('subject_id')->nullable(true);
+            $table->foreignId('subject_id')->constrained('subjects')->restrictOnDelete();
             $table->boolean('status')->default(1);
-            $table->integer('created_by')->nullable(true);
+            $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
         });
     }

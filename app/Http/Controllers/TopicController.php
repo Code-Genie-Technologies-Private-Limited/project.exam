@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Topic;
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
+use App\Models\Subject;
+use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
 {
@@ -15,7 +16,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::all();
+        $topics = Topic::with('creator', 'subject')->orderBy('id', 'desc') ->paginate(4);
         return view('dashboard.Topic.index', compact('topics'));
     }
 
@@ -25,9 +26,11 @@ class TopicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+
     {
-        $topic = Topic::all();
-        return view('dashboard.Topic.create', compact('topic'));
+        $subjects = Subject::all();
+        return view('dashboard.Topic.create', compact('subjects'));
+        
     }
 
     /**
@@ -38,16 +41,25 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:topics|min:3|max:200',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $data = $request->all();
-        Topic::create($request->all());
+        Topic::create(array_merge($request->all(), ['created_by' =>auth()->user()->id]));
+        $request->session()->flash('message', 'Subject Created Successfully');
         return redirect()->route('topics.index');
+
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function show(Topic $topic)
     {
@@ -62,7 +74,8 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        return view('dashboard.Topic.edit', compact('topic'));
+        $subjects = Subject::all();
+        return view('dashboard.Topic.edit', compact('topic', 'subjects'));
     }
 
     /**

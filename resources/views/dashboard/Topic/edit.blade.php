@@ -18,8 +18,18 @@
                                 <label>Name</label>
                                 <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $topic->name }}" />
                             </div>
-                            
-                           
+                            <!-- <div class="form-group row">
+                                <label>Subject</label>
+                                
+                                <select name="subject_id" class="form-control" id="subject_id" required>
+                                    @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}" {{ $topic->subject_id == $subject->id ? 'selected' : '' }}>
+                                        {{ $subject->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div> -->
+
                             <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>

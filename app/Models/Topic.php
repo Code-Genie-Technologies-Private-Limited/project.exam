@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     use HasFactory;
-    protected $fillable=['name','subject_id'];
+    // protected $fillable=['name','subject_id'];
+    protected $guarded = [];
+
+    public function creator()
+    {
+        return $this->belongsTo(user::class, 'created_by');
+    }
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
 }

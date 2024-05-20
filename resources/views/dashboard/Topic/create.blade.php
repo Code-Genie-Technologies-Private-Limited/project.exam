@@ -15,13 +15,24 @@
                             @csrf
                             <div class="form-group row">
                                 <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus />
+                                <input class="form-control" type="text" placeholder="Name" name="name" value="{{old('name')}}" required autofocus />
+                                @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Number" name="subject" required autofocus />
+                                <!-- <label>Name</label>
+                                <input class="form-control" type="text" placeholder="Number" name="subject" required autofocus /> -->
+                                <!-- <div class="form-group"> -->
+                                <label for="subject_id">Subject</label>
+                                <select name="subject_id" class="form-control" id="subject_id" required>
+                                    @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                    @endforeach
+                                </select>
+                                <!-- </div> -->
                             </div>
-                            
+
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>

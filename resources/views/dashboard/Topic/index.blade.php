@@ -25,24 +25,26 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
+                                    <th>Sr.No</th>
                                     <th>Name</th>
-                                    <th>Status</th>
-                                    <th>created_by</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Created by</th>
+                                    <th>Subject</th>
+                                   
+                                    <th>View</th>
+                                    <th>Del</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($topics as $topic)
+
+                                @foreach($topics as $i=> $topic)
+
                                 <tr>
+                                    <td><b>{{$i + 1}}</b></td>
                                     <td><strong>{{ $topic->name }}</strong></td>
-                                    <td><strong>{{ $topic->status }}</strong></td>
-                                    <td><strong></strong></td>
+                                    <td><strong>{{ $topic->creator->name }}</strong></td>
+                                    <td> <b>{{$topic->subject->name}}</b></td>
                                     <td>
                                         <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
-                                    </td>
-                                    <td>
                                         <a href="{{ url('/topics/' . $topic->id . '/edit') }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
