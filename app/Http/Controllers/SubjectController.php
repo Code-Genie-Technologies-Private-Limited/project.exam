@@ -16,7 +16,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::with('creator')->paginate(10);
+        $subjects = Subject::with('creator')->orderBy('order', 'desc')->orderBy('name')->paginate(10);
         return view('dashboard.subjects.index', compact('subjects'));
     }
 
