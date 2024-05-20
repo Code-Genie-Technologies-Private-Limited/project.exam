@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
+use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
 {
@@ -37,7 +38,15 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-        subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:subjects,name|min:3|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            return response($validator->errors);
+        }
+        Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
         return redirect()->route('subjects.index');
     }
 
@@ -72,6 +81,14 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            return response($validator->errors);
+        }
         $subject->update($request->all());
         return redirect()->route('subjects.index');
     }
