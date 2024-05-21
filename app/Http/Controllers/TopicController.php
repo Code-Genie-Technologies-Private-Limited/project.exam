@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Topic;
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
+use App\Models\Subject;
+use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
 {
@@ -15,7 +17,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::all();
+        $topics = Topic::with('subject', 'creator')->paginate(10);
         return view('dashboard.topics.', compact('topics'));
     }
 
@@ -37,7 +39,22 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
-        Topic::create($request->all());
+
+        $validator = Validator::make($request->all(), [
+
+            'name' => 'required|unique|min:3|max:255',
+            'subject_id' => 'unique|min:3|max:255'
+        ]);
+
+        if ($validator->fails()) {
+
+            return response($validator->errors());
+        }
+        Topic::create(array_merge(
+            $request->all(),
+            ['created_by' => auth()->user()->id],
+            ['subject_id' => auth()->user()->id]
+        ));
         return redirect()->route('topics.index');
     }
 
@@ -72,6 +89,19 @@ class TopicController extends Controller
      */
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
+
+        $validator = Validator::make($request->all(), [
+
+            'name' => 'required|unique|min:3|max:255',
+            'subject_id' => 'unique|min:3|max:255'
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return response($validator->errors());
+        }
+
         $topic->update($request->all());
         return redirect()->route('topics.index');
     }

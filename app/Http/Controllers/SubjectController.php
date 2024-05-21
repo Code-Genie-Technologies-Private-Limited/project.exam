@@ -46,7 +46,10 @@ class SubjectController extends Controller
         if ($validator->fails()) {
             return response($validator->errors);
         }
-        Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Subject::create(array_merge(
+            $request->all(),
+            ['created_by' => auth()->user()->id]
+        ));
         return redirect()->route('subjects.index');
     }
 

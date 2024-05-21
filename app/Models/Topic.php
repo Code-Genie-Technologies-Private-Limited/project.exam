@@ -10,7 +10,8 @@ class Topic extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function subjects() {
-return $this->belongsTo(Subject::class);  
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 }
