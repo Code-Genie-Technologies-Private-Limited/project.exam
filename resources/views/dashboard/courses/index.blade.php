@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Topic List
+                        <i class="fa fa-align-justify"></i>Course List
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
@@ -18,6 +18,7 @@
                             </div>
                         </div>
                         @endif
+
                         @if(Session::has('error'))
                         <div class="row">
                             <div class="col-12">
@@ -26,7 +27,7 @@
                         </div>
                         @endif
                         <div class="row">
-                            <a href="{{ route('topics.create') }}" class="btn btn-primary m-2">Add Topic</a>
+                            <a href="{{ route('courses.create') }}" class="btn btn-primary m-2">Add Course</a>
                         </div>
                         <br>
                         <table class="table table-responsive-sm table-striped">
@@ -34,30 +35,28 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Subject</th>
                                     <th>Order</th>
-                                    <th>Created By User</th>
+                                    <th>Created By</th>
                                     <th>View</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($topics as $topic)
+                                @foreach($courses as $course)
                                 <tr>
-                                    <td>{{ $loop->iteration + ($topics->currentPage() - 1) * $topics->perPage() }}</td>
-                                    <td>{{ $topic->name }}<span class="badge {{ $topic->status == 1 ? 'badge-secondary': 'badge-warning' }}">{{ $topic->status == 1 ? "Active": "In Active" }}</span></td>
-                                    <td>{{ $topic->subject->name }}</td>
-                                    <td>{{ $topic->order }}</td>
-                                    <td>{{ $topic->creator->name }}</td>
+                                    <td>{{ $loop->iteration + ($courses->currentPage() - 1) * $courses->perPage() }}</td>
+                                    <td>{{ $course->name }}<span class="badge {{ $course->status == 1 ? 'badge-secondary': 'badge-warning' }}">{{ $course->status == 1 ? "Active": "In Active" }}</span></td>
+                                    <td>{{ $course->order }}</td>
+                                    <td>{{ $course->creator->name }}</td>
                                     <td>
-                                        <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('/courses/' . $course->id) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/topics/' . $topic->id . '/edit') }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('/courses/' . $course->id . '/edit') }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('topics.destroy', $topic->id ) }}" method="POST">
+                                        <form action="{{ route('courses.destroy', $course->id ) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-danger">Delete</button>
@@ -67,7 +66,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $topics->links() }}
+                        {{ $courses->links() }}
                     </div>
                 </div>
             </div>
