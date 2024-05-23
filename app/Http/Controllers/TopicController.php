@@ -18,7 +18,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::with('subject', 'creator')->paginate(10);
-        return view('dashboard.topics.', compact('topics'));
+        return view('dashboard.topics.index', compact('topics'));
     }
 
     /**
@@ -42,8 +42,7 @@ class TopicController extends Controller
 
         $validator = Validator::make($request->all(), [
 
-            'name' => 'required|unique|min:3|max:255',
-            'subject_id' => 'unique|min:3|max:255'
+            'name' => 'required|min:3|max:255'
         ]);
 
         if ($validator->fails()) {
@@ -53,7 +52,7 @@ class TopicController extends Controller
         Topic::create(array_merge(
             $request->all(),
             ['created_by' => auth()->user()->id],
-            ['subject_id' => auth()->user()->id]
+            // ['subject_id' => auth()->user()->id]
         ));
         return redirect()->route('topics.index');
     }
@@ -92,8 +91,7 @@ class TopicController extends Controller
 
         $validator = Validator::make($request->all(), [
 
-            'name' => 'required|unique|min:3|max:255',
-            'subject_id' => 'unique|min:3|max:255'
+            'name' => 'required|min:3|max:255'
 
         ]);
 

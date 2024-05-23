@@ -145,6 +145,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('mail',        'MailController');
         Route::resource('students',        'StudentController');
         Route::resource('topics',        'TopicController');
+        Route::resource('courses',        'CourseController');
         Route::resource('subjects',        'SubjectController');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
         Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
