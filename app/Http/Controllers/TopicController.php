@@ -18,8 +18,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::with('creator', 'subject')->orderBy('id', 'desc')->paginate(4);
-        return view('dashboard.Topic.index', compact('topics'));
+        $topics = Topic::with('creator', 'subject')->orderBy('id', 'desc')->paginate(10);
+        return view('dashboard.topics.index', compact('topics'));
     }
 
     /**
@@ -32,7 +32,7 @@ class TopicController extends Controller
     {
         // $subjects = Subject::all();
         $subjects = Subject::where('status', 1)->orderBy('order')->get();
-        return view('dashboard.Topic.create', compact('subjects'));
+        return view('dashboard.topics.create', compact('subjects'));
     }
 
     /**
@@ -64,7 +64,7 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        return view('dashboard.Topic.show', compact('topic'));
+        return view('dashboard.topics.show', compact('topic'));
     }
 
     /**
@@ -76,7 +76,7 @@ class TopicController extends Controller
     public function edit(Topic $topic)
     {
         $subjects = Subject::all();
-        return view('dashboard.Topic.edit', compact('topic', 'subjects'));
+        return view('dashboard.topics.edit', compact('topic', 'subjects'));
     }
 
     /**

@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Student List
+                        <i class="fa fa-align-justify"></i>Topics List
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
@@ -19,7 +19,7 @@
                         </div>
                         @endif
                         <div class="row">
-                            <a href="{{ route('topics.create') }}" class="btn btn-primary m-2">Add Student</a>
+                            <a href="{{ route('topics.create') }}" class="btn btn-primary m-2">Add Topic</a>
                         </div>
                         <br>
                         <table class="table table-responsive-sm table-striped">

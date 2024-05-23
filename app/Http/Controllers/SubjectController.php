@@ -19,9 +19,9 @@ class SubjectController extends Controller
     {
         $subjects = Subject::with('creator')
             ->orderBy('id', 'desc')
-            ->paginate(4);
+            ->paginate(10);
 
-        return view('dashboard.subject.index', compact('subjects'));
+        return view('dashboard.subjects.index', compact('subjects'));
     }
 
     /**
@@ -32,7 +32,7 @@ class SubjectController extends Controller
     public function create()
     {
         $subject = Subject::all();
-        return view('dashboard.Subject.create', compact('subject'));
+        return view('dashboard.subjects.create', compact('subject'));
     }
 
     /**
@@ -66,7 +66,7 @@ class SubjectController extends Controller
     public function show(Subject $subject)
     {
 
-        return view('dashboard.Subject.show', compact('subject'));
+        return view('dashboard.subjects.show', compact('subject'));
     }
 
     /**
@@ -78,7 +78,7 @@ class SubjectController extends Controller
     public function edit(Subject $subject)
     {
 
-        return view('dashboard.Subject.edit', compact('subject'));
+        return view('dashboard.subjects.edit', compact('subject'));
     }
 
     /**

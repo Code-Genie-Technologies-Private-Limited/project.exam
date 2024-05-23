@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,7 +17,7 @@ class TopicFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(),
-            'subject_id' => $this->faker->numberBetween(1, 10),
+            'subject_id' => Subject::factory(),
             'order' => $this->faker->randomFloat(2, 1, 100),
             'status' => $this->faker->boolean,
             'created_by' => User::factory()
