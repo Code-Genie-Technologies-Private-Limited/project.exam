@@ -16,10 +16,9 @@
                         <h4>Order</h4>
                         <p>{{ $subject->order }}</p>
                         <h4>Status</h4>
-                        <p>{{ $subject->status==1?'active':'deactive'; }}</p>
+                        <p>{{ $subject->status==1?'Active':'Deactive'; }}</p>
                         <h4>Created By</h4>
                         <p>{{ $subject->creator->name }}</p>
-                        
                         <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>

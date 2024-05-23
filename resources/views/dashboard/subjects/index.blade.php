@@ -8,13 +8,20 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Subject List
+                        <i class="fa fa-align-justify"></i>Subjects List
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
                         <div class="row">
                             <div class="col-12">
                                 <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                            </div>
+                        </div>
+                        @endif
+                        @if(Session::has('error'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
                             </div>
                         </div>
                         @endif
@@ -28,7 +35,7 @@
                                     <th>Name</th>
                                     <th>Order</th>
                                     <th>Status</th>
-                                    <th>Created_by</th>
+                                    <th>Creator</th>
                                     <th>View</th>
                                     <th>Edit</th>
                                     <th>Delete</th>

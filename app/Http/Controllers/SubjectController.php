@@ -18,7 +18,7 @@ class SubjectController extends Controller
     public function index()
     {
         $subjects = Subject::with('creator')
-            ->orderBy('id', 'desc')
+            ->orderBy('order', 'desc')
             ->paginate(10);
 
         return view('dashboard.subjects.index', compact('subjects'));
@@ -31,8 +31,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $subject = Subject::all();
-        return view('dashboard.subjects.create', compact('subject'));
+        return view('dashboard.subjects.create');
     }
 
     /**
@@ -44,16 +43,16 @@ class SubjectController extends Controller
     public function store(StoreSubjectRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:subjects|min:3|max:200',
+            'name' => 'required|unique:subjects,name|min:3|max:200',
         ]);
 
         if ($validator->fails()) {
-            // return response()->json(['errors' => $validator->errors()], 422);
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
-        $request->session()->flash('message', 'Subject Created Successfully');
+        $request->session()->flash('message', 'Subject created successfully.');
+
         return redirect()->route('subjects.index');
     }
 
@@ -65,7 +64,6 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-
         return view('dashboard.subjects.show', compact('subject'));
     }
 
@@ -77,7 +75,6 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-
         return view('dashboard.subjects.edit', compact('subject'));
     }
 
@@ -91,15 +88,16 @@ class SubjectController extends Controller
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:200',
+            'name' => 'required|unique:subjects,name,' . $subject->id . '|min:3|max:200',
         ]);
 
         if ($validator->fails()) {
-            // return response()->json(['errors' => $validator->errors()], 422);
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $request->session()->flash('message', "update Successfully");
+
+        $request->session()->flash('message', "Subject updated successfully.");
         $subject->update($request->all());
+
         return redirect()->route('subjects.index');
     }
 
@@ -111,8 +109,16 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject, Request $request)
     {
+        if ($subject->has('topics')->exists()) {
+            $request->session()->flash('error', "Can't delete. Subject has one or more topics.");
+
+            return redirect()->route('subjects.index');
+        }
+
         $subject->delete();
-        $request->session()->flash('message', 'Subject Delete Successfully !');
+
+        $request->session()->flash('message', 'Subject deleted successfully.');
+
         return redirect()->route('subjects.index');
     }
 }

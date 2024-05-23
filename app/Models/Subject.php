@@ -10,8 +10,13 @@ class Subject extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function creator() 
+    public function creator()
     {
         return $this->belongsTo(user::class, 'created_by');
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
     }
 }
