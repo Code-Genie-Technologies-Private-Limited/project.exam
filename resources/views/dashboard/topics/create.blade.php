@@ -24,24 +24,8 @@
                                 <label>order</label>
                                 <input class="form-control" type="text" placeholder="order" name="order" required />
                             </div>
-                            <!-- <div class="form-group row">
-                                <label class="col-md-3 col-form-label">status</label>
-                                <div class="col-md-9 col-form-label">
-                                    <div class="form-check">
-                                        <input class="form-check-input" id="Active" type="radio" value="1" name="status">
-                                        <label class="form-check-label" for="Active">Active</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" id="Inactive" type="radio" value="0" name="status">
-                                        <label class="form-check-label" for="Inactive">Inactive</label>
-                                    </div>
-                                </div> -->
-                                <div class="form-group row">
-                                    <label>created_by</label>
-                                    <input class="form-control" type="text" placeholder="created_by" name="created_by" required />
-                                </div>
-                                <button class="btn btn-success" type="submit">Add</button>
-                                <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
+                            <button class="btn btn-success" type="submit">Add</button>
+                            <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
                 </div>
