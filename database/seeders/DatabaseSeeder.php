@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Subject;
 use Illuminate\Database\Seeder;
 //use database\seeds\UsersAndNotesSeeder;
 //use database\seeds\MenusTableSeeder;
@@ -25,7 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call('BREADSeeder');
         $this->call('EmailSeeder');
         */
-
         $this->call([
             UsersAndNotesSeeder::class,
             MenusTableSeeder::class,
@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             ExampleSeeder::class,
             BREADSeeder::class,
             EmailSeeder::class,
+            SubjectSeeder::class,
+            TopicSeeder::class,
         ]);
     }
 }

@@ -11,8 +11,15 @@
                         <h4>Topic: {{ $topic->name }}</h4>
                     </div>
                     <div class="card-body">
-                        <h4>Name</h4>
-                        <p>{{ $topic->name }}</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <h4>Name</h4>
+                            </div>
+                            <div class="col-6">
+                                <p>{{ $topic->name }}</p>
+                            </div>
+                        </div>
+
                         <h4>Subject</h4>
                         <p>{{ $topic->subject->name }}</p>
                         <h4>Created By</h4>
