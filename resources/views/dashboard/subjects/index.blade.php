@@ -7,7 +7,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Subject List
+                        <i class="fa fa-align-justify"></i>Subjects List
                     </div>
                     <div class="card-body">
                         @if (Session::has('message'))

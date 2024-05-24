@@ -16,7 +16,11 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::with('creator')->orderBy('order')->orderBy('name')->paginate(10);
+        $subjects = Subject::with('creator')
+            ->orderBy('order')
+            ->orderBy('name')
+            ->paginate(10);
+
         return view('dashboard.subjects.index', compact('subjects'));
     }
 
@@ -47,6 +51,7 @@ class SubjectController extends Controller
         }
 
         Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+
         return redirect()->route('subjects.index');
     }
 
@@ -90,6 +95,7 @@ class SubjectController extends Controller
         }
 
         $subject->update($request->all());
+
         return redirect()->route('subjects.index');
     }
 
