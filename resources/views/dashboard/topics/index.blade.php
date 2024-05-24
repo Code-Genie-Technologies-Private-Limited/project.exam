@@ -25,11 +25,11 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Topic</th>
+                                    <th>Subject</th>
                                     <th>Status</th>
                                     <th>Order</th>
-                                    <th>Subject</th>
-                                    <th>Creator by User</th>
+                                    <th>Creator</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -39,9 +39,9 @@
                                 @foreach($topics as $topic)
                                 <tr>
                                     <td><strong>{{ $topic->name }}</strong></td>
+                                    <td><strong>{{ $topic->subject->name }}</strong></td>
                                     <td><strong>{{ $topic->status }}</strong></td>
                                     <td><strong>{{ $topic->order }}</strong></td>
-                                    <td><strong>{{ $topic->subject->id }}</strong></td>
                                     <td><strong>{{ $topic->creator->name }}</strong></td>
                                     <td>
                                         <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>

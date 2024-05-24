@@ -11,16 +11,16 @@
                         <h4>Topic: {{ $topic->name }}</h4>
                     </div>
                     <div class="card-body">
-                        <h4>Name</h4>
+                        <h4>Topic</h4>
                         <p>{{ $topic->name }}</p>
+                        <h4>Subject</h4>
+                        <p>{{ $topic->subject->name }}</p>
                         <h4>Status</h4>
                         <p>{{ $topic->status }}</p>
                         <h4>Order</h4>
                         <p>{{ $topic->order }}</p>
-                        <h4>Creatoe by user</h4>
+                        <h4>Creator</h4>
                         <p>{{ $topic->creator->name }}</p>
-                        <h4>Subject Id</h4>
-                        <p>{{ $topic->subject->id }}</p>
                         <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>

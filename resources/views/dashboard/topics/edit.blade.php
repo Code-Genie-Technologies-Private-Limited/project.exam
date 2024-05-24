@@ -15,14 +15,14 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $topic->name }}" />
+                                <label>Topic</label>
+                                <input class="form-control" type="text" placeholder="Enter your topic" name="name" required autofocus value="{{ $topic->name }}" />
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check">
-                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" {{$topic->status == 0 ? 'checked':''}}>
+                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" {{$topic->status == 1 ? 'checked':''}}>
                                         <label class="form-check-label" for="active">Active</label>
                                     </div>
                                     <div class="form-check">
@@ -35,7 +35,7 @@
                                 <label>Order</label>
                                 <input class="form-control" type="text" placeholder="order" name="order" required value="{{ $topic->order }}" />
                             </div>
-                            <button class="btn btn-success" type="submit">Edit</button>
+                            <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>

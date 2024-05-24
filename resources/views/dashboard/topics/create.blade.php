@@ -14,8 +14,8 @@
                         <form method="POST" action="{{ route('topics.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus />
+                                <label>Topic</label>
+                                <input class="form-control" type="text" placeholder="Enter your topic" name="name" required autofocus />
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
