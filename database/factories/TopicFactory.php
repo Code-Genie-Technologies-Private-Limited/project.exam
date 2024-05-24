@@ -19,7 +19,7 @@ class TopicFactory extends Factory
             'name' => $this->faker->sentence(),
             'subject_id' => Subject::factory(),
             'order' => $this->faker->randomFloat(2, 1, 100),
-            'status' => $this->faker->boolean,
+            'status' => $this->faker->numberBetween(),
             'created_by' => User::factory()
         ];
     }

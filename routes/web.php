@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TopicController;
 
@@ -149,6 +150,7 @@ Route::group(['middleware' => ['get.menu']], function () {
 
         Route::resource('subjects',        'SubjectController');
         Route::resource('topics',        'TopicController');
+        Route::resource('courses',       'CourseController');
 
 
 
