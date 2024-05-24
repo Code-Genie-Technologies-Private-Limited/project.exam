@@ -25,7 +25,7 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Subject</th>
                                     <th>Order</th>
                                     <th>Status</th>
                                     <th>Created By User</th>

@@ -35,7 +35,7 @@
                                 <label>Order</label>
                                 <input class="form-control" type="number" placeholder="Order" name="order" required value="{{ $subject->order }}" />
                             </div>
-                            <button class="btn btn-success" type="submit">Edit</button>
+                            <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>

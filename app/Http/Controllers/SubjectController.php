@@ -16,7 +16,11 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::with('creator')->orderBy('order', 'desc')->orderBy('name')->paginate(10);
+        $subjects = Subject::with('creator')
+            ->orderBy('order', 'desc')
+            ->orderBy('name')
+            ->paginate(10);
+
         return view('dashboard.subjects.index', compact('subjects'));
     }
 
@@ -40,16 +44,18 @@ class SubjectController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:subjects,name|min:3|max:255'
+            'name' => 'required|min:3|max:255'
         ]);
 
         if ($validator->fails()) {
             return response($validator->errors);
         }
+
         Subject::create(array_merge(
             $request->all(),
             ['created_by' => auth()->user()->id]
         ));
+
         return redirect()->route('subjects.index');
     }
 
@@ -92,7 +98,9 @@ class SubjectController extends Controller
         if ($validator->fails()) {
             return response($validator->errors);
         }
+
         $subject->update($request->all());
+
         return redirect()->route('subjects.index');
     }
 
@@ -105,6 +113,7 @@ class SubjectController extends Controller
     public function destroy(Subject $subject)
     {
         $subject->delete();
+
         return redirect()->route('subjects.index');
     }
 }

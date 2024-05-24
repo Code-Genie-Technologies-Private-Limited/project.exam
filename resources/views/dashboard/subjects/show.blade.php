@@ -11,7 +11,7 @@
                         <h4>Subject: {{ $subject->name }}</h4>
                     </div>
                     <div class="card-body">
-                        <h4>Name</h4>
+                        <h4>Subject</h4>
                         <p>{{ $subject->name }}</p>
                         <h4>Status</h4>
                         <p>{{ $subject->status }}</p>
