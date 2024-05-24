@@ -20,7 +20,7 @@
                         <p>{{ $topic->status }}</p>
                         <h4>Created By</h4>
                         <p>{{ $topic->created_by }}</p>
-                        <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
+                        <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>
             </div>

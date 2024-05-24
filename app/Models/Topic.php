@@ -12,10 +12,10 @@ class Topic extends Model
 
     public function creator()
     {
-        return $this->belongsTo(user::class, 'created_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
     public function subject()
     {
-        return $this->belongsTo(subject::class, 'subject_id');
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 }
