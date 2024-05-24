@@ -19,6 +19,14 @@
                                 <input class="form-control" type="text" placeholder="Enter your topic" name="name" required autofocus value="{{ $topic->name }}" />
                             </div>
                             <div class="form-group row">
+                                <label for="subject">Subject</label>
+                                <select name="subject_id" class="form-control" id="subject" required>
+                                    @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}" {{ $subject->id == $topic->subject_id ? 'selected' : '' }}>{{ $subject->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check">

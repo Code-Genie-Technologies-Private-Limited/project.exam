@@ -32,7 +32,11 @@ class TopicController extends Controller
      */
     public function create()
     {
-        return view('dashboard.topics.create');
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order', 'desc')
+            ->get();
+
+        return view('dashboard.topics.create', compact('subjects'));
     }
 
     /**
@@ -78,7 +82,11 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        return view('dashboard.topics.edit', compact('topic'));
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order', 'desc')
+            ->get();
+
+        return view('dashboard.topics.edit', compact('topic', 'subjects'));
     }
 
     /**
@@ -112,7 +120,7 @@ class TopicController extends Controller
     public function destroy(Topic $topic)
     {
         $topic->delete();
-        
+
         return redirect()->route('topics.index');
     }
 }
