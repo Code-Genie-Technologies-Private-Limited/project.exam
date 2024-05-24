@@ -27,20 +27,19 @@
                                 <tr>
                                     <th>Sr.No</th>
                                     <th>Name</th>
+                                    <th>Order</th>
                                     <th>Created by</th>
                                     <th>Subject</th>
-
                                     <th>View</th>
-                                    <th>Del</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach($topics as $i=> $topic)
-
                                 <tr>
                                     <td><b>{{$i + 1}}</b></td>
                                     <td><strong>{{ $topic->name }}</strong></td>
+                                    <td><strong>{{ $topic->order }}</strong></td>
                                     <td><strong>{{ $topic->creator->name }}</strong></td>
                                     <td> <b>{{$topic->subject->name}}</b></td>
                                     <td>{{ $topic->status == 1 ? 'Active' : 'Deactive' }}</td>
@@ -59,7 +58,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- {{ $topics->links() }} --}}
+                        {{ $topics->links() }}
                     </div>
                 </div>
             </div>

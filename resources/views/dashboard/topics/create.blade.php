@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Add Subject</h4>
+                        <h4>Add Topic</h4>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('topics.store') }}">
@@ -21,16 +21,13 @@
                                 @endif
                             </div>
                             <div class="form-group row">
-                               
                                 <label for="subject_id">Subject</label>
                                 <select name="subject_id" class="form-control" id="subject_id" required>
                                     @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                     @endforeach
                                 </select>
-                               
                             </div>
-
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>

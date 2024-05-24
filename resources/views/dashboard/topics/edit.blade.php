@@ -19,17 +19,6 @@
                                 <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $topic->name }}" />
                             </div>
                             <div class="form-group row">
-                                <label>Subject</label>
-
-                                <select name="subject_id" class="form-control" id="subject_id" required>
-                                    @foreach($subjects as $subject)
-                                    <option value="{{ $subject->id }}" {{ $topic->subject_id == $subject->id ? 'selected' : '' }}>
-                                        {{ $subject->name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check">
@@ -40,7 +29,6 @@
                                         <input class="form-check-input" id="radio2" type="radio" value="0" name="status" {{ $topic->status == 0 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="radio2">Deactive</label>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="form-group row">

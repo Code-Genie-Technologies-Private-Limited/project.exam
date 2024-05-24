@@ -19,6 +19,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::with('creator', 'subject')->orderBy('id', 'desc')->paginate(10);
+
         return view('dashboard.topics.index', compact('topics'));
     }
 
@@ -28,13 +29,11 @@ class TopicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-
     {
-        // $subjects = Subject::all();
         $subjects = Subject::where('status', 1)->orderBy('order')->get();
+
         return view('dashboard.topics.create', compact('subjects'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -47,12 +46,15 @@ class TopicController extends Controller
             'name' => 'required|unique:topics|min:3|max:200',
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails()) 
+        {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
         $data = $request->all();
         Topic::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
-        $request->session()->flash('message', 'Topic Created Successfully');
+        $request->session()->flash('message', 'Topic created successfully.');
+
         return redirect()->route('topics.index');
     }
 
@@ -76,6 +78,7 @@ class TopicController extends Controller
     public function edit(Topic $topic)
     {
         $subjects = Subject::all();
+
         return view('dashboard.topics.edit', compact('topic', 'subjects'));
     }
 
@@ -89,7 +92,8 @@ class TopicController extends Controller
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
         $topic->update($request->all());
-        $request->session()->flash('message', 'Topic Updated Successfully');
+        $request->session()->flash('message', 'Topic updated successfully.');
+
         return redirect()->route('topics.index');
     }
 
@@ -101,8 +105,15 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic, Request $request)
     {
+        if ($topic->has('topics')->exists()) {
+            $request->session()->flash('error', "Can't delete. Topic has one or more topics.");
+
+            return redirect()->route('topics.index');
+        }
+
         $topic->delete();
-        $request->session()->flash('message', 'Topic Delete Success');
+        $request->session()->flash('message', 'Topic delete successfully.');
+
         return redirect()->route('topics.index');
     }
 }

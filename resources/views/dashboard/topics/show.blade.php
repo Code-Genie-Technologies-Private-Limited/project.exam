@@ -18,17 +18,41 @@
                             <div class="col-6">
                                 <p>{{ $topic->name }}</p>
                             </div>
+                            <div class="col-6">
+                                <h4>Subject</h4>
+                            </div>
+                            <div class="col-6">
+                                <p>{{ $topic->subject->name }}</p>
+                            </div>
+                            <div class="col-6">
+                                <h4>Created By</h4>
+                            </div>
+                            <div class="col-6">
+                                <p>{{ $topic->creator->name }}</p>
+                            </div>
+                            <div class="col-6">
+                                <h4>Order</h4>
+                            </div>
+                            <div class="col-6">
+                                <p>{{$topic->order}}</p>
+                            </div>
+                            <div class="col-6">
+                                <h4>Status</h4>
+                            </div>
+                            <div class="col-6">
+                                <p>{{$topic->status==1?'Active':'Deactive'}}</p>
+                            </div>
+                            
                         </div>
 
-                        <h4>Subject</h4>
-                        <p>{{ $topic->subject->name }}</p>
-                        <h4>Created By</h4>
-                        <p>{{ $topic->creator->name }}</p>
-                        <h4>Order</h4>
-                        <p>{{$topic->order}}</p>
-                        <h4>Status</h4>
-                        <p>{{$topic->status==1?'Active':'Deactive'}}</p>
-                        <p>{{ $topic->roll_number }}</p>
+
+
+
+
+
+
+
+
                         <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>
