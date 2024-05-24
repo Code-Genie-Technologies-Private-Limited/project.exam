@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Subject;
+use App\Models\Course;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,7 +18,7 @@ class TopicFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence,
-            'subject_id' => Subject::factory(),
+            'course_id' => Course::class(),
             'status' => $this->faker->boolean,
             'order' => $this->faker->randomFloat(2, 1, 100),
             'created_by' => User::factory(),
