@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -15,7 +16,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('creator')->paginate(10);
+        $courses = Course::with('creator')->orderBy('order', 'desc')->orderBy('name', 'desc')->paginate(10);
         return view('dashboard.courses.index', compact('courses'));
     }
 
@@ -37,6 +38,15 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+
+            'name' => 'required|min:3|max:160'
+        ]);
+
+        if ($validator->fails()) {
+
+            return response($validator->errors());
+        }
         Course::create($request->all());
         return redirect()->route('courses.index');
     }
