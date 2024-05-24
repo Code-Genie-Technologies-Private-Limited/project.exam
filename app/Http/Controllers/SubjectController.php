@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
@@ -110,9 +111,15 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject $subject)
+    public function destroy(Subject $subject, Request $request)
     {
+        if ($subject->has('topics')->exists()) {
+            $request->session()->flash('error', 'Subject can not be deleted because it has topics.');
+            return redirect()->route('subjects.index');
+        }
+
         $subject->delete();
+        $request->session()->flash('message', 'Subject has been deleted successfully.');
 
         return redirect()->route('subjects.index');
     }

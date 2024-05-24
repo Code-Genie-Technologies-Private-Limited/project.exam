@@ -17,7 +17,11 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::with('subject', 'creator')->paginate(10);
+        $topics = Topic::with('subject', 'creator')
+            ->orderBy('order', 'desc')
+            ->orderBy('name')
+            ->paginate(10);
+
         return view('dashboard.topics.index', compact('topics'));
     }
 
@@ -39,21 +43,19 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
-
         $validator = Validator::make($request->all(), [
-
             'name' => 'required|min:3|max:255'
         ]);
 
         if ($validator->fails()) {
-
             return response($validator->errors());
         }
+
         Topic::create(array_merge(
             $request->all(),
             ['created_by' => auth()->user()->id],
-            // ['subject_id' => auth()->user()->id]
         ));
+
         return redirect()->route('topics.index');
     }
 
@@ -88,19 +90,16 @@ class TopicController extends Controller
      */
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
-
         $validator = Validator::make($request->all(), [
-
             'name' => 'required|min:3|max:255'
-
         ]);
 
         if ($validator->fails()) {
-
             return response($validator->errors());
         }
 
         $topic->update($request->all());
+
         return redirect()->route('topics.index');
     }
 
@@ -113,6 +112,7 @@ class TopicController extends Controller
     public function destroy(Topic $topic)
     {
         $topic->delete();
+        
         return redirect()->route('topics.index');
     }
 }

@@ -14,7 +14,7 @@
                         <h4>Subject</h4>
                         <p>{{ $subject->name }}</p>
                         <h4>Status</h4>
-                        <p>{{ $subject->status }}</p>
+                        <p>{{ $subject->status == 1 ? 'Active' : 'Inactive'}}</p>
                         <h4>Order</h4>
                         <p>{{ $subject->order }}</p>
                         <h4>Created By User</h4>
