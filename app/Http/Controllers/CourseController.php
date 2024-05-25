@@ -22,8 +22,8 @@ class CourseController extends Controller
             ->orderBy('order')
             ->orderBy('name')
             ->paginate(10);
-            
-        return view('dashboard.cources.index', compact('cources'));
+
+        return view('dashboard.courses.index', compact('courses'));
     }
 
     /**
@@ -33,7 +33,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('dashboard.cources.create');
+        return view('dashboard.courses.create');
     }
 
     /**
@@ -44,12 +44,14 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        Subject::create(array_merge(
+        Course::create(array_merge(
             $request->all(),
             ['created_by' => auth()->user()->id]
         ));
-        $request->session()->flash('create', 'created Successfully');
-        return redirect()->route('coursec.index');
+
+        $request->session()->flash('message', 'Course is created Successfully.');
+
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -60,7 +62,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('dashboard.cources.show', compact('course'));
+        return view('dashboard.courses.show', compact('course'));
     }
 
     /**
@@ -71,7 +73,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        return view('dashboard.cources.edit', compact('course'));
+        return view('dashboard.courses.edit', compact('course'));
     }
 
     /**
@@ -84,8 +86,9 @@ class CourseController extends Controller
     public function update(UpdateCourseRequest $request, Course $course)
     {
         $course->update($request->all());
-        $request->session()->flash('update', 'Updated Successfully');
-        return redirect()->route('cources.index');
+        $request->session()->flash('message', 'Course is updated successfully.');
+
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -97,7 +100,8 @@ class CourseController extends Controller
     public function destroy(Course $course, Request $request)
     {
         $course->delete();
-        $request->session->flash('del', 'Deleted Successfully');
-        return redirect()->route('cources.index');
+        $request->session()->flash('message', ' Course is deleted successfully.');
+
+        return redirect()->route('courses.index');
     }
 }

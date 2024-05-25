@@ -7,20 +7,18 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Topic: {{ $topic->name }}</h4>
+                        <h4>Course: {{ $course->name }}</h4>
                     </div>
                     <div class="card-body">
                         <h4>Name</h4>
-                        <p>{{ $topic->name }}</p>
-                        <h4>Subject Id</h4>
-                        <p>{{ $topic->subject_id }}</p>
+                        <p>{{ $course->name }}</p>
                         <h4>Order</h4>
-                        <p>{{ $topic->order }}</p>
+                        <p>{{ $course->order }}</p>
                         <h4>Status</h4>
-                        <p>{{ $topic->status == 1 ? 'Active':'Inactive'}}</p>
+                        <p>{{ $course->status == 1 ? 'Active':'Inactive'}}</p>
                         <h4>Created By</h4>
-                        <p>{{ $topic->created_by }}</p>
-                        <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
+                        <p>{{ $course->creator->name }}</p>
+                        <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>
             </div>

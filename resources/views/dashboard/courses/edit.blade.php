@@ -21,11 +21,11 @@
                                 <label class="col-md-3 col-form-label">status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check">
-                                        <input class="form-check-input" id="Active" type="radio" value="1" name="status">
+                                        <input class="form-check-input" id="Active" type="radio" value="1" name="status" {{ $course->status == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="Active">Active</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" id="Inactive" type="radio" value="0" name="status">
+                                        <input class="form-check-input" id="Inactive" type="radio" value="0" name="status" {{ $course->status == 0 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="Inactive">Inactive</label>
                                     </div>
                                 </div>
