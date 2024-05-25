@@ -22,6 +22,7 @@ class TopicController extends Controller
             ->orderBy('order')
             ->orderBy('name')
             ->paginate(10);
+
         return view('dashboard.topics.index', compact('topics'));
     }
 
@@ -32,10 +33,12 @@ class TopicController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::query() // Initialize the query builder for the Subject model
-        ->orderBy('order')      // Order the results by the 'order' column
-        ->get();                // Execute the query and get the results
-        return view('dashboard.topics.create',compact('subjects'));
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order')
+            ->orderBy('name')
+            ->get();
+
+        return view('dashboard.topics.create', compact('subjects'));
     }
 
     /**
@@ -46,9 +49,11 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
-        Topic::create(array_merge($request->all(), 
-        ['created_by' => auth()->user()->id]));
-        $request->session()->flash('store','create successfully');
+        Topic::create(array_merge(
+            $request->all(),
+            ['created_by' => auth()->user()->id]
+        ));
+        $request->session()->flash('message', 'Topic is create successfully.');
 
         return redirect()->route('topics.index');
     }
@@ -72,7 +77,12 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        return view('dashboard.topics.edit', compact('topic'));
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order')
+            ->orderBy('name')
+            ->get();
+
+        return view('dashboard.topics.edit', compact('topic', 'subjects'));
     }
 
     /**
@@ -85,7 +95,7 @@ class TopicController extends Controller
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
         $topic->update($request->all());
-        $request->session()->flash('update','Updated Successfully');
+        $request->session()->flash('message', 'Topic is updated successfully.');
         return redirect()->route('topics.index');
     }
 
@@ -95,10 +105,10 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic,Request $request)
+    public function destroy(Topic $topic, Request $request)
     {
         $topic->delete();
-        $request->session()->flash('del','Delete Successfully');
+        $request->session()->flash('message', 'Topic is deleted successfully.');
         return redirect()->route('topics.index');
     }
 }

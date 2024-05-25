@@ -7,7 +7,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Topic List
+                        <i class="fa fa-align-justify"></i><strong>Topic List</strong>
                     </div>
                     <div class="card-body">
                         @if (Session::has('message'))
@@ -17,24 +17,10 @@
                             </div>
                         </div>
                         @endif
-                        @if (Session::has('store'))
+                        @if (Session::has('error'))
                         <div class="row">
                             <div class="col-12">
-                                <div class="alert alert-success" role="alert">{{ Session::get('store') }}</div>
-                            </div>
-                        </div>
-                        @endif
-                        @if (Session::has('del'))
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-success" role="alert">{{ Session::get('del') }}</div>
-                            </div>
-                        </div>
-                        @endif
-                        @if (Session::has('update'))
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-success" role="alert">{{ Session::get('update') }}</div>
+                                <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
                             </div>
                         </div>
                         @endif
@@ -45,13 +31,16 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
-                                    <th>Sr.No.</th>
+                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Subject Id</th>
                                     <th>Order</th>
                                     <th>Status</th>
                                     <th>Created By</th>
-                                    <th></th>
+                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,10 +48,10 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $topic->name }}</td>
-                                    <td>{{ $topic->subject_id }}</td>
+                                    <td>{{ $topic->subject->name }}</td>
                                     <td>{{ $topic->order }}</td>
                                     <td>{{ $topic->status == 1 ? 'Active':'Inactive'}}</td>
-                                    <td>{{ $topic->created_by }}</td>
+                                    <td>{{ $topic->creator->name }}</td>
                                     <td>
                                         <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
                                     </td>

@@ -16,14 +16,15 @@
                                 <label>Name</label>
                                 <input class="form-control" type="text" placeholder="Name" name="name" required autofocus />
                             </div>
-                            <div class="form-group col-sm-4">
-                                <label for="subject">Subject</label>
-                                <select class="form-control" id="subject" name="subject_id">
-                                    <option>Select</option>
-                                    @foreach($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="subject">Subject</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="subject" name="subject_id">
+                                        @foreach($subjects as $subject)
+                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label>order</label>

@@ -13,13 +13,13 @@
                         <h4>Name</h4>
                         <p>{{ $topic->name }}</p>
                         <h4>Subject Id</h4>
-                        <p>{{ $topic->subject_id }}</p>
+                        <p>{{ $topic->subject->name }}</p>
                         <h4>Order</h4>
                         <p>{{ $topic->order }}</p>
                         <h4>Status</h4>
                         <p>{{ $topic->status == 1 ? 'Active':'Inactive'}}</p>
                         <h4>Created By</h4>
-                        <p>{{ $topic->created_by }}</p>
+                        <p>{{ $topic->creator->name }}</p>
                         <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>

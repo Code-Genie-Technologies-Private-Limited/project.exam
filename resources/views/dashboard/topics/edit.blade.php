@@ -41,7 +41,7 @@
                             
                             
                               
-                                <button class="btn btn-success" type="submit">Edit</button>
+                                <button class="btn btn-success" type="submit">Update</button>
                                 <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
