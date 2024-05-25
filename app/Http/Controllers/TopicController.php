@@ -32,9 +32,9 @@ class TopicController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::where('status',1)
-        ->orderBy('order')->get();
-
+        $subjects = Subject::query() // Initialize the query builder for the Subject model
+        ->orderBy('order')      // Order the results by the 'order' column
+        ->get();                // Execute the query and get the results
         return view('dashboard.topics.create',compact('subjects'));
     }
 
@@ -85,6 +85,7 @@ class TopicController extends Controller
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
         $topic->update($request->all());
+        $request->session()->flash('update','Updated Successfully');
         return redirect()->route('topics.index');
     }
 
