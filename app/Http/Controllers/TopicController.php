@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
+use App\Models\Subject;
 use App\Models\Topic;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
@@ -16,7 +18,10 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::with('creator','subject')->paginate(10);
+        $topics = Topic::with('creator', 'subject')
+            ->orderBy('order')
+            ->orderBy('name')
+            ->paginate(10);
         return view('dashboard.topics.index', compact('topics'));
     }
 
@@ -27,7 +32,10 @@ class TopicController extends Controller
      */
     public function create()
     {
-        return view('dashboard.topics.create');
+        $subjects = Subject::where('status',1)
+        ->orderBy('order')->get();
+
+        return view('dashboard.topics.create',compact('subjects'));
     }
 
     /**
@@ -38,7 +46,10 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
-        Topic::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Topic::create(array_merge($request->all(), 
+        ['created_by' => auth()->user()->id]));
+        $request->session()->flash('store','create successfully');
+
         return redirect()->route('topics.index');
     }
 
@@ -83,9 +94,10 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic)
+    public function destroy(Topic $topic,Request $request)
     {
         $topic->delete();
+        $request->session()->flash('del','Delete Successfully');
         return redirect()->route('topics.index');
     }
 }

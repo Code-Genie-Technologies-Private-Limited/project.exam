@@ -17,6 +17,27 @@
                             </div>
                         </div>
                         @endif
+                        @if (Session::has('store'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success" role="alert">{{ Session::get('store') }}</div>
+                            </div>
+                        </div>
+                        @endif
+                        @if (Session::has('del'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success" role="alert">{{ Session::get('del') }}</div>
+                            </div>
+                        </div>
+                        @endif
+                        @if (Session::has('update'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success" role="alert">{{ Session::get('update') }}</div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="row">
                             <a href="{{ route('topics.create') }}" class="btn btn-primary m-2">Add topic</a>
                         </div>
@@ -24,22 +45,24 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
+                                    <th>Sr.No.</th>
                                     <th>Name</th>
                                     <th>Subject Id</th>
-                                    <th>order</th>
-                                    <th>status</th>
+                                    <th>Order</th>
+                                    <th>Status</th>
                                     <th>Created By</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($topics as $topic)
+                                @foreach ($topics as $key=> $topic)
                                 <tr>
-                                    <td><strong>{{ $topic->name }}</strong></td>
-                                    <td><strong>{{ $topic->subject_id }}</strong></td>
-                                    <td><strong>{{ $topic->order }}</strong></td>
-                                    <td><strong>{{ $topic->status }}</strong></td>
-                                    <td><strong>{{ $topic->created_by }}</strong></td>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $topic->name }}</td>
+                                    <td>{{ $topic->subject_id }}</td>
+                                    <td>{{ $topic->order }}</td>
+                                    <td>{{ $topic->status == 1 ? 'Active':'Inactive'}}</td>
+                                    <td>{{ $topic->created_by }}</td>
                                     <td>
                                         <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
                                     </td>
