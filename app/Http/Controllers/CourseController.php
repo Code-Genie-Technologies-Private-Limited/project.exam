@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
+use App\Models\Subject;
+use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class CourseController extends Controller
@@ -16,7 +18,11 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('creator')->orderBy('order')->orderBy('name')->paginate(10);
+        $courses = Course::with('creator')
+            ->orderBy('order')
+            ->orderBy('name')
+            ->paginate(10);
+            
         return view('dashboard.cources.index', compact('cources'));
     }
 
@@ -38,7 +44,11 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Subject::create(array_merge(
+            $request->all(),
+            ['created_by' => auth()->user()->id]
+        ));
+        $request->session()->flash('create', 'created Successfully');
         return redirect()->route('coursec.index');
     }
 
@@ -74,6 +84,7 @@ class CourseController extends Controller
     public function update(UpdateCourseRequest $request, Course $course)
     {
         $course->update($request->all());
+        $request->session()->flash('update', 'Updated Successfully');
         return redirect()->route('cources.index');
     }
 
@@ -83,9 +94,10 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Course $course, Request $request)
     {
         $course->delete();
+        $request->session->flash('del', 'Deleted Successfully');
         return redirect()->route('cources.index');
     }
 }
