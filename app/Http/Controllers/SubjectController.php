@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
@@ -50,9 +51,13 @@ class SubjectController extends Controller
             return response()->json($validator->errors());
         }
 
-        Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Subject::create(array_merge($request->all(),
+         ['created_by' => auth()->user()->id]));
+         $request->session()->flash('error','add successfully');
+
 
         return redirect()->route('subjects.index');
+
     }
 
     /**
@@ -95,6 +100,7 @@ class SubjectController extends Controller
         }
 
         $subject->update($request->all());
+        $request->session()->flash('update','Updated successfully');
 
         return redirect()->route('subjects.index');
     }
@@ -105,9 +111,11 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject $subject)
+    public function destroy(Subject $subject, Request $request )
     {
         $subject->delete();
+        $request->session()->flash('message', 'Delete successfully');
+
         return redirect()->route('subjects.index');
     }
 }

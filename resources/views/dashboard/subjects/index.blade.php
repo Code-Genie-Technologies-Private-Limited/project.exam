@@ -17,6 +17,27 @@
                             </div>
                         </div>
                         @endif
+                        @if (Session::has('error'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success" role="alert">{{ Session::get('error') }}</div>
+                            </div>
+                        </div>
+                        @endif
+                        @if (Session::has('del'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success" role="alert">{{ Session::get('del') }}</div>
+                            </div>
+                        </div>
+                        @endif
+                        @if (Session::has('update'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success" role="alert">{{ Session::get('update') }}</div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="row">
                             <a href="{{ route('subjects.create') }}" class="btn btn-primary m-2">Add Subject</a>
                         </div>
@@ -38,7 +59,7 @@
                                 <tr>
                                     <td><strong>{{ $subject->name }}</strong></td>
                                     <td><strong>{{ $subject->order }}</strong></td>
-                                    <td><strong>{{ $subject->status }}</strong></td>
+                                    <td><strong>{{ $subject->status == 1 ? 'Active': 'Inactive' }}</strong></td>
                                     <td><strong>{{ $subject->creator->name }}</strong></td>
                                     <td>
                                         <a href="{{ url('/subjects/' . $subject->id) }}" class="btn btn-primary">View</a>
