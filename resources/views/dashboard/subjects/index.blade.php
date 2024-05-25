@@ -7,7 +7,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Subjects List
+                        <i class="fa fa-align-justify"></i><strong>Subjects List</strong>
                     </div>
                     <div class="card-body">
                         @if (Session::has('message'))
@@ -20,21 +20,7 @@
                         @if (Session::has('error'))
                         <div class="row">
                             <div class="col-12">
-                                <div class="alert alert-success" role="alert">{{ Session::get('error') }}</div>
-                            </div>
-                        </div>
-                        @endif
-                        @if (Session::has('del'))
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-success" role="alert">{{ Session::get('del') }}</div>
-                            </div>
-                        </div>
-                        @endif
-                        @if (Session::has('update'))
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-success" role="alert">{{ Session::get('update') }}</div>
+                                <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
                             </div>
                         </div>
                         @endif
@@ -45,22 +31,24 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Order</th>
                                     <th>Status</th>
                                     <th>Created By</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($subjects as $subject)
+                                @foreach ($subjects as $key => $subject)
                                 <tr>
-                                    <td><strong>{{ $subject->name }}</strong></td>
-                                    <td><strong>{{ $subject->order }}</strong></td>
-                                    <td><strong>{{ $subject->status == 1 ? 'Active': 'Inactive' }}</strong></td>
-                                    <td><strong>{{ $subject->creator->name }}</strong></td>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $subject->name }}</td>
+                                    <td>{{ $subject->order }}</td>
+                                    <td>{{ $subject->status == 1 ? 'Active': 'Inactive' }}</td>
+                                    <td>{{ $subject->creator->name }}</td>
                                     <td>
                                         <a href="{{ url('/subjects/' . $subject->id) }}" class="btn btn-primary">View</a>
                                     </td>

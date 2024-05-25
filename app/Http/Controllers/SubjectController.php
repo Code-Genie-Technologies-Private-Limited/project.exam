@@ -51,13 +51,14 @@ class SubjectController extends Controller
             return response()->json($validator->errors());
         }
 
-        Subject::create(array_merge($request->all(),
-         ['created_by' => auth()->user()->id]));
-         $request->session()->flash('error','add successfully');
+        Subject::create(array_merge(
+            $request->all(),
+            ['created_by' => auth()->user()->id]
+        ));
 
+        $request->session()->flash('message', 'Subject is added successfully.');
 
         return redirect()->route('subjects.index');
-
     }
 
     /**
@@ -100,7 +101,7 @@ class SubjectController extends Controller
         }
 
         $subject->update($request->all());
-        $request->session()->flash('update','Updated successfully');
+        $request->session()->flash('message', 'Subject is updated successfully.');
 
         return redirect()->route('subjects.index');
     }
@@ -111,10 +112,16 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject $subject, Request $request )
+    public function destroy(Subject $subject, Request $request)
     {
+        if ($subject->has('topics')->exists()) {
+            $request->session()->flash('error', 'Subject can not be deleted becauses it has one or more topics.');
+
+            return redirect()->route('subjects.index');
+        }
+
         $subject->delete();
-        $request->session()->flash('message', 'Delete successfully');
+        $request->session()->flash('message', 'Subject is deleted successfully.');
 
         return redirect()->route('subjects.index');
     }

@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group row">
                                 <label> Order</label>
-                                <input class="form-control" type="number" placeholder="Order" name="order" required value="{{ $subject->order }}" />
+                                <input class="form-control" type="number" step="0.01" placeholder="Order" name="order" required value="{{ $subject->order }}" />
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
 
-                            <button class="btn btn-success" type="submit">Edit</button>
+                            <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
