@@ -11,7 +11,7 @@
                         <h4>Edit Topic</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('topics.update', $topic->id) }}">
+                        <form method="POST" action="{{ route('topics.update', ['topic' => $topic->id, 'page' => request()->input('page', 1)]) }}">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">

@@ -50,7 +50,7 @@
                                     <td>{{ $subject->order }}</td>
                                     <td>{{ $subject->creator->name }}</td>
                                     <td>
-                                        <a href="{{ url('/subjects/' . $subject->id) . '?page=' . request()->input('page', 1)  }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('/subjects/' . $subject->id) . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
                                         <a href="{{ url('/subjects/' . $subject->id . '/edit') . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">Edit</a>

@@ -44,13 +44,13 @@
                                     <td>{{ $topic->order }}</td>
                                     <td>{{ $topic->creator->name }}</td>
                                     <td>
-                                        <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('/topics/' . $topic->id) . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/topics/' . $topic->id . '/edit') }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('/topics/' . $topic->id . '/edit') . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('topics.destroy', $topic->id ) }}" method="POST">
+                                        <form action="{{ route('topics.destroy', ['topic' => $topic->id, 'page' => request()->input('page', 1)]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-danger">Delete</button>

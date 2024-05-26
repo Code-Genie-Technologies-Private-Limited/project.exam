@@ -21,7 +21,7 @@
                         <p>{{ $topic->status == 1 ? "Active": "In Active" }}</p>
                         <h4>Created By User</h4>
                         <p>{{ $topic->creator->name }}</p>
-                        <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
+                        <a href="{{ route('topics.index') . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@
                         <p>{{ $subject->status == 1 ? "Active": "In Active" }}</p>
                         <h4>Created By User</h4>
                         <p>{{ $subject->creator->name }}</p>
-                        <a href="{{ route('subjects.index')  . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">Return</a>
+                        <a href="{{ route('subjects.index') . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>
             </div>

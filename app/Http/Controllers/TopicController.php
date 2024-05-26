@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Subject;
 use App\Models\Topic;
+use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
@@ -16,7 +17,13 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::with(['subject', 'creator'])->paginate(10);
+        $topics = Topic::with(['subject', 'creator'])
+            ->join('subjects', 'topics.subject_id', '=', 'subjects.id')
+            ->orderBy('subjects.order')
+            ->orderBy('topics.order')
+            ->select('topics.*')
+            ->paginate(10);
+
         return view('dashboard.topics.index', compact('topics'));
     }
 
@@ -84,7 +91,7 @@ class TopicController extends Controller
     {
         $topic->update($request->validated());
 
-        return redirect()->route('topics.index')
+        return redirect()->route('topics.index', ['page' => $request->input('page', 1)])
             ->with('message', 'Topic updated successfully.');
     }
 
@@ -94,16 +101,16 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic)
+    public function destroy(Topic $topic, Request $request)
     {
         // if ($topic->questions()->exists()) {
-        //     return redirect()->route('topics.index')
+        //     return redirect()->route('topics.index', ['page' => $request->input('page', 1)])
         //         ->with('error', "Can't delete. Topic has assigned one or more questions.");
         // }
 
         $topic->delete();
 
-        return redirect()->route('topics.index')
+        return redirect()->route('topics.index', ['page' => $request->input('page', 1)])
             ->with('message', "Topic has been deleted.");
     }
 }
