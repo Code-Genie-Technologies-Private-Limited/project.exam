@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\ModelFilters\TopicFilter;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $guarded = [];
 
@@ -21,6 +23,11 @@ class Topic extends Model
             $maxOrder = Topic::where('subject_id', $topic->subject_id)->max('order');
             $topic->order = $maxOrder ? $maxOrder + 1 : 1;
         });
+    }
+
+    public function modelFilter()
+    {
+        return $this->provideFilter(TopicFilter::class);
     }
 
     public function subject()
