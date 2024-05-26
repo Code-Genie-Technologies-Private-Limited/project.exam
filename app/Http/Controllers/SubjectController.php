@@ -6,7 +6,6 @@ use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 use App\Models\Subject;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
 {
@@ -39,16 +38,6 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:160',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         Subject::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
         return redirect()->route('subjects.index')
@@ -86,21 +75,9 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-        $validator = Validator::make($request->validated(), [
-            'name' => 'required|min:1|max:160',
-            'order' => 'decimal:2',
-            'status' => 'boolean',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         $subject->update($request->validated());
 
-        return redirect()->route('subjects.index')
+        return redirect()->route('subjects.index', ['page' => $request->input('page', 1)])
             ->with('message', 'Subject successfully updated.');
     }
 
@@ -112,15 +89,14 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject, Request $request)
     {
-        // Flash an error message and redirect if the subject has any related topics
         if ($subject->topics()->exists()) {
-            return redirect()->route('subjects.index')
+            return redirect()->route('subjects.index', ['page' => $request->input('page', 1)])
                 ->with('error', "Can't delete. Subject has assigned one or more topics.");
         }
 
         $subject->delete();
 
-        return redirect()->route('subjects.index')
-            ->with('message', "Subject has been deleted.");
+        return redirect()->route('subjects.index', ['page' => $request->input('page', 1)])
+            ->with('message', 'Subject has been deleted.');
     }
 }

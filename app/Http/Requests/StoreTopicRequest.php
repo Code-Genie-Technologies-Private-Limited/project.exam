@@ -24,7 +24,8 @@ class StoreTopicRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|min:1|max:160',
+            'subject_id' => 'required|exists:subjects,id',
         ];
     }
 }

@@ -6,8 +6,6 @@ use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Subject;
 use App\Models\Topic;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
 {
@@ -41,17 +39,6 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:160',
-            'subject_id' => 'required|exists:subjects,id',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         Topic::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
         return redirect()->route('topics.index')
@@ -95,19 +82,6 @@ class TopicController extends Controller
      */
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:160',
-            'subject_id' => 'required|exists:subjects,id',
-            'order' => 'decimal:2',
-            'status' => 'boolean',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         $topic->update($request->validated());
 
         return redirect()->route('topics.index')
@@ -120,9 +94,8 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic, Request $request)
+    public function destroy(Topic $topic)
     {
-        // Flash an error message and redirect if the subject has any related questions
         // if ($topic->questions()->exists()) {
         //     return redirect()->route('topics.index')
         //         ->with('error', "Can't delete. Topic has assigned one or more questions.");
