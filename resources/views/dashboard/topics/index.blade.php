@@ -25,6 +25,7 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Subject</th>
                                     <th>Order</th>
@@ -37,6 +38,7 @@
                             <tbody>
                                 @foreach($topics as $topic)
                                 <tr>
+                                    <td>{{ $loop->iteration + ($topics->currentPage() - 1) * $topics->perPage() }}</td>
                                     <td>{{ $topic->name }}<span class="badge {{ $topic->status == 1 ? 'badge-secondary': 'badge-warning' }}">{{ $topic->status == 1 ? "Active": "In Active" }}</span></td>
                                     <td>{{ $topic->subject->name }}</td>
                                     <td>{{ $topic->order }}</td>

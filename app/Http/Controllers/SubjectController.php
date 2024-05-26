@@ -49,10 +49,10 @@ class SubjectController extends Controller
                 ->withInput();
         }
 
-        Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Subject::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
-        $request->session()->flash('message', 'Successfully created subject.');
-        return redirect()->route('subjects.index');
+        return redirect()->route('subjects.index')
+            ->with('message', 'Successfully created subject.');
     }
 
     /**
@@ -86,8 +86,10 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->validated(), [
             'name' => 'required|min:1|max:160',
+            'order' => 'decimal:2',
+            'status' => 'boolean',
         ]);
 
         if ($validator->fails()) {
@@ -96,10 +98,10 @@ class SubjectController extends Controller
                 ->withInput();
         }
 
-        $subject->update($request->all());
+        $subject->update($request->validated());
 
-        $request->session()->flash('message', 'Subject successfully updated.');
-        return redirect()->route('subjects.index');
+        return redirect()->route('subjects.index')
+            ->with('message', 'Subject successfully updated.');
     }
 
     /**
@@ -110,18 +112,15 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject, Request $request)
     {
-        // Check if the subject has any related topics
-        $hasTopics = $subject->topics()->exists();
-
-        // Flash an error message and redirect if the subject has topics
-        if ($hasTopics) {
-            $request->session()->flash('error', "Can't delete. Subject has assigned one or more topics.");
-            return redirect()->route('subjects.index');
+        // Flash an error message and redirect if the subject has any related topics
+        if ($subject->topics()->exists()) {
+            return redirect()->route('subjects.index')
+                ->with('error', "Can't delete. Subject has assigned one or more topics.");
         }
 
         $subject->delete();
 
-        $request->session()->flash('message', "Subject has been deleted.");
-        return redirect()->route('subjects.index');
+        return redirect()->route('subjects.index')
+            ->with('message', "Subject has been deleted.");
     }
 }

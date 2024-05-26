@@ -52,10 +52,10 @@ class TopicController extends Controller
                 ->withInput();
         }
 
-        Topic::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Topic::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
-        $request->session()->flash('message', 'Topic created successfully.');
-        return redirect()->route('topics.index');
+        return redirect()->route('topics.index')
+            ->with('message', 'Topic created successfully.');
     }
 
     /**
@@ -78,7 +78,11 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        $subjects = Subject::where('status', 1)->orderBy('order')->get();
+        $subjects = Subject::where('status', 1)
+            ->orWhere('id', $topic->subject_id)
+            ->orderBy('order')
+            ->get();
+
         return view('dashboard.topics.edit', compact('topic', 'subjects'));
     }
 
@@ -94,6 +98,8 @@ class TopicController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:1|max:160',
             'subject_id' => 'required|exists:subjects,id',
+            'order' => 'decimal:2',
+            'status' => 'boolean',
         ]);
 
         if ($validator->fails()) {
@@ -102,10 +108,10 @@ class TopicController extends Controller
                 ->withInput();
         }
 
-        $topic->update($request->all());
+        $topic->update($request->validated());
 
-        $request->session()->flash('message', 'Topic updated successfully.');
-        return redirect()->route('topics.index');
+        return redirect()->route('topics.index')
+            ->with('message', 'Topic updated successfully.');
     }
 
     /**
@@ -116,18 +122,15 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic, Request $request)
     {
-        // Check if the subject has any related topics
-        // $hasQuestions = $topic->questions()->exists();
-
-        // Flash an error message and redirect if the subject has topics
-        // if ($hasQuestions) {
-        //     $request->session()->flash('error', "Can't delete. Topic has assigned one or more questions.");
-        //     return redirect()->route('topics.index');
+        // Flash an error message and redirect if the subject has any related questions
+        // if ($topic->questions()->exists()) {
+        //     return redirect()->route('topics.index')
+        //         ->with('error', "Can't delete. Topic has assigned one or more questions.");
         // }
 
         $topic->delete();
 
-        $request->session()->flash('message', "Topic has been deleted.");
-        return redirect()->route('topics.index');
+        return redirect()->route('topics.index')
+            ->with('message', "Topic has been deleted.");
     }
 }
