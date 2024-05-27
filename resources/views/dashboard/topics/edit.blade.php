@@ -49,11 +49,11 @@
                                 <label class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" @checked(old('status', $topic->status))>
+                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" @checked(old('status', $topic->status == 1))>
                                         <label class="form-check-label" for="active">Active</label>
                                     </div>
                                     <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" id="in-active" type="radio" value="0" name="status" @checked(old('status', $topic->status))>
+                                        <input class="form-check-input" id="in-active" type="radio" value="0" name="status" @checked(old('status', $topic->status == 0))>
                                         <label class="form-check-label" for="in-active">In Active</label>
                                     </div>
                                     @error('status')

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class SubCourse extends Model
 {
     use HasFactory;
 
@@ -16,16 +16,16 @@ class Course extends Model
     {
         parent::boot();
 
-        static::creating(function ($subject) {
+        static::creating(function ($sub_course) {
             // Set 'order' to the next available number
-            $maxOrder = Course::max('order');
-            $subject->order = $maxOrder ? $maxOrder + 1 : 1;
+            $maxOrder = SubCourse::where('course_id', $sub_course->course_id)->max('order');
+            $sub_course->order = $maxOrder ? $maxOrder + 1 : 1;
         });
     }
 
-    public function sub_course()
+    public function course()
     {
-        return $this->hasMany(SubCourse::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function creator()
