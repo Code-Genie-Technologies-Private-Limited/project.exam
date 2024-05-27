@@ -43,14 +43,14 @@ class SubjectController extends Controller
     public function store(StoreSubjectRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:subjects,name|min:3|max:200',
+            // 'name' => 'required|unique:subjects,name|min:3|max:200',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Subject::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Subject::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
         $request->session()->flash('message', 'Subject created successfully.');
 
         return redirect()->route('subjects.index');
@@ -87,16 +87,19 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:subjects,name,' . $subject->id . '|min:3|max:200',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required|unique:subjects,name,' . $subject->id . '|min:3|max:200',
+        // ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+        var_dump($request->validated());
+        exit;
+        $subject->update($request->validated());
 
         $request->session()->flash('message', "Subject updated successfully.");
-        $subject->update($request->all());
+        $subject->update($request->validated());
 
         return redirect()->route('subjects.index');
     }

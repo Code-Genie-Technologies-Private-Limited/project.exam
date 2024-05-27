@@ -24,7 +24,7 @@ class StoreSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|unique:subjects,name|min:3|max:200',
         ];
     }
 }

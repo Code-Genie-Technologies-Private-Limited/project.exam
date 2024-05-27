@@ -44,7 +44,7 @@ class TopicController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:topics|min:3|max:200',
-        ]);
+        ]); 
 
         if ($validator->fails()) 
         {
