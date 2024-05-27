@@ -44,16 +44,8 @@ class SubjectController extends Controller
     public function store(StoreSubjectRequest $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:255'
-        ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors);
-        }
-
         Subject::create(array_merge(
-            $request->all(),
+            $request->validated(),
             ['created_by' => auth()->user()->id]
         ));
 
@@ -91,16 +83,7 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:255'
-        ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors);
-        }
-
-        $subject->update($request->all());
+        $subject->update($request->validated());
 
         return redirect()->route('subjects.index');
     }
