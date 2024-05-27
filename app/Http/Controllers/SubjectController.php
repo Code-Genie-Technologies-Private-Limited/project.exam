@@ -18,7 +18,7 @@ class SubjectController extends Controller
     public function index()
     {
         $subjects = Subject::with('creator')
-            ->orderBy('order')
+            ->orderBy('order','desc')
             ->orderBy('name')
             ->paginate(10);
 
@@ -43,16 +43,8 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:160',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-
         Subject::create(array_merge(
-            $request->all(),
+            $request->validated(),
             ['created_by' => auth()->user()->id]
         ));
 
@@ -92,15 +84,7 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:160',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-
-        $subject->update($request->all());
+        $subject->update($request->validated());
         $request->session()->flash('message', 'Subject is updated successfully.');
 
         return redirect()->route('subjects.index');
