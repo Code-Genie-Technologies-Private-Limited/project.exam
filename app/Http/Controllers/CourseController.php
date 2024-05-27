@@ -6,6 +6,9 @@ use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Topic;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -41,6 +44,13 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
+        
+        $validator = Validator::make($request->all(),[
+            'name'=>'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         
         Course::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
         $request->session()->flash('message', 'course created successfully.');
@@ -80,6 +90,13 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255|unique:courses,name,' . $course->id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $request->session()->flash('message', "course updated successfully.");
         $course->update($request->all());
 
@@ -92,11 +109,11 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Course $course,Request $request)
     {
         $course->delete();
 
-        // $request->session()->flash('message', 'course deleted successfully.');
+        $request->session()->flash('message', 'course deleted successfully.');
 
         return redirect()->route('courses.index');
     }

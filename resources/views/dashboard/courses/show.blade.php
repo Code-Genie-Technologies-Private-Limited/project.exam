@@ -19,7 +19,6 @@
                         <p>{{ $course->status==1?'active':'deactive'; }}</p>
                         <h4>Created By</h4>
                         <p>{{ $course->creator->name }}</p>
-
                         <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>

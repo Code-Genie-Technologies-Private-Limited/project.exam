@@ -106,9 +106,9 @@ class TopicController extends Controller
     public function destroy(Topic $topic, Request $request)
     {
         if ($topic->has('topics')->exists()) {
-            $request->session()->flash('error', "Can't delete. Topic has one or more topics.");
+            $request->session()->flash('error', "Can't delete. to has one or more topics.");
 
-            return redirect()->route('topics.index');
+            return redirect()->route('subjects.index');
         }
 
         $topic->delete();

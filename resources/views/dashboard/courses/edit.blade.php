@@ -16,30 +16,28 @@
                             @method('PUT')
                             <div class="form-group row">
                                 <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $course->name }}" />
+                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $course->name }}" title="Name" />
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check">
-                                        <input class="form-check-input" id="radio1" type="radio" value="1" name="status" {{$course->status==1?'checked':''}}>
+                                        <input class="form-check-input" id="radio1" type="radio" value="1" name="status" title="radio" {{$course->status==1?'checked':''}}>
                                         <label class="form-check-label" for="radio1">Active</label>
                                         @if ($errors->has('name'))
                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                         @endif
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" id="radio2" type="radio" value="0" name="status" {{$course->status==0?'checked':''}}>
+                                        <input class="form-check-input" id="radio2" type="radio" value="0" name="status" name="status" title="radio" {{$course->status==0?'checked':''}}>
                                         <label class="form-check-label" for="radio2">De-active</label>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Order" name="order" required autofocus value="{{ $course->order }}" />
+                                <input class="form-control" type="text" placeholder="Order" name="order" required title="Order" value="{{ $course->order }}" />
                             </div>
-
                             <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
                         </form>
