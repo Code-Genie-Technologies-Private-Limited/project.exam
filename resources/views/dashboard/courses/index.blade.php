@@ -37,10 +37,10 @@
                             <tbody>
                                 @foreach($courses as $course)
                                 <tr>
-                                    <td><strong>{{ $course->name }}</strong></td>
-                                    <td><strong>{{ $course->status }}</strong></td>
-                                    <td><strong>{{ $course->order }}</strong></td>
-                                    <td><strong>{{ $course->creator->name }}</strong></td>
+                                    <td>{{ $course->name }}</td>
+                                    <td>{{ $course->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                    <td>{{ $course->order }}</td>
+                                    <td>{{ $course->creator->name }}</td>
                                     <td>
                                         <a href="{{ url('/courses/' . $course->id) }}" class="btn btn-primary">View</a>
                                     </td>

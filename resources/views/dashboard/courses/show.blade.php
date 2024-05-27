@@ -14,10 +14,10 @@
                         <h4>Name</h4>
                         <p>{{ $course->name }}</p>
                         <h4>Status</h4>
-                        <p>{{ $course->status }}</p>
+                        <p>{{ $course->status == 1 ? 'Active': 'Inactive'}}</p>
                         <h4>Order</h4>
                         <p>{{ $course->order }}</p>
-                        <h4>Created by user</h4>
+                        <h4>Creator</h4>
                         <p>{{ $course->creator->name }}</p>
                         <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
                     </div>
