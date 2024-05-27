@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubcourseRequest;
 use App\Http\Requests\UpdateSubcourseRequest;
+use App\Models\Course;
 use App\Models\Subcourse;
+use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class SubcourseController extends Controller
 {
@@ -15,9 +18,10 @@ class SubcourseController extends Controller
      */
     public function index()
     {
-        $subcourse = Subcourse::with('creator')
+        $subcourses = Subcourse::with('creator', 'course')
             ->orderBy('order', 'DESC')
             ->pagination(10);
+        return view('Dashboard.sub-cources.index', compact('subcourses'));
     }
 
     /**
@@ -27,7 +31,12 @@ class SubcourseController extends Controller
      */
     public function create()
     {
-        return view('dashboard.subcourses.create');
+        $course = Course::where('satus', 1)
+            ->orderBy('order')
+            ->orderBy('name')
+            ->get();
+
+        return view('dashboard.sub-cources.create', compact('courses'));
     }
 
     /**
@@ -38,9 +47,14 @@ class SubcourseController extends Controller
      */
     public function store(StoreSubcourseRequest $request)
     {
-        Subcourse::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Subcourse::create(array_merge(
+            $request->all(),
+            ['created_by' => auth()->user()->id]
+        ));
+        $request->session()->flash('message', 'Sub-cources is created successfully.');
 
-        return redirect()->route('subcourses.index');
+
+        return redirect()->route('sub-cources.index');
     }
 
     /**
@@ -51,7 +65,7 @@ class SubcourseController extends Controller
      */
     public function show(Subcourse $subcourse)
     {
-        return view('dashboard.subcourses.show', compact('subcourse'));
+        return view('dashboard.sub-cources.show', compact('subcourse'));
     }
 
     /**
@@ -62,7 +76,12 @@ class SubcourseController extends Controller
      */
     public function edit(Subcourse $subcourse)
     {
-        return view('dashboard.subcourses.show', compact('subcourse'));
+        $subcourse = Course::where('satus', 1)
+            ->orderBy('order')
+            ->orderBy('name')
+            ->get();
+
+        return view('dashboard.sub-cources.show', compact('subcourse'));
     }
 
     /**
@@ -76,7 +95,9 @@ class SubcourseController extends Controller
     {
         $subcourse->update($request->all());
 
-        return redirect()->route('subcourses.index');
+        $request->session()->flash('message', 'Sub-cources is updated successfully.');
+
+        return redirect()->route('sub-cources.index');
     }
 
     /**
@@ -85,9 +106,10 @@ class SubcourseController extends Controller
      * @param  \App\Models\Subcourse  $subcourse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subcourse $subcourse)
+    public function destroy(Subcourse $subcourse, Request $request)
     {
         $subcourse->delete();
-        return redirect()->route('subcourses.index');
+        $request->session()->flash('message', 'Sub-cources is deleted successfully.');
+        return redirect()->route('sub-cources.index');
     }
 }

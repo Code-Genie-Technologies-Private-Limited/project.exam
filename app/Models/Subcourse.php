@@ -11,10 +11,10 @@ class Subcourse extends Model
     protected $guarded = [];
     public function creator()
     {
-        return $this->belongsTo(User::class, 'course_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
     public function course()
     {
-        return $this->belongsTo(Course::class, 'created_by');
+        return $this->belongsTo(Course::class);
     }
 }

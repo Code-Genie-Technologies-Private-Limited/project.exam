@@ -14,8 +14,8 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label>Course</label>
-                                <input class="form-control" type="text" placeholder="Course" name="name" required autofocus value="{{ $course->name }}" />
+                                <label>Sub-Course</label>
+                                <input class="form-control" type="text" placeholder="Sub-Course" name="name" required autofocus value="{{ $course->name }}" />
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">status</label>
@@ -34,8 +34,6 @@
                                 <label>Order</label>
                                 <input class="form-control" type="text" placeholder="Order" name="order" required value="{{ $course->order }}" />
                             </div>
-
-
                             <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
                         </form>
