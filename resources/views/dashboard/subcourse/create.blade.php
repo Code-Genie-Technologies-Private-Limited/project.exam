@@ -11,7 +11,7 @@
                         <h4>Add Topic</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('topics.store') }}">
+                        <form method="POST" action="{{ route('sub-courses.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label>Name</label>
@@ -21,15 +21,15 @@
                                 @endif
                             </div>
                             <div class="form-group row">
-                                <label for="subject_id">Subject</label>
-                                <select name="subject_id" class="form-control" id="subject_id" required>
-                                    @foreach($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                <label for="course">Subject</label>
+                                <select name="course_id" class="form-control" id="course" required>
+                                    @foreach($courses as $course)
+                                    <option value="{{ $course->id }}">{{ $course->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
-                            <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
+                            <a href="{{ route('sub-courses.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
                 </div>

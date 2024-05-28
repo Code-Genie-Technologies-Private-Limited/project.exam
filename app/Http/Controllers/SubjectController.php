@@ -87,15 +87,8 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|unique:subjects,name,' . $subject->id . '|min:3|max:200',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
-        var_dump($request->validated());
-        exit;
+        // var_dump($request->validated());
+        // die;
         $subject->update($request->validated());
 
         $request->session()->flash('message', "Subject updated successfully.");

@@ -29,14 +29,14 @@
                                         @endif
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" id="radio2" type="radio" value="0" name="status" name="status" title="radio" {{$course->status==0?'checked':''}}>
+                                        <input class="form-check-input" id="radio2" type="radio" value="0" name="status"  {{$course->status==0?'checked':''}}>
                                         <label class="form-check-label" for="radio2">De-active</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Order" name="order" required title="Order" value="{{ $course->order }}" />
+                                <input class="form-control" type="text" placeholder="Order" name="order" required autofocus value="{{ $course->order }}" />
                             </div>
                             <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SubCourse;
 use Illuminate\Database\Seeder;
 
 class SubCourseSeeder extends Seeder
@@ -13,6 +14,6 @@ class SubCourseSeeder extends Seeder
      */
     public function run()
     {
-        //
+        SubCourse::factory()->count(11)->create();
     }
 }

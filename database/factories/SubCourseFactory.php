@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubCourseFactory extends Factory
@@ -14,7 +16,11 @@ class SubCourseFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->sentence,
+            'course_id'=>Course::factory(),
+            'order' => $this->faker->randomFloat(2, 1, 100),
+            'status' => $this->faker->boolean,
+            'created_by' => User::factory()
         ];
     }
 }

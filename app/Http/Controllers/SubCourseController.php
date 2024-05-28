@@ -6,6 +6,7 @@ use App\Models\SubCourse;
 use App\Http\Requests\StoreSubCourseRequest;
 use App\Http\Requests\UpdateSubCourseRequest;
 use App\Models\Course;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class SubCourseController extends Controller
@@ -18,7 +19,7 @@ class SubCourseController extends Controller
     public function index()
     {
 
-        $subcourses = SubCourse::with('creator', 'subject')->orderBy('id', 'desc')->paginate(10);
+        $subcourses = SubCourse::with('creator', 'course')->orderBy('id', 'desc')->paginate(10);
 
         return view('dashboard.subcourse.index', compact('subcourses'));
     }
@@ -44,7 +45,7 @@ class SubCourseController extends Controller
     public function store(StoreSubCourseRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:topics|min:3|max:200',
+            'name' => 'required|min:3|max:200',
         ]);
 
         if ($validator->fails()) {
@@ -55,7 +56,7 @@ class SubCourseController extends Controller
         SubCourse::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
         $request->session()->flash('message', 'Sub Course created successfully.');
 
-        return redirect()->route('subcourse.index');
+        return redirect()->route('sub-courses.index');
     }
 
     /**
@@ -77,7 +78,9 @@ class SubCourseController extends Controller
      */
     public function edit(SubCourse $subCourse)
     {
-        //
+        // $courses = Course::all();
+        $courses = Course::where('status',1)->orderBy('order','Desc')->orderBy('name','DESC')->get();
+        return view('dashboard.subcourse.edit', compact('subCourse', 'courses'));
     }
 
     /**
@@ -89,7 +92,10 @@ class SubCourseController extends Controller
      */
     public function update(UpdateSubCourseRequest $request, SubCourse $subCourse)
     {
-        //
+        $subCourse->update($request->all());
+        $request->session()->flash('message', 'Topic updated successfully.');
+
+        return redirect()->route('sub-courses.index');
     }
 
     /**
@@ -98,8 +104,18 @@ class SubCourseController extends Controller
      * @param  \App\Models\SubCourse  $subCourse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubCourse $subCourse)
+    public function destroy(SubCourse $subCourse, Request $request)
     {
-        //
+        // if ($subCourse->has('cources')->exists()) {
+        //     $request->session()->flash('error', "Can't delete. Subject has one or more topics.");
+
+        //     return redirect()->route('subjects.index');
+        // }
+
+        $subCourse->delete();
+
+        $request->session()->flash('message', 'subcourse deleted successfully.');
+
+        return redirect()->route('sub-courses.index');
     }
 }

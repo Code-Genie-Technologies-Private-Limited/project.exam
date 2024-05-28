@@ -19,7 +19,7 @@
                         </div>
                         @endif
                         <div class="row">
-                            <a href="{{ route('subCourses.create') }}" class="btn btn-primary m-2">Add subCourse</a>
+                            <a href="{{ route('sub-courses.create') }}" class="btn btn-primary m-2">Add sub Course</a>
                         </div>
                         <br>
                         <table class="table table-responsive-sm table-striped">
@@ -35,21 +35,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($subCourses as $i=> $subCourse)
-                                
+                                @foreach($subcourses as $i=> $subCourse)
+
                                 <tr>
                                     <td><b>{{$i + 1}}</b></td>
                                     <td><strong>{{ $subCourse->name }}</strong></td>
                                     <td><strong>{{ $subCourse->order }}</strong></td>
                                     <td><strong>{{ $subCourse->creator->name }}</strong></td>
-                                    <td> <b>{{$subCourse->subCourses->name}}</b></td>
+                                    <td> <b>{{$subCourse->course->name}}</b></td>
                                     <td>{{ $subCourse->status == 1 ? 'Active' : 'Deactive' }}</td>
                                     <td>
-                                        <a href="{{ url('/subCourses/' . $subCourse->id) }}" class="btn btn-primary">View</a>
-                                        <a href="{{ url('/subCourses/' . $subCourse->id . '/edit') }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('/sub-courses/' . $subCourse->id) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('/sub-courses/' . $subCourse->id . '/edit') }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('subCourses.destroy', $subCourse->id ) }}" method="POST">
+                                        <form action="{{ route('sub-courses.destroy', $subCourse->id ) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-danger">Delete</button>
@@ -59,7 +59,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $subCourses->links() }}
+                        {{ $subcourses->links() }}
                     </div>
                 </div>
             </div>

@@ -45,7 +45,7 @@
                             <tbody>
                                 @foreach($subjects as $key => $subject)
                                 <tr>
-                                    <td><strong>{{$subject->page * ($subject->page - 1) }}</strong></td>
+                                    <td><strong>{{ $subjects->perPage() * ($subjects->currentPage() - 1) + $loop->iteration }}</strong></td>
                                     <td><strong>{{ $subject->name }}</strong></td>
                                     <td><strong>{{ $subject->order }}</strong></td>
                                     <td><strong>{{ $subject->status==1?'Active':'Deactive'; }}</strong></td>

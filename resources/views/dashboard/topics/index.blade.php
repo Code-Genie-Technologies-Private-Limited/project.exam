@@ -37,7 +37,7 @@
                             <tbody>
                                 @foreach($topics as $i=> $topic)
                                 <tr>
-                                    <td><b>{{$i + 1}}</b></td>
+                                    <td><b>{{ $subjects->perPage() * ($subjects->currentPage() - 1) + $loop->iteration }}</b></td>
                                     <td><strong>{{ $topic->name }}</strong></td>
                                     <td><strong>{{ $topic->order }}</strong></td>
                                     <td><strong>{{ $topic->creator->name }}</strong></td>
