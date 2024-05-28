@@ -32,6 +32,7 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
+                                    <th>Sr.No</th>
                                     <th>Subject</th>
                                     <th>Order</th>
                                     <th>Status</th>
@@ -44,6 +45,7 @@
                             <tbody>
                                 @foreach($subjects as $key => $subject)
                                 <tr>
+                                    <td><b>{{$subjects->perPage()* ($subjects->currentPage()-1)+$loop->iteration}}</b></td>
                                     <td>{{ $subject->name }}</td>
                                     <td>{{ $subject->order }}</td>
                                     <td>{{ $subject->status == 1 ? 'Active' : 'Inactive' }}</td>
