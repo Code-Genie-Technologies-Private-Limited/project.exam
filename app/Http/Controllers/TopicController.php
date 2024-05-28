@@ -6,6 +6,7 @@ use App\Models\Topic;
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TopicController extends Controller
@@ -107,6 +108,7 @@ class TopicController extends Controller
         }
 
         $topic->update($request->all());
+        $request->session()->flash('message', 'Topic has been updated successfully.');
 
         return redirect()->route('topics.index');
     }
@@ -117,10 +119,10 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic)
+    public function destroy(Topic $topic, Request $request)
     {
         $topic->delete();
-
+        $request->session()->flash('message', 'Topic has been deleted successfully.');
         return redirect()->route('topics.index');
     }
 }
