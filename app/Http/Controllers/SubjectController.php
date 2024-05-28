@@ -48,6 +48,7 @@ class SubjectController extends Controller
             $request->validated(),
             ['created_by' => auth()->user()->id]
         ));
+        $request->session()->flash('message', 'Subject has been added successfully.');
 
         return redirect()->route('subjects.index');
     }
@@ -84,6 +85,7 @@ class SubjectController extends Controller
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         $subject->update($request->validated());
+        $request->session()->flash('message', 'Subject has been updated successfully.');
 
         return redirect()->route('subjects.index');
     }
