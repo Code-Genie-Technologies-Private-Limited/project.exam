@@ -30,9 +30,9 @@
                                     <th>Status</th>
                                     <th>Order</th>
                                     <th>Creator</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,7 +40,7 @@
                                 <tr>
                                     <td><strong>{{ $topic->name }}</strong></td>
                                     <td><strong>{{ $topic->subject->name }}</strong></td>
-                                    <td><strong>{{ $topic->status }}</strong></td>
+                                    <td><strong>{{ $topic->status == 1 ? 'Active' : 'Inactive'}}</strong></td>
                                     <td><strong>{{ $topic->order }}</strong></td>
                                     <td><strong>{{ $topic->creator->name }}</strong></td>
                                     <td>
