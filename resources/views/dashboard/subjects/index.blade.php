@@ -36,13 +36,13 @@
                                     <th>Order</th>
                                     <th>Status</th>
                                     <th>Created By User</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($subjects as $subject)
+                                @foreach($subjects as $key => $subject)
                                 <tr>
                                     <td>{{ $subject->name }}</td>
                                     <td>{{ $subject->order }}</td>
