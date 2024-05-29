@@ -77,7 +77,11 @@ class SubCourseController extends Controller
      */
     public function edit(SubCourse $subCourse)
     {
-        return view('dashboard.sub-courses.edit', compact('subCourse'));
+        $courses = Course::where('status', 1)
+            ->orderBy('order', 'DESC')
+            ->orderBy('name', 'DESC')
+            ->get();
+        return view('dashboard.sub-courses.edit', compact('subCourse', 'courses'));
     }
 
     /**
@@ -104,6 +108,6 @@ class SubCourseController extends Controller
     {
         $subCourse->delete();
         $request->session()->flash('message', 'Subcourse is deleted successfully.');
-        return redirect()->route('dashboard.index');
+        return redirect()->route('sub-courses.index');
     }
 }

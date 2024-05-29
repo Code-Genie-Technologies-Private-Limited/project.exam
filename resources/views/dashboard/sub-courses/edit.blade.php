@@ -18,6 +18,16 @@
                                 <input class="form-control" type="text" placeholder="Sub Course" name="name" required autofocus value="{{ $subCourse->name }}" />
                             </div>
                             <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="subject">Course</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="course_id" name="course_id">
+                                        @foreach($courses as $course)
+                                        <option value="">{{ $course->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label> Order</label>
                                 <input class="form-control" type="number" step="0.01" placeholder="Order" name="order" required value="{{ $subCourse->order }}" />
                             </div>

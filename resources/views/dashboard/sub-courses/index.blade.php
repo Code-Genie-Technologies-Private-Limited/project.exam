@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{{ $subCourses->perPage()*($subCourses->currentPage()-1)+$loop->iteration }}</td>
                                     <td>{{ $subCourse->name }}</td>
-                                    <td>{{ $subCourse->Course }}</td>
+                                    <td>{{ $subCourse->Course->name }}</td>
                                     <td>{{ $subCourse->order }}</td>
                                     <td>{{ $subCourse->status == 1 ? 'Active': 'Inactive' }}</td>
                                     <td>{{ $subCourse->creator->name }}</td>
