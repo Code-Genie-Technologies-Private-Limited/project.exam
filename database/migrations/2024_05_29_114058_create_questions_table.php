@@ -17,10 +17,12 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->foreignId('subject_id')->constrained('subjects')->restrictOnDelete();
             $table->foreignId('topic_id')->constrained('topics')->restrictOnDelete();
-            $table->integer('difficulty_level');
+            $table->enum('difficulty_level', ['easy', 'medium', 'hard']);
             $table->string('keyword');
             $table->string('options');
-            $table->string('answer');
+            $table->boolean('status')->default(1);
+            $table->decimal('order')->default(0.00);
+            $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
         });
     }

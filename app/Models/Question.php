@@ -12,10 +12,14 @@ class Question extends Model
 
     public function subject()
     {
-        return $this->hasMany(Topic::class);
+        return $this->belongsTo(Subject::class);
     }
     public function topic()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Topic::class);
+    }
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -24,7 +24,10 @@ class UpdateQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'subject_id' => 'required',
+            'topic_id' => 'required',
+            'status' => 'required',
+            'order' => 'required'
         ];
     }
 }

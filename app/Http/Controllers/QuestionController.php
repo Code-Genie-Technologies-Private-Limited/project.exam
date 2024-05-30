@@ -17,7 +17,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::with('subject', 'topic')
+        $questions = Question::with('creator','subject', 'topic')
             ->orderBy('name', 'desc')
             ->orderBy('order')
             ->paginate(10);
@@ -57,7 +57,9 @@ class QuestionController extends Controller
             $request->validated(),
             ['created_by' => auth()->user()->id]
         ));
+
         return session()->flash('message', 'question is created successfully.');
+
         return redirect()->route('questions.index');
     }
 
@@ -103,7 +105,9 @@ class QuestionController extends Controller
     public function update(UpdateQuestionRequest $request, Question $question)
     {
         $question->update($request->validated());
+
         return session()->flash('message', 'Question is updated successfully.');
+
         return redirect()->route('questions.index');
     }
 
@@ -116,7 +120,9 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         $question->delete();
+
         return session()->flash('error', 'Question is deleted successfully.');
+        
         return redirect()->route('questions.index');
     }
 }

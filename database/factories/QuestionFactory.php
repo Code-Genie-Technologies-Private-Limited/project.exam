@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Subject;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class QuestionFactory extends Factory
@@ -22,6 +23,9 @@ class QuestionFactory extends Factory
             'keyword' => $this->faker->sentence,
             'options' => $this->faker->sentence,
             'answer' => $this->faker->sentence,
+            'order' => $this->faker->randomFloat(2, 1, 100),
+            'status' => $this->faker->boolean,
+            'created' => User::factory()
         ];
     }
 }
