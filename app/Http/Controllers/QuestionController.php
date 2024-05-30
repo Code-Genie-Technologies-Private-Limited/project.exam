@@ -35,6 +35,7 @@ class QuestionController extends Controller
         $subjects = Subject::where('status', 1)
             ->orderBy('order', 'desc')
             ->get();
+
         $topics = Topic::where('status', 1)
             ->orderBy('order', 'desc')
             ->get();
@@ -50,7 +51,11 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        Question::create($request->all());
+        Question::create(array_merge(
+            $request->all,
+            ['created_by' => auth()->user->id]
+        ));
+        $request->session()->flash('message', 'Question has been stored successfully');
 
         return redirect()->route('questions.index');
     }
@@ -87,7 +92,7 @@ class QuestionController extends Controller
     public function update(UpdateQuestionRequest $request, Question $question)
     {
         $question->update($request->all());
-        $request->session()->flash('message', 'Question has been deleted successfully.');
+        $request->session()->flash('message', 'Question has been updated successfully.');
 
         return redirect()->route('questions.index');
     }
