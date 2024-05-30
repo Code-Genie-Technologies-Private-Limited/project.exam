@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\DifficultLevel;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreQuestionRequest extends FormRequest
 {
@@ -24,7 +26,9 @@ class StoreQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'subject_id' => 'required',
+            'topic_id' => 'required',
+            'difficulty_level' => ['required', new Enum(DifficultLevel::class)],
         ];
     }
 }

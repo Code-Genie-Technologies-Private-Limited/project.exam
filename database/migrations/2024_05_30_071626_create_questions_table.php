@@ -15,8 +15,8 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->decimal('order')->default(0.00);
             $table->boolean('status')->default(1);
+            $table->decimal('order')->default(0.00);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->foreignId('subject_id')->constrained('subjects')->restrictOnDelete();
             $table->foreignId('topic_id')->constrained('topics')->restrictOnDelete();

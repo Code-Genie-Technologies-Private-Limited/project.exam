@@ -20,7 +20,9 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = Question::with('creator', 'subject', 'topic')
-            ->orderBy('order', 'desc');
+            ->orderBy('order', 'desc')
+            ->orderBy('name', 'desc')
+            ->paginate(10);
 
         return view('dashboard.questions.index', compact('questions'));
     }
@@ -52,7 +54,7 @@ class QuestionController extends Controller
     public function store(StoreQuestionRequest $request)
     {
         Question::create(array_merge(
-            $request->all,
+            $request->validated(),
             ['created_by' => auth()->user->id]
         ));
         $request->session()->flash('message', 'Question has been stored successfully');
@@ -91,7 +93,7 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
-        $question->update($request->all());
+        $question->update($request->validated());
         $request->session()->flash('message', 'Question has been updated successfully.');
 
         return redirect()->route('questions.index');
