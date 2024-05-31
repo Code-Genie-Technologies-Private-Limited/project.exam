@@ -15,15 +15,15 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->boolean('status')->default(1);
-            $table->decimal('order')->default(0.00);
-            $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->foreignId('subject_id')->constrained('subjects')->restrictOnDelete();
             $table->foreignId('topic_id')->constrained('topics')->restrictOnDelete();
-            $table->enum('difficulty_level', ['easy', 'medium', 'hard']);
+            $table->enum('difficulty_level', ['easy', 'medium', 'hard'])->default('easy');
             $table->string('keyword');
             $table->string('options');
             $table->string('answer');
+            $table->decimal('order')->default(0.00);
+            $table->boolean('status')->default(1);
+            $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
         });
     }
