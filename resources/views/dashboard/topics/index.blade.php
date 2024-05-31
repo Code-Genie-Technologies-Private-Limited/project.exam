@@ -25,6 +25,7 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Topic</th>
                                     <th>Subject</th>
                                     <th>Status</th>
@@ -38,11 +39,12 @@
                             <tbody>
                                 @foreach($topics as $topic)
                                 <tr>
-                                    <td><strong>{{ $topic->name }}</strong></td>
-                                    <td><strong>{{ $topic->subject->name }}</strong></td>
-                                    <td><strong>{{ $topic->status == 1 ? 'Active' : 'Inactive'}}</strong></td>
-                                    <td><strong>{{ $topic->order }}</strong></td>
-                                    <td><strong>{{ $topic->creator->name }}</strong></td>
+                                    <td><b>{{ $topics->perPage()*($topics->currentPage() - 1) + $loop->iteration }}</b></td>
+                                    <td>{{ $topic->name }}</td>
+                                    <td>{{ $topic->subject->name }}</td>
+                                    <td>{{ $topic->status == 1 ? 'Active' : 'Inactive'}}</td>
+                                    <td>{{ $topic->order }}</td>
+                                    <td>{{ $topic->creator->name }}</td>
                                     <td>
                                         <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
                                     </td>

@@ -19,7 +19,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::with('subject', 'creator')
-            ->orderBy('order', 'desc')
+            ->orderBy('order', 'asc')
             ->orderBy('name')
             ->paginate(10);
 
