@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->foreignId('topic_id')->constrained('topics')->restrictOnDelete();
             $table->enum('difficulty_level', ['easy', 'medium', 'hard'])->default('easy');
             $table->string('keyword');
-            $table->string('options');
+            $table->integer('options');
             $table->string('answer');
             $table->decimal('order')->default(0.00);
             $table->boolean('status')->default(1);
