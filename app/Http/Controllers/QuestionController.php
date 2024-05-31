@@ -17,7 +17,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::with('creator','subject', 'topic')
+        $questions = Question::with('creator', 'subject', 'topic')
             ->orderBy('name', 'desc')
             ->orderBy('order')
             ->paginate(10);
@@ -83,11 +83,13 @@ class QuestionController extends Controller
     public function edit(Question $question)
     {
         $subjects = Subject::where('status', 1)
+            ->orWhere('id', $question->subject_id)
             ->orderBy('order', 'desc')
             ->orderBy('name')
             ->get();
 
         $topics = Topic::where('status', 1)
+            ->orWhere('id', $question->topic_id)
             ->orderBy('name', 'desc')
             ->orderBy('order')
             ->get();
@@ -122,7 +124,7 @@ class QuestionController extends Controller
         $question->delete();
 
         return session()->flash('error', 'Question is deleted successfully.');
-        
+
         return redirect()->route('questions.index');
     }
 }
