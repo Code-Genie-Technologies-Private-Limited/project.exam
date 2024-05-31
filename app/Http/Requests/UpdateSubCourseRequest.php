@@ -25,7 +25,9 @@ class UpdateSubCourseRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
-            'course_id' => 'required'
+            'course_id' => 'required|exists:courses,id',
+            'order' => 'required|numeric',
+            'status' => 'required|boolean',
         ];
     }
 }

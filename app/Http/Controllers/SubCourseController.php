@@ -18,7 +18,7 @@ class SubCourseController extends Controller
     public function index()
     {
         $subCourses = SubCourse::with('creator', 'course')
-            ->orderBy('order', 'desc')
+            ->orderBy('order', 'asc')
             ->orderBy('name')
             ->paginate(10);
 
@@ -52,7 +52,8 @@ class SubCourseController extends Controller
             $request->validated(),
             ['created_by' => auth()->user()->id]
         ));
-        $request->session()->flash('message', 'Subcourse has been added successfully.');
+
+        $request->session()->flash('message', 'Sub course has been added successfully.');
 
         return redirect()->route('sub-courses.index');
     }
@@ -77,6 +78,7 @@ class SubCourseController extends Controller
     public function edit(SubCourse $subCourse)
     {
         $courses = Course::where('status', 1)
+            ->orWhere('id', $subCourse->course_id)
             ->orderBy('order', 'desc')
             ->orderBy('name')
             ->get();
@@ -94,7 +96,7 @@ class SubCourseController extends Controller
     public function update(UpdateSubCourseRequest $request, SubCourse $subCourse)
     {
         $subCourse->update($request->validated());
-        $request->session()->flash('message', 'Subcourse has been updated successfully.');
+        $request->session()->flash('message', 'Sub course has been updated successfully.');
 
         return redirect()->route('sub-courses.index');
     }
@@ -108,7 +110,7 @@ class SubCourseController extends Controller
     public function destroy(SubCourse $subCourse, Request $request)
     {
         $subCourse->delete();
-        $request->session()->flash('message', 'Subcourse has been deleted successfully.');
+        $request->session()->flash('message', 'Sub course has been deleted successfully.');
 
         return redirect()->route('sub-courses.index');
     }

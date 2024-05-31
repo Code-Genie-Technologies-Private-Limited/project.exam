@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>SubCourse List
+                        <i class="fa fa-align-justify"></i>Sub Course List
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
@@ -43,11 +43,11 @@
                                 @foreach($subCourses as $SubCourse)
                                 <tr>
                                     <td><b>{{$subCourses->perPage()* ($subCourses->currentPage()-1)+$loop->iteration}}</b></td>
-                                    <td><strong>{{ $SubCourse->name }}</strong></td>
-                                    <td><strong>{{ $SubCourse->course->name }}</strong></td>
-                                    <td><strong>{{ $SubCourse->status == 1 ? 'Active' : 'Inactive'}}</strong></td>
-                                    <td><strong>{{ $SubCourse->order }}</strong></td>
-                                    <td><strong>{{ $SubCourse->creator->name }}</strong></td>
+                                    <td>{{ $SubCourse->name }}</td>
+                                    <td>{{ $SubCourse->course->name }}</td>
+                                    <td>{{ $SubCourse->status == 1 ? 'Active' : 'Inactive'}}</td>
+                                    <td>{{ $SubCourse->order }}</td>
+                                    <td>{{ $SubCourse->creator->name }}</td>
                                     <td>
                                         <a href="{{ url('/sub-courses/' . $SubCourse->id) }}" class="btn btn-primary">View</a>
                                     </td>
