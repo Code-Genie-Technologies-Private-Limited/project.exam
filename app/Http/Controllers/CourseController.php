@@ -18,8 +18,8 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::with('creator')
-            ->orderBy('order', 'desc')
-            ->orderBy('name', 'desc')
+            ->orderBy('order', 'asc')
+            ->orderBy('name', 'asc')
             ->paginate(10);
 
         return view('dashboard.courses.index', compact('courses'));
