@@ -8,13 +8,12 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-
                         <div class="row">
                             <div class="col-md-6">
                                 <i class="fa fa-align-left"></i><strong>Subject List</strong>
                             </div>
-                            <div class="col-md-6">
-                                <a href="{{ route('subjects.create') }}" class="btn btn-primary fa fa-align-right">Add Subject</a>
+                            <div class="col-md-6 text-right">
+                                <a href="{{ route('subjects.create') }}" class="btn btn-primary">Add Subject</a>
                             </div>
                         </div>
                     </div>
@@ -42,7 +41,8 @@
                             </div>
                             <div class="form-group row">
                                 <label for="status" class="col-md-3 col-form-label">Status</label>
-                                <div class="col-md-9"><select name="status" id="status" class="form-control">
+                                <div class="col-md-9">
+                                    <select name="status" id="status" class="form-control">
                                         <option value="">All</option>
                                         <option value="1" {{ ($filters['status'] ?? '') === '1' ? 'selected' : '' }}>Active</option>
                                         <option value="0" {{ ($filters['status'] ?? '') === '0' ? 'selected' : '' }}>Inactive</option>
@@ -69,7 +69,18 @@
                             </div>
                         </div>
                         @endif
-                        <table class="table table-responsive-sm table-striped">
+                        <div class="row">
+                            <div class="col-6">
+                                <select id="perPage" class="form-control w-auto d-inline">
+                                    <option value="5" {{ ($filters['per_page'] ?? 10) == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ ($filters['per_page'] ?? 10) == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="25" {{ ($filters['per_page'] ?? 10) == 25 ? 'selected' : '' }}>25</option>
+                                    <option value="50" {{ ($filters['per_page'] ?? 10) == 50 ? 'selected' : '' }}>50</option>
+                                    <option value="100" {{ ($filters['per_page'] ?? 10) == 100 ? 'selected' : '' }}>100</option>
+                                </select>
+                            </div>
+                        </div>
+                        <table class="table table-responsive-sm table-striped mt-2">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -116,5 +127,12 @@
 @endsection
 
 @section('javascript')
-
+<script>
+    document.getElementById('perPage').addEventListener('change', function() {
+        var perPage = this.value;
+        var url = new URL(window.location.href);
+        url.searchParams.set('per_page', perPage);
+        window.location.href = url.toString();
+    });
+</script>
 @endsection
