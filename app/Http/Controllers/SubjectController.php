@@ -24,6 +24,7 @@ class SubjectController extends Controller
 
         $subjects = Subject::filter($request->all())
             ->with('creator')
+            ->withCount('topics')
             ->orderBy('order')
             ->paginate($perPage)
             ->appends($request->query()); // Retain query parameters
@@ -115,14 +116,16 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject, Request $request): RedirectResponse
     {
+        $filters = $request->except('_token', '_method'); // Exclude CSRF token from filters
+
         if ($subject->topics()->exists()) {
-            return redirect()->route('subjects.index', $request->query())
+            return redirect()->route('subjects.index', $filters)
                 ->with('error', 'Cannot delete this subject as it has one or more associated topics.');
         }
 
         $subject->delete();
 
-        return redirect()->route('subjects.index', $request->query())
+        return redirect()->route('subjects.index', $filters)
             ->with('message', 'The subject has been deleted successfully.');
     }
 }

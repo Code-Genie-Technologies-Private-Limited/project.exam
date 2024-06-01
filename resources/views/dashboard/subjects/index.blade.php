@@ -34,7 +34,7 @@
                                     <select name="user" id="user" class="form-control">
                                         <option value="">All</option>
                                         @foreach($creators as $creator)
-                                        <option value="{{ $creator->id }}" {{ $filters['creator'] ?? '' == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
+                                        <option value="{{ $creator->id }}" {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -69,18 +69,23 @@
                             </div>
                         </div>
                         @endif
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-6">
-                                <select id="perPage" class="form-control w-auto d-inline">
-                                    <option value="5" {{ ($filters['per_page'] ?? 10) == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="10" {{ ($filters['per_page'] ?? 10) == 10 ? 'selected' : '' }}>10</option>
-                                    <option value="25" {{ ($filters['per_page'] ?? 10) == 25 ? 'selected' : '' }}>25</option>
-                                    <option value="50" {{ ($filters['per_page'] ?? 10) == 50 ? 'selected' : '' }}>50</option>
-                                    <option value="100" {{ ($filters['per_page'] ?? 10) == 100 ? 'selected' : '' }}>100</option>
-                                </select>
+                                <form method="GET" action="{{ url()->current() }}">
+                                    <select id="perPage" name="per_page" class="form-control w-auto d-inline" onchange="this.form.submit()">
+                                        <option value="5" {{ ($filters['per_page'] ?? 10) == 5 ? 'selected' : '' }}>5</option>
+                                        <option value="10" {{ ($filters['per_page'] ?? 10) == 10 ? 'selected' : '' }}>10</option>
+                                        <option value="25" {{ ($filters['per_page'] ?? 10) == 25 ? 'selected' : '' }}>25</option>
+                                        <option value="50" {{ ($filters['per_page'] ?? 10) == 50 ? 'selected' : '' }}>50</option>
+                                        <option value="100" {{ ($filters['per_page'] ?? 10) == 100 ? 'selected' : '' }}>100</option>
+                                    </select>
+                                    @foreach(request()->except('per_page') as $key => $value)
+                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                    @endforeach
+                                </form>
                             </div>
                         </div>
-                        <table class="table table-responsive-sm table-striped mt-2">
+                        <table class="table table-responsive-sm table-bordered table-striped table-sm mt-2">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -94,9 +99,9 @@
                             </thead>
                             <tbody>
                                 @foreach($subjects as $subject)
-                                <tr>
+                                <tr class="{{ $subject->status == 0 ? 'table-danger' : '' }}">
                                     <td>{{ $loop->iteration + ($subjects->currentPage() - 1) * $subjects->perPage() }}</td>
-                                    <td>{{ $subject->name }}<span class="badge {{ $subject->status == 1 ? 'badge-secondary': 'badge-warning' }}">{{ $subject->status == 1 ? "Active": "In Active" }}</span></td>
+                                    <td>{{ $subject->name }}<span class="badge badge-secondary">{{ $subject->topics_count }}</span></td>
                                     <td>{{ $subject->order }}</td>
                                     <td>{{ $subject->creator->name }}</td>
                                     <td>
@@ -106,10 +111,13 @@
                                         <a href="{{ url('/subjects/' . $subject->id . '/edit') . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('subjects.destroy', ['subject' => $subject->id, 'page' => request()->input('page', 1)]) }}" method="POST">
+                                        <form action="{{ route('subjects.destroy', ['subject' => $subject->id]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-danger">Delete</button>
+                                            @foreach(request()->query() as $key => $value)
+                                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                            @endforeach
+                                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this subject?')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -129,10 +137,7 @@
 @section('javascript')
 <script>
     document.getElementById('perPage').addEventListener('change', function() {
-        var perPage = this.value;
-        var url = new URL(window.location.href);
-        url.searchParams.set('per_page', perPage);
-        window.location.href = url.toString();
+        this.form.submit();
     });
 </script>
 @endsection
