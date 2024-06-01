@@ -30,16 +30,4 @@ class StoreTopicRequest extends FormRequest
             'order' => 'required|numeric'
         ];
     }
-    public function messages()
-    {
-        return [
-            'name.required' => 'The name field is required.',
-            'subject_id.required' => 'The subject ID field is required.',
-            'subject_id.exists' => 'The selected subject ID is invalid.',
-            'status.required' => 'The status field is required.',
-            'status.in' => 'The selected status is invalid.',
-            'order.integer' => 'The order must be an integer.',
-            'order.min' => 'The order must be at least 1.',
-        ];
-    }
 }
