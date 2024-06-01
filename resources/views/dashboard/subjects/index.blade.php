@@ -19,11 +19,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="GET" action="{{ route('subjects.index') }}">
+                        <form method="GET" action="{{ url()->current() }}">
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="name">Subject Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter subject name" length="160" autocomplete="subject" autofocus value="{{ request('name') }}">
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter subject name" length="160" autocomplete="subject" autofocus value="{{ $filters['name'] ?? '' }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -35,7 +35,7 @@
                                     <select name="user" id="user" class="form-control">
                                         <option value="">All</option>
                                         @foreach($creators as $creator)
-                                        <option value="{{ $creator->id }}" {{ request('user') == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
+                                        <option value="{{ $creator->id }}" {{ $filters['creator'] ?? '' == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -44,8 +44,8 @@
                                 <label for="status" class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9"><select name="status" id="status" class="form-control">
                                         <option value="">All</option>
-                                        <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inactive</option>
+                                        <option value="1" {{ ($filters['status'] ?? '') === '1' ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ ($filters['status'] ?? '') === '0' ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                 </div>
                             </div>
@@ -89,10 +89,10 @@
                                     <td>{{ $subject->order }}</td>
                                     <td>{{ $subject->creator->name }}</td>
                                     <td>
-                                        <a href="{{ url('/subjects/' . $subject->id) . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('/subjects/' . $subject->id) . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/subjects/' . $subject->id . '/edit') . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('/subjects/' . $subject->id . '/edit') . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
                                         <form action="{{ route('subjects.destroy', ['subject' => $subject->id, 'page' => request()->input('page', 1)]) }}" method="POST">
@@ -105,7 +105,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $subjects->links() }}
+                        {{ $subjects->appends($filters)->links() }}
                     </div>
                 </div>
             </div>

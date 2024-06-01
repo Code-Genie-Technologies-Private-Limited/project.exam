@@ -19,7 +19,12 @@ class SubjectController extends Controller
     {
         $subjects = Subject::filter($request->all())->with('creator')->orderBy('order')->paginate(10);
         $creators = User::all();
-        return view('dashboard.subjects.index', compact('subjects', 'creators'));
+
+        return view('dashboard.subjects.index', [
+            'subjects' => $subjects,
+            'creators' => $creators,
+            'filters' => $request->all(),
+        ]);
     }
 
     /**
@@ -52,9 +57,12 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function show(Subject $subject)
+    public function show(Subject $subject, Request $request)
     {
-        return view('dashboard.subjects.show', compact('subject'));
+        return view('dashboard.subjects.show', [
+            'subject' => $subject,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
@@ -63,9 +71,12 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subject $subject)
+    public function edit(Subject $subject, Request $request)
     {
-        return view('dashboard.subjects.edit', compact('subject'));
+        return view('dashboard.subjects.edit', [
+            'subject' => $subject,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
@@ -79,7 +90,7 @@ class SubjectController extends Controller
     {
         $subject->update($request->validated());
 
-        return redirect()->route('subjects.index', ['page' => $request->input('page', 1)])
+        return redirect()->route('subjects.index', ['filters' => $request->query()])
             ->with('message', 'Subject successfully updated.');
     }
 
@@ -92,13 +103,13 @@ class SubjectController extends Controller
     public function destroy(Subject $subject, Request $request)
     {
         if ($subject->topics()->exists()) {
-            return redirect()->route('subjects.index', ['page' => $request->input('page', 1)])
+            return redirect()->route('subjects.index', ['filters' => $request->query()])
                 ->with('error', "Can't delete. Subject has assigned one or more topics.");
         }
 
         $subject->delete();
 
-        return redirect()->route('subjects.index', ['page' => $request->input('page', 1)])
+        return redirect()->route('subjects.index', ['filters' => $request->query()])
             ->with('message', 'Subject has been deleted.');
     }
 }

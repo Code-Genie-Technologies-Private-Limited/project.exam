@@ -11,7 +11,7 @@
                         <h4>Edit Subject</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('subjects.update', ['subject' => $subject->id, 'page' => request()->input('page', 1)]) }}">
+                        <form method="POST" action="{{ url('/subjects/' . $subject->id) . '?' . http_build_query($filters) }}">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-success" type="submit">Update</button>
-                            <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
+                            <a href="{{ url('/subjects?' . http_build_query($filters)) }}" class="btn btn-secondary">Back to list</a>
                         </form>
                     </div>
                 </div>
