@@ -13,15 +13,14 @@
                     <div class="card-body">
                         <h4>Name</h4>
                         <p>{{ $topic->name }}</p>
-                        <h4>Subject</h4>
-                        <p>{{ $topic->subject->name }}</p>
-                        <h4>Priority Order</h4>
+                        <h4>Order</h4>
                         <p>{{ $topic->order }}</p>
                         <h4>Status</h4>
                         <p>{{ $topic->status == 1 ? "Active": "In Active" }}</p>
                         <h4>Created By User</h4>
                         <p>{{ $topic->creator->name }}</p>
-                        <a href="{{ route('topics.index') . '?page=' . request()->input('page', 1) }}" class="btn btn-primary">Return</a>
+                        <a href="{{ url('/topics/' . $topic->id . '/edit') . '?' . http_build_query($filters) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ url('/topics?' . http_build_query($filters)) }}" class="btn btn-secondary">Back to list</a>
                     </div>
                 </div>
             </div>

@@ -20,14 +20,14 @@ class SubjectController extends Controller
      */
     public function index(Request $request): View
     {
-        $perPage = $request->input('per_page', 10); // Default to 10 items per page
+        $perPage = $request->input('per_page', 10);
 
         $subjects = Subject::filter($request->all())
             ->with('creator')
             ->withCount('topics')
             ->orderBy('order')
             ->paginate($perPage)
-            ->appends($request->query()); // Retain query parameters
+            ->appends($request->query());
 
         $creators = User::all();
 
@@ -116,7 +116,7 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject, Request $request): RedirectResponse
     {
-        $filters = $request->except('_token', '_method'); // Exclude CSRF token from filters
+        $filters = $request->except('_token', '_method');
 
         if ($subject->topics()->exists()) {
             return redirect()->route('subjects.index', $filters)

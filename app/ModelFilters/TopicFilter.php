@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\ModelFilters;
 
@@ -7,10 +7,25 @@ use EloquentFilter\ModelFilter;
 class TopicFilter extends ModelFilter
 {
     /**
-    * Related Models that have ModelFilters as well as the method on the ModelFilter
-    * As [relationMethod => [input_key1, input_key2]].
-    *
-    * @var array
-    */
-    public $relations = [];
+     * Related Models that have ModelFilters as well as the method on the ModelFilter
+     * As [relationMethod => [input_key1, input_key2]].
+     *
+     * @var array
+     */
+    public $relations = ['subject' => ['subject']];
+
+    public function user(int $user)
+    {
+        return $this->where('created_by', $user);
+    }
+
+    public function name(string $name)
+    {
+        return $this->whereLike('name', $name);
+    }
+
+    public function status(bool $status)
+    {
+        return $this->where('status', $status);
+    }
 }

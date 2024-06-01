@@ -11,13 +11,13 @@
                         <h4>Edit Topic</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('topics.update', ['topic' => $topic->id, 'page' => request()->input('page', 1)]) }}">
+                        <form method="POST" action="{{ url('/topics/' . $topic->id) . '?' . http_build_query($filters) }}">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="name">Topic Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter Topic Name" autocomplete="topic" autofocus required value="{{ old('name') ?? $topic->name }}">
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter topic..." autocomplete="topic" autofocus required value="{{ old('name') ?? $topic->name }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-success" type="submit">Update</button>
-                            <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
+                            <a href="{{ url('/topics?' . http_build_query($filters)) }}" class="btn btn-secondary">Back to list</a>
                         </form>
                     </div>
                 </div>
