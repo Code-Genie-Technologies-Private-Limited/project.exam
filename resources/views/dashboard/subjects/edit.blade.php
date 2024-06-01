@@ -16,7 +16,7 @@
                             @method('PUT')
                             <div class="form-group row">
                                 <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" autofocus value="{{ $subject->name }}" />
+                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $subject->name }}" />
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Order" name="order" value="{{ $subject->order }}" />
+                                <input class="form-control" type="text" placeholder="Order" required name="order" value="{{ $subject->order }}" />
                                 @error('order')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
