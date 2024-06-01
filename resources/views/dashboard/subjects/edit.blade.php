@@ -16,10 +16,16 @@
                             <div class="form-group row">
                                 <label>Name</label>
                                 <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $subject->name }}" />
+                                @error('name')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label> Order</label>
                                 <input class="form-control" type="number" step="0.01" placeholder="Order" name="order" required value="{{ $subject->order }}" />
+                                @error('order')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>
