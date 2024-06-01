@@ -19,8 +19,8 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::with('creator', 'subject')
-            ->orderBy('order')
-            ->orderBy('name')
+            ->orderBy('order', 'asc')
+            ->orderBy('name', 'asc')
             ->paginate(10);
 
         return view('dashboard.topics.index', compact('topics'));
@@ -34,8 +34,8 @@ class TopicController extends Controller
     public function create()
     {
         $subjects = Subject::where('status', 1)
-            ->orderBy('order')
-            ->orderBy('name')
+            ->orderBy('order', 'asc')
+            ->orderBy('name', 'asc')
             ->get();
 
         return view('dashboard.topics.create', compact('subjects'));
@@ -78,8 +78,8 @@ class TopicController extends Controller
     public function edit(Topic $topic)
     {
         $subjects = Subject::where('status', 1)
-            ->orderBy('order')
-            ->orderBy('name')
+            ->orderBy('order', 'asc')
+            ->orderBy('name', 'asc')
             ->get();
 
         return view('dashboard.topics.edit', compact('topic', 'subjects'));

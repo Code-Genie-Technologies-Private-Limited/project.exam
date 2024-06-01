@@ -20,7 +20,7 @@ class SubCourseController extends Controller
     {
         $subCourses = SubCourse::with('creator', 'course')
             ->orderby('order', 'asc')
-            ->orderBy('name')
+            ->orderBy('name', 'asc')
             ->paginate(10);
 
         return view('dashboard.sub-courses.index', compact('subCourses'));
@@ -35,7 +35,7 @@ class SubCourseController extends Controller
     {
         $courses = Course::where('status', 1)
             ->orderBy('order', 'asc')
-            ->orderBy('name')
+            ->orderBy('name', 'asc')
             ->get();
 
         return view('dashboard.sub-courses.create', compact('courses'));
@@ -79,8 +79,8 @@ class SubCourseController extends Controller
     {
         $courses = Course::where('status', 1)
             ->orWhere('id', $subCourse->course_id)
-            ->orderBy('order', 'DESC')
-            ->orderBy('name', 'DESC')
+            ->orderBy('order', 'asc')
+            ->orderBy('name', 'asc')
             ->get();
         return view('dashboard.sub-courses.edit', compact('subCourse', 'courses'));
     }
