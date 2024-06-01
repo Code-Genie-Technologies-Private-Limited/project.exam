@@ -23,23 +23,18 @@ class StoreSubCourseRequest extends FormRequest
      */
     public function rules()
     {
-     return [
+        return [
             'name' => 'required|min:3|max:160',
             'course_id' => 'required|integer|exists:subjects,id',
             'status' => 'required|boolean',
             'order' => 'required|numeric'
         ];
     }
+
     public function messages()
     {
         return [
-            'name.required' => 'The name field is required.',
-            'course_id.required' => 'The course ID field is required.',
-            'course_id.exists' => 'The selected course ID is invalid.',
-            'status.required' => 'The status field is required.',
-            'status.in' => 'The selected status is invalid.',
-            'order.integer' => 'The order must be an integer.',
-            'order.min' => 'The order must be at least 1.',
+            //
         ];
     }
 }
