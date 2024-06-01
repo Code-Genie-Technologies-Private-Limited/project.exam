@@ -16,6 +16,9 @@
                             <div class="form-group row">
                                 <label>Topic</label>
                                 <input class="form-control" type="text" placeholder="Enter your topic" name="name" required autofocus />
+                                @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label for="subject">Subject</label>
