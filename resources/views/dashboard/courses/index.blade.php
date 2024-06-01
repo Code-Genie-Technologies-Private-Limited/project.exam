@@ -18,6 +18,13 @@
                             </div>
                         </div>
                         @endif
+                        @if(Session::has('error'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="row">
                             <a href="{{ route('courses.create') }}" class="btn btn-primary m-2">Add course</a>
                         </div>
@@ -25,18 +32,20 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Status</th>
                                     <th>Order</th>
                                     <th>Creator by User</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($courses as $course)
                                 <tr>
+                                    <td><b>{{ $courses->perPage()*($courses->currentPage() - 1) + $loop->iteration }}</b></td>
                                     <td>{{ $course->name }}</td>
                                     <td>{{ $course->status == 1 ? 'Active' : 'Inactive' }}</td>
                                     <td>{{ $course->order }}</td>

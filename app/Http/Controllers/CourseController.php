@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
@@ -16,7 +17,11 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('creator')->orderBy('order', 'desc')->orderBy('name', 'desc')->paginate(10);
+        $courses = Course::with('creator')
+            ->orderBy('order', 'desc')
+            ->orderBy('name', 'desc')
+            ->paginate(10);
+
         return view('dashboard.courses.index', compact('courses'));
     }
 
@@ -38,16 +43,12 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        $validator = Validator::make($request->all(), [
+        Course::create(array_merge(
+            $request->validated(),
+            ['created_by' => auth()->user()->id]
+        ));
+        $request->session()->flash('message', 'Course has been added successfully.');
 
-            'name' => 'required|min:3|max:160'
-        ]);
-
-        if ($validator->fails()) {
-
-            return response($validator->errors());
-        }
-        Course::create($request->all());
         return redirect()->route('courses.index');
     }
 
@@ -82,7 +83,9 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        $course->update($request->all());
+        $course->update($request->validated());
+        $request->session()->flash('message', 'Course has been updated successfully.');
+
         return redirect()->route('courses.index');
     }
 
@@ -92,9 +95,16 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Course $course, Request $request)
     {
+        if ($course->subCourses()->exists()) {
+            $request->session()->flash('error', 'Course can not be deleted because it has one or more subcourses.');
+            return redirect()->route('courses.index');
+        }
+
         $course->delete();
+        $request->session()->flash('message', 'Course has been deleted successfully.');
+
         return redirect()->route('courses.index');
     }
 }

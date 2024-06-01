@@ -16,13 +16,16 @@
                             @method('PUT')
                             <div class="form-group row">
                                 <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $course->name }}" />
+                                <input class="form-control" type="text" placeholder="Name" name="name" autofocus value="{{ $course->name }}" />
+                                @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check">
-                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" {{$course->status == 0 ? 'checked':''}}>
+                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" {{$course->status == 1 ? 'checked':''}}>
                                         <label class="form-check-label" for="active">Active</label>
                                     </div>
                                     <div class="form-check">
@@ -33,9 +36,12 @@
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>
-                                <input class="form-control" type="text" placeholder="order" name="order" required value="{{ $course->order }}" />
+                                <input class="form-control" type="text" placeholder="order" name="order" value="{{ $course->order }}" />
+                                @error('order')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <button class="btn btn-success" type="submit">Edit</button>
+                            <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
