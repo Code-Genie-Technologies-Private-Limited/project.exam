@@ -51,6 +51,7 @@ class TopicController extends Controller
             $request->validated(),
             ['created_by' => auth()->user()->id],
         ));
+        $request->session()->flash('message', 'Topic has been added successfully.');
 
         return redirect()->route('topics.index');
     }
