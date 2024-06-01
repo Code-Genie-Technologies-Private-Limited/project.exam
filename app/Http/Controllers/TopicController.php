@@ -36,7 +36,6 @@ class TopicController extends Controller
         $subjects = Subject::where('status', 1)
             ->orderBy('order', 'desc')
             ->get();
-
         return view('dashboard.topics.create', compact('subjects'));
     }
 
