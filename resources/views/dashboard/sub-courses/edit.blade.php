@@ -16,6 +16,9 @@
                             <div class="form-group row">
                                 <label>Sub Course</label>
                                 <input class="form-control" type="text" placeholder="Sub Course" name="name" required autofocus value="{{ $subCourse->name }}" />
+                                @error('name')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="subject">Course</label>
@@ -30,6 +33,9 @@
                             <div class="form-group row">
                                 <label> Order</label>
                                 <input class="form-control" type="number" step="0.01" placeholder="Order" name="order" required value="{{ $subCourse->order }}" />
+                                @error('order')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>

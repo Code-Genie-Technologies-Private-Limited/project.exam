@@ -15,6 +15,9 @@
                             <div class="form-group row">
                                 <label>Course</label>
                                 <input class="form-control" type="text" placeholder="course" name="name" required autofocus />
+                                @error('name')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>

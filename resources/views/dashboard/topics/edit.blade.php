@@ -16,6 +16,9 @@
                             <div class="form-group row">
                                 <label>Name</label>
                                 <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $topic->name }}" />
+                                @error('name')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label>topic Id</label>
@@ -24,6 +27,9 @@
                             <div class="form-group row">
                                 <label>Order</label>
                                 <input class="form-control" type="text" placeholder="Order" name="order" required value="{{ $topic->order }}" />
+                                @error('order')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">status</label>
@@ -38,11 +44,11 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
-                              
-                                <button class="btn btn-success" type="submit">Update</button>
-                                <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
+
+
+
+                            <button class="btn btn-success" type="submit">Update</button>
+                            <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
                 </div>
