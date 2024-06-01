@@ -29,7 +29,6 @@ class StoreTopicRequest extends FormRequest
             'status' => 'required|boolean',
             'order' => 'required|numeric'
         ];
-        
     }
     public function messages()
     {
@@ -43,6 +42,4 @@ class StoreTopicRequest extends FormRequest
             'order.min' => 'The order must be at least 1.',
         ];
     }
-
-
 }

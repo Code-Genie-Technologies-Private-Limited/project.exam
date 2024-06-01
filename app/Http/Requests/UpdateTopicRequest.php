@@ -23,13 +23,12 @@ class UpdateTopicRequest extends FormRequest
      */
     public function rules()
     {
-      return [
+        return [
             'name' => 'required|min:3|max:160',
             'subject_id' => 'required|integer|exists:subjects,id',
             'status' => 'required|boolean',
             'order' => 'required|numeric'
         ];
-        
     }
     public function messages()
     {
@@ -43,3 +42,4 @@ class UpdateTopicRequest extends FormRequest
             'order.min' => 'The order must be at least 1.',
         ];
     }
+}
