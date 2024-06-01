@@ -18,7 +18,7 @@ class SubjectController extends Controller
     public function index()
     {
         $subjects = Subject::with('creator')
-            ->orderBy('order', 'desc')
+            ->orderBy('order', 'asc')
             ->orderBy('name')
             ->paginate(10);
 
