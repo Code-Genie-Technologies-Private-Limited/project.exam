@@ -78,6 +78,7 @@ class SubCourseController extends Controller
     public function edit(SubCourse $subCourse)
     {
         $courses = Course::where('status', 1)
+            ->orWhere('id', $subCourse->course_id)
             ->orderBy('order', 'DESC')
             ->orderBy('name', 'DESC')
             ->get();
