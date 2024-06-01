@@ -33,13 +33,7 @@ class UpdateSubCourseRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'The name field is required.',
-            'course_id.required' => 'The course ID field is required.',
-            'course_id.exists' => 'The selected course ID is invalid.',
-            'status.required' => 'The status field is required.',
-            'status.in' => 'The selected status is invalid.',
-            'order.integer' => 'The order must be an integer.',
-            'order.min' => 'The order must be at least 1.',
+           //
         ];
     }
 }

@@ -7,7 +7,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Edit Subject</h4>
+                        <h4>Edit Sub Course</h4>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('sub-courses.update', $subCourse->id) }}">
@@ -25,9 +25,12 @@
                                 <div class="col-md-9">
                                     <select class="form-control" id="course_id" name="course_id">
                                         @foreach($courses as $course)
-                                        <option value="">{{ $course->name }}</option>
+                                        <option value="{{ $course->id }}">{{ $course->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('course_id')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">

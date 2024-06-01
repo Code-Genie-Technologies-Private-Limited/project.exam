@@ -19,7 +19,7 @@ class SubCourseController extends Controller
     public function index()
     {
         $subCourses = SubCourse::with('creator', 'course')
-            ->orderby('order', 'desc')
+            ->orderby('order', 'asc')
             ->orderBy('name')
             ->paginate(10);
 
@@ -34,7 +34,7 @@ class SubCourseController extends Controller
     public function create()
     {
         $courses = Course::where('status', 1)
-            ->orderBy('order', 'desc')
+            ->orderBy('order', 'asc')
             ->orderBy('name')
             ->get();
 
@@ -94,8 +94,10 @@ class SubCourseController extends Controller
      */
     public function update(UpdateSubCourseRequest $request, SubCourse $subCourse)
     {
-        $subCourse->upadte($request->validated());
+        $subCourse->update($request->validated());
+
         $request->session()->flash('message', 'Subcourse is updated successfully.');
+
         return redirect()->route('sub-courses.index');
     }
 
