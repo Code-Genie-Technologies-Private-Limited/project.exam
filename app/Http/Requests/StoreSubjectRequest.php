@@ -25,8 +25,6 @@ class StoreSubjectRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
-            'status' => 'required|boolean|in:active,inactive',
-            'order' => 'nullable|integer|min:1'
         ];
     }
 
