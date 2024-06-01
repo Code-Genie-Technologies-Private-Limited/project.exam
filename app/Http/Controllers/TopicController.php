@@ -108,7 +108,7 @@ class TopicController extends Controller
     {
         $topic->delete();
         $request->session()->flash('message', 'Topic has been deleted successfully.');
-        
+
         return redirect()->route('topics.index');
     }
 }
