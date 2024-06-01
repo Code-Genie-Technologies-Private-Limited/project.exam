@@ -24,7 +24,10 @@ class UpdateTopicRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|min:3|max:255',
+            'subject_id' => 'required|exists:subjects',
+            'order' => 'required|numeric',
+            'status' => 'required|boolean',
         ];
     }
 }

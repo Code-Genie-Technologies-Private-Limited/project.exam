@@ -48,16 +48,8 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:255'
-        ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors());
-        }
-
         Topic::create(array_merge(
-            $request->all(),
+            $request->validated(),
             ['created_by' => auth()->user()->id],
         ));
 
@@ -84,6 +76,7 @@ class TopicController extends Controller
     public function edit(Topic $topic)
     {
         $subjects = Subject::where('status', 1)
+            ->orWhere('id', $topic->course_id)
             ->orderBy('order', 'desc')
             ->get();
 
@@ -99,15 +92,7 @@ class TopicController extends Controller
      */
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:255'
-        ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors());
-        }
-
-        $topic->update($request->all());
+        $topic->update($request->validated());
         $request->session()->flash('message', 'Topic has been updated successfully.');
 
         return redirect()->route('topics.index');
@@ -123,6 +108,7 @@ class TopicController extends Controller
     {
         $topic->delete();
         $request->session()->flash('message', 'Topic has been deleted successfully.');
+        
         return redirect()->route('topics.index');
     }
 }
