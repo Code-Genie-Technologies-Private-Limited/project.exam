@@ -98,7 +98,7 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject, Request $request)
     {
-        if ($subject->has('topics')->exists()) {
+        if ($subject->topics()->exists()) {
             $request->session()->flash('error', 'Subject can not be deleted because it has topics.');
             return redirect()->route('subjects.index');
         }
