@@ -76,7 +76,7 @@ class TopicController extends Controller
     public function edit(Topic $topic)
     {
         $subjects = Subject::where('status', 1)
-            ->orWhere('id', $topic->course_id)
+            ->orWhere('id', $topic->subject_id)
             ->orderBy('order', 'desc')
             ->get();
 
