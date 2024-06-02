@@ -26,7 +26,7 @@ class UpdateSubjectRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:255',
             'status' => 'required|boolean',
-            'order' => 'nullable|number|min:1'
+            'order' => 'nullable|min:1'
         ];
     }
 

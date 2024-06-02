@@ -13,11 +13,12 @@
                         <form method="POST" action="{{ route('subjects.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ old('name') }}"/>
-                                @error('name')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
+                                <div class="col-3"> <label for="name">Name</label></div>
+                                <div class="col-9"><input class="form-control" id="name" type="text" placeholder="Name" name="name"  title="Name" required autofocus value="{{ old('name') }}" />
+                                    @error('name')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
