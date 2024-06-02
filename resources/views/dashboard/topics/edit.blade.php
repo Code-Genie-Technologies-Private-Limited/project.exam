@@ -21,8 +21,14 @@
                                 @enderror
                             </div>
                             <div class="form-group row">
-                                <label>topic Id</label>
-                                <input class="form-control" type="text" placeholder="topic Id" name="subject_id" required value="{{ $topic->subject_id }}" />
+                                <label class="col-md-3 col-form-label" for="subject">Subject</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="subject" name="subject_id">
+                                        @foreach($subjects as $subject)
+                                        <option {{$subject->id == $topic->subject_id ? 'selected':''}} value="{{ $subject->id ,old('subject_id')}}">{{ $subject->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>
@@ -44,9 +50,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
                         </form>

@@ -14,7 +14,7 @@
                             @csrf
                             <div class="form-group row">
                                 <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus />
+                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{old('name')}}" />
                                 @error('name')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -24,14 +24,10 @@
                                 <div class="col-md-9">
                                     <select class="form-control" id="subject" name="subject_id">
                                         @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        <option value="{{ $subject->id }}" @selected(old('subject_id')=={{$subject->id}})>{{ $subject->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label>order</label>
-                                <input class="form-control" type="text" placeholder="order" name="order" required />
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
