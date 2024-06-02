@@ -50,7 +50,7 @@ class TopicController extends Controller
     public function store(StoreTopicRequest $request)
     {
         Topic::create(array_merge(
-            $request->all(),
+            $request->validated(),
             ['created_by' => auth()->user()->id]
         ));
         $request->session()->flash('message', 'Topic is create successfully.');
@@ -94,7 +94,7 @@ class TopicController extends Controller
      */
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
-        $topic->update($request->all());
+        $topic->update($request->validated());
         $request->session()->flash('message', 'Topic is updated successfully.');
         return redirect()->route('topics.index');
     }
