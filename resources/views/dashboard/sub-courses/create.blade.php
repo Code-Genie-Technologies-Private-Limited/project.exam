@@ -14,7 +14,7 @@
                             @csrf
                             <div class="form-group row">
                                 <label>Sub Course</label>
-                                <input class="form-control" type="text" placeholder="Sub Course" name="name" required autofocus />
+                                <input class="form-control" type="text" placeholder="Sub Course" name="name" required autofocus value="{{ old('name') }}" />
                                 @error('name')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
