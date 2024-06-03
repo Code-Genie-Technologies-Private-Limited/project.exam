@@ -16,7 +16,7 @@
                             @method('PUT')
                             <div class="form-group row">
                                 <label>Topic</label>
-                                <input class="form-control" type="text" placeholder="Enter your topic" name="name" required autofocus value="{{ $topic->name }}" />
+                                <input class="form-control" type="text" placeholder="Enter your topic" name="name" required autofocus value="{{ old('name') ??  $topic->name }}" />
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
