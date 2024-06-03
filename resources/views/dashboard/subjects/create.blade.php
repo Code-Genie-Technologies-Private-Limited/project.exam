@@ -11,11 +11,11 @@
                         <h4>Add Subject</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('subjects.store') }}">
+                        <form method="POST" action="{{ route('subjects.store', $subject->id) }}">
                             @csrf
                             <div class="form-group row">
                                 <label>Subject</label>
-                                <input class="form-control" type="text" placeholder="Enter your subject" name="name" required autofocus />
+                                <input class="form-control" type="text" placeholder="Enter your subject" name="name" required autofocus "{{ old('name') ?? $subject->name }}" />
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
