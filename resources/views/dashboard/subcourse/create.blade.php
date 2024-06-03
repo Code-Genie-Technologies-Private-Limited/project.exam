@@ -24,7 +24,7 @@
                                 <label for="course">Subject</label>
                                 <select name="course_id" class="form-control" id="course" required>
                                     @foreach($courses as $course)
-                                    <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                    <option value="{{ $course->id }}" {{ old('course_id') == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

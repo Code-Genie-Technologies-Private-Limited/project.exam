@@ -8,14 +8,14 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Add Student</h4>
+                        <h4>Add Subject</h4>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('subjects.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" value="{{old('name')}}" required autofocus />
+                                <label for="subject">Subject</label>
+                                <input class="form-control" type="text" id='subject' placeholder="Enter you subject" name="name" value="{{old('name')}}" title="subject" required autofocus />
                                 @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                                 @endif

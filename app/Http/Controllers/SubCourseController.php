@@ -79,7 +79,11 @@ class SubCourseController extends Controller
     public function edit(SubCourse $subCourse)
     {
         // $courses = Course::all();
-        $courses = Course::where('status',1)->orderBy('order','Desc')->orderBy('name','DESC')->get();
+        $courses = Course::where('status', 1)
+            ->orwhere('id', $subCourse->course_id)
+            ->orderBy('order', 'Desc')
+            ->orderBy('name', 'DESC')
+            ->get();
         return view('dashboard.subcourse.edit', compact('subCourse', 'courses'));
     }
 

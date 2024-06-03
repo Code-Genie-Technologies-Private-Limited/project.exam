@@ -25,26 +25,30 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
-                                    <th>Sr.No</th>
+                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Order</th>
                                     <th>Created by</th>
                                     <th>Subject</th>
+                                    <th>Status</th>
                                     <th>View</th>
+                                    <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($topics as $i=> $topic)
                                 <tr>
-                                    <td><b>{{ $subjects->perPage() * ($subjects->currentPage() - 1) + $loop->iteration }}</b></td>
-                                    <td><strong>{{ $topic->name }}</strong></td>
-                                    <td><strong>{{ $topic->order }}</strong></td>
-                                    <td><strong>{{ $topic->creator->name }}</strong></td>
-                                    <td> <b>{{$topic->subject->name}}</b></td>
+                                    <td><b>{{ $topics->perPage() * ($topics->currentPage() - 1) + $loop->iteration }}</b></td>
+                                    <td>{{ $topic->name }}</td>
+                                    <td>{{ $topic->order }}</td>
+                                    <td>{{ $topic->creator->name }}</td>
+                                    <td> {{$topic->subject->name}}</td>
                                     <td>{{ $topic->status == 1 ? 'Active' : 'Deactive' }}</td>
                                     <td>
                                         <a href="{{ url('/topics/' . $topic->id) }}" class="btn btn-primary">View</a>
+                                    </td>
+                                    <td>
                                         <a href="{{ url('/topics/' . $topic->id . '/edit') }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>

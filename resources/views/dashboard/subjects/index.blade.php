@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Subjects List
+                        <i class="fa fa-align-justify"></i><b>Subjects List</b>
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
@@ -29,10 +29,10 @@
                             <a href="{{ route('subjects.create') }}" class="btn btn-primary m-2">Add Subject</a>
                         </div>
                         <br>
-                        <table class="table table-responsive-sm table-striped">
+                        <table class="table table-responsive-sm table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Sr.No</th>
+                                    <th><b>#</b></th>
                                     <th>Name</th>
                                     <th>Order</th>
                                     <th>Status</th>
@@ -45,11 +45,11 @@
                             <tbody>
                                 @foreach($subjects as $key => $subject)
                                 <tr>
-                                    <td><strong>{{ $subjects->perPage() * ($subjects->currentPage() - 1) + $loop->iteration }}</strong></td>
-                                    <td><strong>{{ $subject->name }}</strong></td>
-                                    <td><strong>{{ $subject->order }}</strong></td>
-                                    <td><strong>{{ $subject->status==1?'Active':'Deactive'; }}</strong></td>
-                                    <td><strong>{{ $subject->creator->name }}</strong></td>
+                                    <td>{{ $subjects->perPage() * ($subjects->currentPage() - 1) + $loop->iteration }}</td>
+                                    <td>{{ $subject->name }}</td>
+                                    <td>{{ $subject->order }}</td>
+                                    <td>{{ $subject->status==1?'Active':'Deactive'; }}</td>
+                                    <td>{{ $subject->creator->name }}</td>
                                     <td>
                                         <a href="{{ url('/subjects/' . $subject->id) }}" class="btn btn-primary">View</a>
                                     </td>

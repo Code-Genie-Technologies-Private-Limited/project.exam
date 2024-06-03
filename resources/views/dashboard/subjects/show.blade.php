@@ -11,15 +11,35 @@
                         <h4>subject: {{ $subject->name }}</h4>
                     </div>
                     <div class="card-body">
-                        <h4>Name</h4>
-                        <p>{{ $subject->name }}</p>
-                        <h4>Order</h4>
-                        <p>{{ $subject->order }}</p>
-                        <h4>Status</h4>
-                        <p>{{ $subject->status==1?'Active':'Deactive'; }}</p>
-                        <h4>Created By</h4>
-                        <p>{{ $subject->creator->name }}</p>
-                        <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
+                        <div class="row">
+                            <div class="col-3">
+                                <b>Name</b>
+                            </div>
+                            <div class="col-9">
+                                <p>{{ $subject->name }}</p>
+                            </div>
+                            <div class="col-3">
+                                <b>Order</b>
+                            </div>
+                            <div class="col-9">
+                                <p>{{ $subject->order }}</p>
+                            </div>
+                            <div class="col-3">
+                                <b>Status</b>
+                            </div>
+                            <div class="col-9">
+                                <p>{{ $subject->status==1?'Active':'Deactive'; }}</p>
+                            </div>
+                            <div class="col-3">
+                                <b>Created By</b>
+                            </div>
+                            <div class="col-9">
+                                <p>{{ $subject->creator->name }}</p>
+                            </div>
+                            <div class="col-6">
+                                <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
