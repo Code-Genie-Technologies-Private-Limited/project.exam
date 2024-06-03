@@ -11,13 +11,13 @@
                         <h4>Course: {{ $course->name }}</h4>
                     </div>
                     <div class="card-body">
-                        <h4>Name</h4>
+                        <h5>Name</h5>
                         <p>{{ $course->name }}</p>
-                        <h4>Status</h4>
+                        <h5>Status</h5>
                         <p>{{ $course->status == 1 ? 'Active': 'Inactive'}}</p>
-                        <h4>Order</h4>
+                        <h5>Order</h5>
                         <p>{{ $course->order }}</p>
-                        <h4>Creator</h4>
+                        <h5>Creator</h5>
                         <p>{{ $course->creator->name }}</p>
                         <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
                     </div>

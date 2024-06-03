@@ -15,7 +15,7 @@
                             @csrf
                             <div class="form-group row">
                                 <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" autofocus />
+                                <input class="form-control" type="text" placeholder="Name" name="name" autofocus required value="{{old('name')}}" />
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
