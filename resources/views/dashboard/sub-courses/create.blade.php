@@ -15,7 +15,7 @@
                             @csrf
                             <div class="form-group row">
                                 <label>Sub Course</label>
-                                <input class="form-control" type="text" placeholder="Enter your sub course" name="name" autofocus />
+                                <input class="form-control" type="text" placeholder="Enter your sub course" name="name" autofocus required value="{{ old('name') }}" />
                                 @error('name')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -24,7 +24,7 @@
                                 <label for="course">Course</label>
                                 <select name="course_id" class="form-control" id="course" required>
                                     @foreach($courses as $course)
-                                    <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                    <option value="{{ $course->id }}" {{ old() }}>{{ $course->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -25,7 +25,7 @@
                                 <label for="course">Course</label>
                                 <select name="course_id" class="form-control" id="course" required>
                                     @foreach($courses as $Course)
-                                    <option value="{{ $Course->id }}" {{ $Course->id == $subCourse->course_id ? 'selected' : '' }}>{{ $Course->name }}</option>
+                                    <option value="{{ $Course->id }}" {{ old('course_id')==$Course->id? 'selected':'' }} {{ $Course->id == $subCourse->course_id ? 'selected' : '' }}>{{ $Course->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -45,9 +45,6 @@
                             <div class="form-group row">
                                 <label>Order</label>
                                 <input class="form-control" type="text" placeholder="order" name="order" value="{{ $subCourse->order }}" />
-                                @error('name')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
                             </div>
                             <button class="btn btn-success" type="submit">Update</button>
                             <a href="{{ route('sub-courses.index') }}" class="btn btn-primary">Return</a>
