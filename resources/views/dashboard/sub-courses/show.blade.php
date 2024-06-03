@@ -11,15 +11,15 @@
                         <h4>Sub Course: {{ $subCourse->name }}</h4>
                     </div>
                     <div class="card-body">
-                        <h4>Sub Course</h4>
+                        <h5>Sub Course</h5>
                         <p>{{ $subCourse->name }}</p>
-                        <h4>Course</h4>
+                        <h5>Course</h5>
                         <p>{{ $subCourse->course->name }}</p>
-                        <h4>Status</h4>
+                        <h5>Status</h5>
                         <p>{{ $subCourse->status == 1 ? 'Active' : 'Inactive' }}</p>
-                        <h4>Order</h4>
+                        <h5>Order</h5>
                         <p>{{ $subCourse->order }}</p>
-                        <h4>Creator</h4>
+                        <h5>Creator</h5>
                         <p>{{ $subCourse->creator->name }}</p>
                         <a href="{{ route('sub-courses.index') }}" class="btn btn-primary">Return</a>
                     </div>
