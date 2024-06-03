@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Subject List
+                        <i class="fa fa-align-justify"></i><b>Subject List</b>
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
@@ -32,11 +32,11 @@
                         <table class="table table-responsive-sm table-striped">
                             <thead>
                                 <tr>
-                                    <th>Sr.No</th>
+                                    <th>#</th>
                                     <th>Subject</th>
                                     <th>Order</th>
                                     <th>Status</th>
-                                    <th>Created By User</th>
+                                    <th>Creator</th>
                                     <th>View</th>
                                     <th>Edit</th>
                                     <th>Delete</th>

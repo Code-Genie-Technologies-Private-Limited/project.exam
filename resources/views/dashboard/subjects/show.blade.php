@@ -11,13 +11,13 @@
                         <h4>Subject: {{ $subject->name }}</h4>
                     </div>
                     <div class="card-body">
-                        <h4>Subject</h4>
+                        <h5>Subject</h5>
                         <p>{{ $subject->name }}</p>
-                        <h4>Status</h4>
+                        <h5>Status</h5>
                         <p>{{ $subject->status == 1 ? 'Active' : 'Inactive'}}</p>
-                        <h4>Order</h4>
+                        <h5>Order</h5>
                         <p>{{ $subject->order }}</p>
-                        <h4>Created By User</h4>
+                        <h5>Creator</h5>
                         <p>{{ $subject->creator->name }}</p>
                         <a href="{{ route('subjects.index') }}" class="btn btn-primary">Return</a>
                     </div>

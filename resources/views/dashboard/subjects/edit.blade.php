@@ -15,8 +15,8 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ old('name') ?? $subject->name }}" />
+                                <label for='name'>Name</label>
+                                <input class="form-control" type="text" id='name' placeholder="Name" name="name" required autofocus value="{{ old('name', $subject->name )}}" />
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -35,8 +35,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Order" required name="order" value="{{ $subject->order }}" />
+                                <label for='order'>Order</label>
+                                <input class="form-control" type="text" id='order' placeholder="Order" required name="order" value="{{ $subject->order }}" />
                                 @error('order')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
