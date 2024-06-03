@@ -18,7 +18,7 @@ class SubjectFactory extends Factory
             'name' => $this->faker->sentence,
             'order' => $this->faker->randomFloat(2, 1, 100),
             'status' => $this->faker->boolean,
-            'created_by' => User::factory(),
+            'created_by' => User::query()->inRandomOrder()->value('id'),
         ];
     }
 }

@@ -17,10 +17,10 @@ class TopicFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence,
-            'subject_id' => Subject::factory(),
+            'subject_id' => Subject::query()->where('status', 1)->inRandomOrder()->value('id'),
             'order' => $this->faker->randomFloat(2, 1, 100),
             'status' => $this->faker->boolean,
-            'created_by' => User::factory(),
+            'created_by' => User::query()->inRandomOrder()->value('id'),
         ];
     }
 }

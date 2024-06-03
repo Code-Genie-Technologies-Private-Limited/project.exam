@@ -101,7 +101,11 @@
                                 @foreach($subjects as $subject)
                                 <tr class="{{ $subject->status == 0 ? 'table-danger' : '' }}">
                                     <td>{{ $loop->iteration + ($subjects->currentPage() - 1) * $subjects->perPage() }}</td>
-                                    <td>{{ $subject->name }}<span class="badge badge-secondary">{{ $subject->topics_count }}</span></td>
+                                    <td>{{ $subject->name }}
+                                        <a href="{{ route('topics.index', ['subject' => $subject->id]) }}">
+                                            <span class="badge badge-secondary">{{ $subject->topics_count }}</span>
+                                        </a>
+                                    </td>
                                     <td>{{ $subject->order }}</td>
                                     <td>{{ $subject->creator->name }}</td>
                                     <td>

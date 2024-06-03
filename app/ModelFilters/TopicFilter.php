@@ -12,19 +12,24 @@ class TopicFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = ['subject' => ['subject']];
-
-    public function user(int $user)
-    {
-        return $this->where('created_by', $user);
-    }
+    public $relations = [];
 
     public function name(string $name)
     {
         return $this->whereLike('name', $name);
     }
 
-    public function status(bool $status)
+    public function subject(int $subject)
+    {
+        return $this->where('subject_id', $subject);
+    }
+
+    public function user($user)
+    {
+        return $this->where('created_by', $user);
+    }
+
+    public function status($status)
     {
         return $this->where('status', $status);
     }
