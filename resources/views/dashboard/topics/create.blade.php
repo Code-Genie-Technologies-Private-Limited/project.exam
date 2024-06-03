@@ -14,8 +14,8 @@
                         <form method="POST" action="{{ route('topics.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label>Topic</label>
-                                <input class="form-control" type="text" placeholder="Enter your topic" name="name" required autofocus />
+                                <label for='topic'>Topic</label>
+                                <input class="form-control" id='topic' type="text" placeholder="Enter your topic" name="name" required autofocus value="{{ old('name') }}" />
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -24,7 +24,7 @@
                                 <label for="subject">Subject</label>
                                 <select name="subject_id" class="form-control" id="subject" required>
                                     @foreach($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                    <option value="{{ $subject->id }}" {{ old('subject_id')==$subject->id? 'selected':'' }}>{{ $subject->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
