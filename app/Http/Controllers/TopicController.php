@@ -91,6 +91,13 @@ class TopicController extends Controller
      */
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:topics|min:3|max:200',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $topic->update($request->all());
         $request->session()->flash('message', 'Topic updated successfully.');
 

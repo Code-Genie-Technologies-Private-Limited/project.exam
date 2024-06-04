@@ -15,8 +15,22 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $topic->name }}" />
+                                <label for="name">Name</label>
+                                <input class="form-control" type="text" placeholder="Name" name="name" id="name" required autofocus value="{{ old('name', $topic->name) }}" />
+                                @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group row">
+                                <label for="subject">Subject</label>
+                                <select name="subject_id" class="form-control" id="subject" required>
+                                    @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}" {{ old('subject_id', $topic->subject_id) == $subject->id ? 'selected' : '' }}>
+                                        {{ $subject->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>

@@ -22,7 +22,7 @@
                             <a href="{{ route('topics.create') }}" class="btn btn-primary m-2">Add Topic</a>
                         </div>
                         <br>
-                        <table class="table table-responsive-sm table-striped">
+                        <table class="table table-responsive-sm table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th>#</th>
