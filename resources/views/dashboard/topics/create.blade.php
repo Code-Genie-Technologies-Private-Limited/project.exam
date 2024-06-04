@@ -24,7 +24,7 @@
                                 <div class="col-md-9">
                                     <select class="form-control" id="subject" name="subject_id">
                                         @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}" @selected(old('subject_id')=={{$subject->id}})>{{ $subject->name }}</option>
+                                        <option value="{{ $subject->id }}" {{old('subject_id') == $subject->id ? 'selected' : ''}}>{{ $subject->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

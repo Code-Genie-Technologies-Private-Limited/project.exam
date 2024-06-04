@@ -85,7 +85,7 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        $course->update($request->all());
+        $course->update($request->validated());
         $request->session()->flash('message', 'Course is updated successfully.');
 
         return redirect()->route('courses.index');

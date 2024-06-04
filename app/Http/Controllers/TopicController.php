@@ -96,6 +96,7 @@ class TopicController extends Controller
     {
         $topic->update($request->validated());
         $request->session()->flash('message', 'Topic is updated successfully.');
+        
         return redirect()->route('topics.index');
     }
 
