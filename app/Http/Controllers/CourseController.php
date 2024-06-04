@@ -46,7 +46,7 @@ class CourseController extends Controller
     {
         
         $validator = Validator::make($request->all(),[
-            'name'=>'required',
+            'name'=> 'required|min:3|max:255|',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();

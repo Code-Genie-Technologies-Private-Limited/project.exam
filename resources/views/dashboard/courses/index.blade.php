@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Course List
+                        <i class="fa fa-align-justify"></i><b>Course List</b>
                     </div>
                     <div class="card-body">
                         @if(Session::has('message'))
@@ -37,10 +37,10 @@
                             <tbody>
                                 @foreach($courses as $course)
                                 <tr>
-                                    <td><strong>{{ $course->name }}</strong></td>
-                                    <td><strong>{{ $course->order }}</strong></td>
-                                    <td><strong>{{ $course->status==1?'Active':'Deactive'; }}</strong></td>
-                                    <td><strong>{{ $course->creator->name }}</strong></td>
+                                    <td>{{ $course->name }}</td>
+                                    <td>{{ $course->order }}</td>
+                                    <td>{{ $course->status==1?'Active':'Deactive'; }}</td>
+                                    <td>{{ $course->creator->name }}</td>
                                     <td>
                                         <a href="{{ url('/courses/' . $course->id) }}" class="btn btn-primary">View</a>
                                     </td>
