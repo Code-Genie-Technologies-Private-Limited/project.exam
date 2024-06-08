@@ -38,7 +38,7 @@
                             <tbody>
                                 @foreach($courses as $course)
                                 <tr>
-                                    <td></td>
+                                    <td>{{ $courses->perPage()*($courses->currentPage()-1)+$loop->iteration }}</td>
                                     <td>{{ $course->name }}</td>
                                     <td>{{ $course->order }}</td>
                                     <td>{{ $course->status == 1 ? 'Active': 'Inactive' }}</td>
