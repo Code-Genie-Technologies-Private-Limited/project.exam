@@ -16,11 +16,17 @@
                             @method('PUT')
                             <div class="form-group row">
                                 <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" title="name" name="name" required autofocus value="{{ $course->name }}" />
+                                <input class="form-control" type="text" placeholder="Name" title="name" name="name" required autofocus value="{{old('name',$course->name) }}" />
+                                @error('name')
+                                <span class="text-danger"> {{$message}} </span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>
-                                <input class="form-control" type="text" placeholder="Order" title="order" name="order" required value="{{ $course->order }}" />
+                                <input class="form-control" type="text" placeholder="Order" title="order" name="order" required value="{{old('order',$course->order)  }}" />
+                                @error('order')
+                                <span class="text-danger"> {{$message}} </span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Status</label>

@@ -74,7 +74,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course, Request $request)
     {
-        if ($course->has('subcourses')->exists()) {
+        if ($course->has('subcourse')->exists()) {
             $request->session()->flash('error', 'course has many subcourses');
             return redirect()->route('courses.index');
         }
