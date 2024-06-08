@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -13,7 +15,11 @@ class CourseController extends Controller
      */
     public function index()
     {
-        
+        $courses = Course::with('creator')
+        ->orderBy('order', 'desc')
+        ->paginate(10);
+
+        return view('dashboard.courses.index', compact('courses'));
     }
 
     /**
@@ -21,7 +27,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.courses.create');
     }
 
     /**
@@ -29,7 +35,12 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        //
+        Course::make($request->validated());
+
+        Course::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        $request->session()->flash('message', 'course created successfully.');
+
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -37,7 +48,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        return view('dashboard.courses.show', compact('course'));
     }
 
     /**
@@ -45,7 +56,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        return view('dashboard.courses.edit', compact('course'));
     }
 
     /**
@@ -53,14 +64,22 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        //
+        $course->update($request->validated());
+
+        $request->session()->flash('message', "course updated successfully.");
+       
+        return redirect()->route('courses.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy(Course $course, Request $request)
     {
-        //
+        $course->delete();
+
+        $request->session()->flash('message', 'course deleted successfully.');
+
+        return redirect()->route('courses.index');
     }
 }

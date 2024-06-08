@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Ramsey\Uuid\Type\Decimal;
 
 class UpdateCourseRequest extends FormRequest
 {
@@ -22,7 +23,9 @@ class UpdateCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|min:3|max:255|',
+            'order' => 'numeric',
+            'status' => 'boolean'
         ];
     }
 }

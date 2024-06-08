@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\CourseController;
+
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
         return view('dashboard.homepage');
@@ -144,6 +146,9 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('roles',        'RolesController');
         Route::resource('mail',        'MailController');
         Route::resource('students',        'StudentController');
+        
+        Route::resource('courses',        'CourseController');
+
         Route::resource('subjects',        'SubjectController');
         Route::resource('topics',        'TopicController');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
