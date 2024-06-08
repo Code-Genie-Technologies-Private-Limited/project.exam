@@ -18,11 +18,18 @@
                             </div>
                         </div>
                         @endif
+                        @if(Session::has('error'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="row">
                             <a href="{{ route('courses.create') }}" class="btn btn-primary m-2">Add Student</a>
                         </div>
                         <br>
-                        <table class="table table-responsive-sm table-striped table-hover" >
+                        <table class="table table-responsive-sm table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th>Name</th>
