@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
 use Illuminate\Database\Seeder;
 //use database\seeds\UsersAndNotesSeeder;
 //use database\seeds\MenusTableSeeder;
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             EmailSeeder::class,
             SubjectSeeder::class,
             TopicSeeder::class,
+            CourseSeeder::class,
         ]);
     }
 }
