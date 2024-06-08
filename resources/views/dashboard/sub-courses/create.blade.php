@@ -11,14 +11,17 @@
                         <h4>Add Course</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('courses.store') }}">
+                        <form method="POST" action="{{ route('sub-courses.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label>Course Name</label>
-                                <input class="form-control" type="text" placeholder="Name" title="name" name="name" required autofocus />
+                                <label>SubCourse Name</label>
+                                <input class="form-control" type="text" value="{{old('name)}}" placeholder="SubCourse Name" title="SubCourse Name" name="name" required autofocus />
+                                @error('name')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
-                            <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
+                            <a href="{{ route('sub-courses.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
                 </div>

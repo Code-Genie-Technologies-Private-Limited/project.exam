@@ -25,6 +25,7 @@
                         <table class="table table-responsive-sm table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>SubCourse</th>
                                     <th>Course</th>
                                     <th>Order</th>
@@ -38,6 +39,7 @@
                             <tbody>
                                 @foreach($subCourses as $subcourse)
                                 <tr>
+                                    <td>{{$subCourses->perpage()*($subCourses->currentpage()-1)+$loop->iteration }}</td>
                                     <td>{{ $subcourse->name }}</td>
                                     <td>{{ $subcourse->course->name }}</td>
                                     <td>{{ $subcourse->order }}</td>

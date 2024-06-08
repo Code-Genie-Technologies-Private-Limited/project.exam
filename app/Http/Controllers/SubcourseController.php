@@ -46,20 +46,20 @@ class SubcourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Subcourse $subcourse)
+    public function show(Subcourse $subCourse)
     {
-        return view('dashboard.sub-courses.show');
+        return view('dashboard.sub-courses.show', compact('subCourse'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subcourse $subcourse, Request $request)
+    public function edit(Subcourse $subCourse, Request $request)
     {
-        $course = Course::where('status', 1)
-            ->orWhere('id', $subcourse->course_id)->get();
+        $courses = Course::where('status', 1)
+            ->orWhere('id', $subCourse->course_id)->get();
 
-        return view('dashboard.sub-courses.edit', compact('course'));
+        return view('dashboard.sub-courses.edit', compact('subCourse', 'courses'));
     }
 
     /**
