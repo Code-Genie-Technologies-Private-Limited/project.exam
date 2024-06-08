@@ -14,8 +14,11 @@
                         <form method="POST" action="{{ route('courses.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label>for='name' Name</label>
-                                <input class="form-control" type="text" id="name" placeholder="Name" name="name" required autofocus />
+                                <label for='name'>Name</label>
+                                <input class="form-control" type="text" id="name" placeholder="Name" name="name" required autofocus value="{{old('name')}}" />
+                                @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>

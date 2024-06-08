@@ -15,23 +15,29 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label>for="name" Name</label>
-                                <input class="form-control" type="text" id="name" placeholder="Name" name="name" required autofocus value="{{ $course->name }}" />
+                                <label for="name">Name</label>
+                                <input class="form-control" type="text" id="name" placeholder="Name" name="name" required autofocus value="{{ old('name',$course->name) }}" />
+                                @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label>Order</label>
                                 <input class="form-control" type="text" placeholder="Order" name="order" required value="{{ $course->order }}" />
+                                @error('order')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Staus</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check">
                                         <input class="form-check-input" id="Active" type="radio" value="1" name="status" {{ $course->status == 1 ? 'checked': '' }}>
-                                        <label class="form-check-label" for="Active">Option 1</label>
+                                        <label class="form-check-label" for="Active">Active</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" id="Inactive" type="radio" value="0" name="status" {{ $course->status == 0 ? 'checked': '' }}>
-                                        <label class="form-check-label" for="Inactive">Option 2</label>
+                                        <label class="form-check-label" for="Inactive">Inactive</label>
                                     </div>
                                 </div>
                             </div>
