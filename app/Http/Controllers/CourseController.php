@@ -73,7 +73,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course, Request $request)
     {
-        if ($course->has()->subcourse->exists()) {
+        if ($course->subcourse()->exists()) {
             $request->session()->flash('error', 'Course can not be deleted because it has one or more subcourses.');
             return redirect()->route('courses.index');
         }
