@@ -25,8 +25,9 @@ class UpdateSchoolRequest extends FormRequest
             'name' => 'required|min:3|max:255',
             'address' => 'required|min:3|max:255',
             'contact_person' => 'required|min:3|max:255',
+            'contact_number' => 'required|min:10|max:10',
             'order' => 'required|numeric',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
         ];
     }
 }
