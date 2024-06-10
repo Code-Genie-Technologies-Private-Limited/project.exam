@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address')->default('');
-            $table->string('contact_person');
-            $table->string('contact_number');
+            $table->string('address')->nullable(true);
+            $table->string('contact_person')->nullable(true);
+            $table->string('contact_number')->nullable(true);
             $table->decimal('order')->default(0.00);
             $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();

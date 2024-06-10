@@ -34,6 +34,8 @@ class SchoolController extends Controller
      */
     public function store(StoreSchoolRequest $request)
     {
+        // dd($request->all());
+        // die;
         School::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
         $request->session()->flash('message', 'School has been added successfully.');
 
