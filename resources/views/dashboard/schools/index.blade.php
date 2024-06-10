@@ -52,9 +52,9 @@
                                 <tr>
                                     <td>{{ $schools->perPage()*($schools->currentPage()-1)+$loop->iteration }}</td>
                                     <td>{{ $school->name }}</td>
-                                    <td>{{ $school->address }}</td>
-                                    <td>{{ $school->contact_person }}</td>
-                                    <td>{{ $school->contact_number }}</td>
+                                    <td>{{ $school->address == '' ? 'NA' : $school->address }}</td>
+                                    <td>{{ $school->contact_person == '' ? 'NA' :$school->contact_person }}</td>
+                                    <td>{{ $school->contact_number == '' ? 'NA' : $school->contact_number}}</td>
                                     <td>{{ $school->order }}</td>
                                     <td>{{ $school->status == 1 ? 'Active': 'Inactive' }}</td>
                                     <td>{{ $school->creator->name }}</td>
