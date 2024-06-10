@@ -29,7 +29,20 @@
                                 @enderror
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Staus</label>
+                                <label class="col-md-3 col-form-label" for="school_id">School</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="school_id" name="school_id">
+                                        @foreach($schools as $school)
+                                        <option value="{{ $school->id }}" @selected( old('school_id')==$school->id)>{{ $school->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('school_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Status</label>
                                 <div class="col-md-9 col-form-label">
                                     <div class="form-check">
                                         <input class="form-check-input" id="Active" type="radio" value="1" name="status" {{ $teacher->status == 1 ? 'checked': '' }}>

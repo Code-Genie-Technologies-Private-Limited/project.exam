@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
+use App\Models\School;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -27,7 +28,9 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('dashboard.teachers.create');
+        $schools = School::where('status', 1)->get();
+
+        return view('dashboard.teachers.create', compact('schools'));
     }
 
     /**
@@ -54,7 +57,11 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        return view('dashboard.teachers.edit', compact('teacher'));
+        $schools = School::where('status', 1)
+            ->orWhere('id', $teacher->school_id)
+            ->get();
+
+        return view('dashboard.teachers.edit', compact('teacher', 'schools'));
     }
 
     /**
