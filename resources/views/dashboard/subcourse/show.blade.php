@@ -44,15 +44,6 @@
                             </div>
 
                         </div>
-
-
-
-
-
-
-
-
-
                         <a href="{{ route('sub-courses.index') }}" class="btn btn-primary">Return</a>
                     </div>
                 </div>

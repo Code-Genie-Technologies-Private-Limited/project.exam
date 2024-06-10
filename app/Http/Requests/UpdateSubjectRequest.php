@@ -24,8 +24,7 @@ class UpdateSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>
-            'required|min:3|max:200' . $this->route('subject')->id . '|min:3|max:200',
+            'name' =>'required|min:3|max:200' . $this->route('subject')->id . '|min:3|max:200',
             'order' => 'required|integer',
         ];
     }

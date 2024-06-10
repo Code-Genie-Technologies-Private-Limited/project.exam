@@ -37,7 +37,7 @@
                             <tbody>
                                 @foreach($subcourses as $i=> $subCourse)
 
-                                <tr>
+                                <tr> 
                                     <td><b>{{$i + 1}}</b></td>
                                     <td><strong>{{ $subCourse->name }}</strong></td>
                                     <td><strong>{{ $subCourse->order }}</strong></td>

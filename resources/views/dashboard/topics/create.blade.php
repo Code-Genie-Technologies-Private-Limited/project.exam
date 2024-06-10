@@ -26,7 +26,7 @@
                                     @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}" {{ old('subject_id') == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
                                     @endforeach
-                                </select>
+                                </select> 
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
