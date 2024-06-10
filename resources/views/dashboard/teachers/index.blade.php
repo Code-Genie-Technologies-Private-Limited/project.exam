@@ -53,8 +53,8 @@
                                     <td>{{ $teachers->perPage()*($teachers->currentPage()-1)+$loop->iteration }}</td>
                                     <td>{{ $teacher->name }}</td>
                                     <td>{{ $teacher->school->name }}</td>
-                                    <td>{{ $teacher->mobile_number }}</td>
-                                    <td>{{ $teacher->address }}</td>
+                                    <td>{{ $teacher->mobile_number == '' ? 'NA' : $teacher->mobile_number }}</td>
+                                    <td>{{ $teacher->address == '' ? 'NA' : $teacher->address }}</td>
                                     <td>{{ $teacher->order }}</td>
                                     <td>{{ $teacher->status == 1 ? 'Active': 'Inactive' }}</td>
                                     <td>{{ $teacher->creator->name }}</td>

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('school_id')->constrained('schools')->restrictOnDelete();
-            $table->string('mobile_number')->default('');
-            $table->string('address');
-            $table->decimal('order');
-            $table->boolean('status');
+            $table->string('mobile_number')->nullable(true);
+            $table->string('address')->nullable(true);
+            $table->decimal('order')->default(0.00);
+            $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
         });

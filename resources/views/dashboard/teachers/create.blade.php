@@ -20,6 +20,19 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="school_id">School</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="school_id" name="school_id">
+                                        @foreach($schools as $school)
+                                        <option value="{{ $school->id }}" @selected( old('school_id')==$school->id)>{{ $school->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('school_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <button class="btn btn-success" type="submit">Add</button>
                             <a href="{{ route('teachers.index') }}" class="btn btn-primary">Return</a>
                         </form>
