@@ -81,7 +81,7 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher, Request $request)
     {
         $teacher->delete();
-        $request->session()->flash('message', 'Teacher has been updated successfully.');
+        $request->session()->flash('message', 'Teacher has been deleted successfully.');
 
         return redirect()->route('teachers.index');
     }
