@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\School;
 use App\Http\Requests\StoreSchoolRequest;
 use App\Http\Requests\UpdateSchoolRequest;
+use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {
@@ -72,8 +73,13 @@ class SchoolController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(School $school)
+    public function destroy(School $school, Request $request)
     {
+        if ($school->teacher()->exists()) {
+            $request->session()->flash('error', 'School can not be deleted because it has one or more teachers.');
+            return redirect()->route('schools.index');
+        }
+
         $school->delete();
 
         return redirect()->route('schools.index');
