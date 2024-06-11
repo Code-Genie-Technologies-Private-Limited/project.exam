@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\KlassController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SubCourseController;
 use App\Http\Controllers\TeacherController;
@@ -151,6 +152,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('subjects',        'SubjectController');
         Route::resource('topics',        'TopicController');
         Route::resource('courses',        'CourseController');
+        Route::resource('klasses',        'KlassController');
         Route::resource('schools',        'SchoolController');
         Route::resource('teachers',        'TeacherController');
         Route::resource('sub-courses',        'SubCourseController');
