@@ -15,8 +15,10 @@
                         <p>{{ $teacher->name }}</p>
                         <h5>School Name</h5>
                         <p>{{ $teacher->school->name }}</p>
+                        <h5>Mobile Number</h5>
+                        <p>{{ $teacher->mobile_number == '' ? 'NA' : $teacher->mobile_number}}</p>
                         <h5>Address</h5>
-                        <p>{{ $teacher->address }}</p>
+                        <p>{{ $teacher->address == '' ? 'NA' : $teacher->address }}</p>
                         <h5>Order</h5>
                         <p>{{ $teacher->order }}</p>
                         <h5>Status</h5>
