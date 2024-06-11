@@ -19,7 +19,7 @@ class SectionFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence,
-            'order' => $this->faker->randomFloat(2, 1, 100),
+            'status' => $this->faker->boolean,
             'created_by' => User::factory(),
         ];
     }

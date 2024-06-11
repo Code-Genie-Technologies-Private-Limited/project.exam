@@ -153,6 +153,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('topics',        'TopicController');
         Route::resource('courses',        'CourseController');
         Route::resource('klasses',        'KlassController');
+        Route::resource('sections',        'SectionController');
         Route::resource('schools',        'SchoolController');
         Route::resource('teachers',        'TeacherController');
         Route::resource('sub-courses',        'SubCourseController');
