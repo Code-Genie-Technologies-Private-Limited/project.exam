@@ -15,4 +15,9 @@ class School extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function teacher()
+    {
+        return $this->hasMany(Teacher::class);
+    }
 }
