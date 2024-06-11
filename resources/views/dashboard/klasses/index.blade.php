@@ -69,7 +69,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $klasss->links() }}
+                        {{ $klasses->links() }}
                     </div>
                 </div>
             </div>
