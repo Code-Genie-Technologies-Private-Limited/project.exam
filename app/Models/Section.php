@@ -9,7 +9,7 @@ class Section extends Model
 {
     use HasFactory;
 
-    protected $guardded = [];
+    protected $guarded = [];
 
     public function creator()
     {
