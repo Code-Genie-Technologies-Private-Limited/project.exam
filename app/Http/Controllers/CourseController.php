@@ -13,7 +13,7 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() 
     {
         $courses = Course::with('creator')
         ->orderBy('order', 'desc')
@@ -35,9 +35,9 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        Course::make($request->validated());
+        // Course::make($request->validated());
 
-        Course::create(array_merge($request->all(), ['created_by' => auth()->user()->id]));
+        Course::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
         $request->session()->flash('message', 'course created successfully.');
 
         return redirect()->route('courses.index');

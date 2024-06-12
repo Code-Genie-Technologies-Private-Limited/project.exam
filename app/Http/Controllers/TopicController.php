@@ -28,16 +28,18 @@ class TopicController extends Controller
             ->filter($request->all())
             ->paginate($perPage);
 
-        $subjects = Subject::orderBy('order')->get();
+        return view('dashboard.topic.index', compact('topics'));
 
-        $creators = User::all();
+        // $subjects = Subject::orderBy('order')->get();
 
-        return view('dashboard.topics.index', [
-            'topics' => $topics,
-            'subjects' => $subjects,
-            'creators' => $creators,
-            'filters' => $request->all(),
-        ]);
+        // $creators = User::all();
+
+        // return view('dashboard.topics.index', [
+        //     'topics' => $topics,
+        //     'subjects' => $subjects,
+        //     'creators' => $creators,
+        //     'filters' => $request->all(),
+        // ]);
     }
 
     /**

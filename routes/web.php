@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\PhoneController;
 
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
@@ -146,8 +147,9 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('roles',        'RolesController');
         Route::resource('mail',        'MailController');
         Route::resource('students',        'StudentController');
-        
+
         Route::resource('courses',        'CourseController');
+        Route::resource('phones',        'PhoneController');
 
         Route::resource('subjects',        'SubjectController');
         Route::resource('topics',        'TopicController');
