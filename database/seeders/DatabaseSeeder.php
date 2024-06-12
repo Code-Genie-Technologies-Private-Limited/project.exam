@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             SubcourseSeeder::class,
             SchoolSeeder::class,
             CitySeeder::class,
+            DistrictSeeder::class,
         ]);
     }
 }
