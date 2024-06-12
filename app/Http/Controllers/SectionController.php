@@ -45,7 +45,7 @@ class SectionController extends Controller
      */
     public function show(Section $section)
     {
-        return view('dashboard.sections.index', compact('section'));
+        return view('dashboard.sections.show', compact('section'));
     }
 
     /**
