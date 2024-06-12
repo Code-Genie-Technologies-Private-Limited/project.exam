@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             SubcourseSeeder::class,
             SchoolSeeder::class,
+            CitySeeder::class,
         ]);
     }
 }

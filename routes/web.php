@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\SchoolController;
 
 Route::group(['middleware' => ['get.menu']], function () {
@@ -151,6 +152,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('courses',        'CourseController');
         Route::resource('sub-courses',        'SubcourseController');
         Route::resource('schools',        'SchoolController');
+        Route::resource('cities',        'CityController');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
         Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');

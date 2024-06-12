@@ -1,0 +1,58 @@
+@extends('dashboard.base')
+
+@section('content')
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Edit City</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('cities.update', $city->id) }}">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group row">
+                                <label>Name</label>
+                                <input class="form-control" type="text" placeholder="Name" title="name" name="name" required autofocus value="{{old('name',$city->name) }}" />
+                                @error('name')
+                                <span class="text-danger"> {{$message}} </span>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label>Address</label>
+                                <input class="form-control" type="text" placeholder="Address" title="Address" name="address" required value="{{old('order',$city->address)  }}" />
+                                @error('address')
+                                <span class="text-danger"> {{$message}} </span>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Status</label>
+                                <div class="col-md-9 col-form-label">
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="radio1" type="radio" value="1" name="status" {{$city->status ==1 ? 'checked':''}}>
+                                        <label class="form-check-label" for="radio1">Active</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="radio2" type="radio" value="0" name="status" {{$city->status ==0 ? 'checked':''}}>
+                                        <label class="form-check-label" for="radio2">Inactive</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success" type="submit">Update</button>
+                            <a href="{{ route('cities.index') }}" class="btn btn-primary">Return</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('javascript')
+
+@endsection
