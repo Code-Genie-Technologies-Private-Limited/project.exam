@@ -58,7 +58,7 @@
                                         <a href="{{ url('/services/' . $service->id) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/services/' . $service->id . '/edit') }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('/services/' . $service->id . '/edit') }}" class="btn btn-success">Edit</a>
                                     </td>
                                     <td>
                                         <form action="{{ route('services.destroy', $service->id ) }}" method="POST">
