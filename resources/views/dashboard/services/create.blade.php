@@ -14,8 +14,12 @@
                         <form method="POST" action="{{ route('services.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label for='name'>Name</label>
-                                <input class="form-control" type="text" id="name" placeholder="Name" name="name" required autofocus value="{{old('name')}}" />
+                                <div class="col-md-3">
+                                    <label for='name'><b>Name</b></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" id="name" placeholder="Name" name="name" required autofocus value="{{old('name')}}" />
+                                </div>
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
