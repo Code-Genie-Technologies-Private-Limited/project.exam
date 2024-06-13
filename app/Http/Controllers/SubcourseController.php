@@ -30,7 +30,7 @@ class SubcourseController extends Controller
     {
         $course = Course::where('status', 1)->get();
 
-        return view('dashboard.sub-courses.create');
+        return view('dashboard.sub-courses.create', compact('course'));
     }
 
     /**

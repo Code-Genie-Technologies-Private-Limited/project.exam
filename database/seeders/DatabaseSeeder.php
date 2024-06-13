@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Course;
+use App\Models\CourseSubject;
 use App\Models\Subcourse;
 use Illuminate\Database\Seeder;
 //use database\seeds\UsersAndNotesSeeder;
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             DistrictSeeder::class,
             SectionSeeder::class,
+            CourseSubjectSeeder::class,
         ]);
     }
 }
