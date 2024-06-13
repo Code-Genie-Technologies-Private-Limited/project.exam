@@ -16,6 +16,7 @@ use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SubCourseController;
 use App\Http\Controllers\TeacherController;
+use App\Models\CourseSubject;
 
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
@@ -159,6 +160,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('teachers',        'TeacherController');
         Route::resource('services',        'ServiceController');
         Route::resource('sub-courses',        'SubCourseController');
+        Route::resource('course-subjects',        'CourseSubjectController');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
         Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');

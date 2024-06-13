@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CourseSubject;
 use Illuminate\Database\Seeder;
 //use database\seeds\UsersAndNotesSeeder;
 //use database\seeds\MenusTableSeeder;
@@ -42,6 +43,7 @@ class DatabaseSeeder extends Seeder
             SectionSeeder::class,
             ServiceSeeder::class,
             SubCourseSeeder::class,
+            CourseSubjectSeeder::class,
         ]);
     }
 }
