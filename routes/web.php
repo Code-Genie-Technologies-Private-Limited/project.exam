@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\CopyController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PhoneController;
 
@@ -150,6 +151,7 @@ Route::group(['middleware' => ['get.menu']], function () {
 
         Route::resource('courses',        'CourseController');
         Route::resource('phones',        'PhoneController');
+        Route::resource('copies',        'CopyController');
 
         Route::resource('subjects',        'SubjectController');
         Route::resource('topics',        'TopicController');
