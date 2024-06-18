@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\ModelFilters\CourseFilter;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Filterable;
     protected $guarded = [];
 
     // Automatically set the 'order' field when adding

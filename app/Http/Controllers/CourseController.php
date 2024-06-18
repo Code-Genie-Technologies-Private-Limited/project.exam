@@ -5,23 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Livewire\Features\SupportConsoleCommands\Commands\CpCommand;
-use Pest\Plugins\Parallel\Support\CompactPrinter;
+use Illuminate\View\View;
 
 class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): View
     {
-        $courses = Course::with('creator')
+        $perPage = $request->input('per_page', 10);
+
+        $courses = Course::filter($request->all())
+            ->with('creator')
             ->orderBy('order', 'asc')
             ->orderBy('name', 'asc')
-            ->paginate(10);
+            ->paginate($perPage)
+            ->appends($request->query());
 
-        return view('dashboard.courses.index', compact('courses'));
+        $creators = User::all();
+
+        return view('dashboard.courses.index', [
+            'courses' => $courses,
+            'creators' => $creators,
+            'filters' => $request->all(),
+        ]);
     }
 
     /**
@@ -49,17 +59,23 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show(Course $course, Request $request)
     {
-        return view('dashboard.courses.show', compact('course'));
+        return view('dashboard.courses.show', [
+            'course' => $course,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course)
+    public function edit(Course $course, Request $request)
     {
-        return view('dashboard.courses.edit', compact('course'));
+        return view('dashboard.courses.edit', [
+            'course' => $course,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
@@ -68,9 +84,9 @@ class CourseController extends Controller
     public function update(UpdateCourseRequest $request, Course $course)
     {
         $course->update($request->validated());
-        $request->session()->flash('message', 'Course has been updated successfully.');
 
-        return redirect()->route('courses.index');
+        return redirect()->route('courses.index', $request->query())
+            ->with('message', 'Course has been updated successfully.');
     }
 
     /**
@@ -78,9 +94,11 @@ class CourseController extends Controller
      */
     public function destroy(Course $course, Request $request)
     {
-        $course->delete();
-        $request->session()->flash('message', 'Course has been deleted successfully.');
+        $filters = $request->except('_token', '_method');
 
-        return redirect()->route('courses.index');
+        $course->delete();
+
+        return redirect()->route('courses.index', $filters)
+            ->with('message', 'Course has been deleted successfully.');
     }
 }

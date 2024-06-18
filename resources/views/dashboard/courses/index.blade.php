@@ -90,9 +90,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Order</th>
-                                    <th>Staus</th>
                                     <th>Description</th>
+                                    <th>Order</th>
                                     <th>Created By</th>
                                     <th>View</th>
                                     <th>Edit</th>
@@ -102,12 +101,13 @@
                             <tbody>
                                 @foreach($courses as $course)
                                 <tr class="{{ $course->status == 0 ? 'table-danger' : '' }}">
-                                    <td>{{ $loop->iteration + ($courses->currentPage() - 1) * $courses->perPage() }}</td>
+                                    <td><b>{{ $loop->iteration + ($courses->currentPage() - 1) * $courses->perPage() }}</b></td>
                                     <td>{{ $course->name }}
                                         <a href="{{ route('topics.index', ['course' => $course->id]) }}">
                                             <span class="badge badge-secondary">{{ $course->topics_count }}</span>
                                         </a>
                                     </td>
+                                    <td>{{ $course->description }}</td>
                                     <td>{{ $course->order }}</td>
                                     <td>{{ $course->creator->name }}</td>
                                     <td>
