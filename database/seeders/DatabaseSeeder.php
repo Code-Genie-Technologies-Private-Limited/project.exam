@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CourseSubject;
 use App\Models\Phone;
 use Illuminate\Database\Seeder;
 //use database\seeds\UsersAndNotesSeeder;
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             PhoneSeeder::class,
             CopySeeder::class,
+            CourseSubjectSeeder::class,
         ]);
     }
 }

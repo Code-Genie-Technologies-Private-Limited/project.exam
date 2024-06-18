@@ -13,7 +13,9 @@
 
 use App\Http\Controllers\CopyController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CourseSubjectController;
 use App\Http\Controllers\PhoneController;
+use App\Models\CourseSubject;
 
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
@@ -152,6 +154,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('courses',        'CourseController');
         Route::resource('phones',        'PhoneController');
         Route::resource('copies',        'CopyController');
+        Route::resource('courseSubjects',        'CourseSubjectController');
 
         Route::resource('subjects',        'SubjectController');
         Route::resource('topics',        'TopicController');
