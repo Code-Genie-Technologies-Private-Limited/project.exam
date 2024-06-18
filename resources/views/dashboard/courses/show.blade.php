@@ -8,7 +8,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Student: {{ $course->name }}</h4>
+                        <h4>course: {{ $course->name }}</h4>
                     </div>
                     <div class="card-body">
                         <h4>Name</h4>
@@ -16,8 +16,11 @@
                         <h4>Order</h4>
                         <p>{{ $course->order }}</p>
                         <h4>Status</h4>
-                        <p>{{ $course->status }}</p>
-                        <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
+                        <p>{{ $course->status == 1 ? "Active": "In Active" }}</p>
+                        <h4>Created By User</h4>
+                        <p>{{ $course->creator->name }}</p>
+                        <a href="{{ url('/courses/' . $course->id . '/edit') . '?' . http_build_query($filters) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ url('/courses?' . http_build_query($filters)) }}" class="btn btn-secondary">Back to list</a>
                     </div>
                 </div>
             </div>

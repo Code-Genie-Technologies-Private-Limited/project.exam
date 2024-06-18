@@ -19,7 +19,7 @@ class SubjectFilter extends ModelFilter
         return $this->whereLike('name', $name);
     }
 
-    public function user($user)
+    public function user(int $user)
     {
         return $this->where('created_by', $user);
     }

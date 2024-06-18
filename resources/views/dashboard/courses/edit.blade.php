@@ -8,26 +8,48 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Edit Student</h4>
+                        <h4>Edit course</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('courses.update', $course->id) }}">
+                        <form method="POST" action="{{ url('/courses/' . $course->id) . '?' . http_build_query($filters) }}">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label>Name</label>
-                                <input class="form-control" type="text" placeholder="Name" name="name" required autofocus value="{{ $course->name }}" />
+                                <label class="col-md-3 col-form-label" for="name">course Name</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter course Name" autocomplete="course" autofocus required value="{{ old('name') ?? $course->name }}">
+                                    @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group row">
-                                <label>Mobile Number</label>
-                                <input class="form-control" type="text" placeholder="Mobile Number" name="mobile_number" required value="{{ $course->mobile_number }}" />
+                                <label class="col-md-3 col-form-label" for="order">Priority Order</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="order" type="number" name="order" placeholder="Enter Priority Order" step="0.01" value="{{ old('order', number_format($course->order, 2)) }}">
+                                    @error('order')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group row">
-                                <label>Roll Number</label>
-                                <input class="form-control" type="text" placeholder="Roll Number" name="roll_number" required value="{{ $course->roll_number }}" />
+                                <label class="col-md-3 col-form-label">Status</label>
+                                <div class="col-md-9 col-form-label">
+                                    <div class="form-check form-check-inline mr-1">
+                                        <input class="form-check-input" id="active" type="radio" value="1" name="status" @checked(old('status', $course->status) == 1)>
+                                        <label class="form-check-label" for="active">Active</label>
+                                    </div>
+                                    <div class="form-check form-check-inline mr-1">
+                                        <input class="form-check-input" id="in-active" type="radio" value="0" name="status" @checked(old('status', $course->status) == 0)>
+                                        <label class="form-check-label" for="in-active">In Active</label>
+                                    </div>
+                                    @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
-                            <button class="btn btn-success" type="submit">Edit</button>
-                            <a href="{{ route('courses.index') }}" class="btn btn-primary">Return</a>
+                            <button class="btn btn-success" type="submit">Update</button>
+                            <a href="{{ url('/courses?' . http_build_query($filters)) }}" class="btn btn-secondary">Back to list</a>
                         </form>
                     </div>
                 </div>
