@@ -22,7 +22,7 @@ class CourseFactory extends Factory
             'description'=>$this->faker->paragraph,
             'status' => $this->faker->boolean,
             'order' => $this->faker->randomFloat(2, 1, 100),
-            'created_by' => User::factory(),
+            'created_by' => User::query()->inRandomOrder()->value('id'),
         ];
     }
 }
