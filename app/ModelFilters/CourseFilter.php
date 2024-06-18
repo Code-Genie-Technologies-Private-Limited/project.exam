@@ -19,12 +19,12 @@ class CourseFilter extends ModelFilter
         return $this->whereLike('name', $name);
     }
 
-    public function user($user)
+    public function user(int $user)
     {
         return $this->where('created_by', $user);
     }
 
-    public function status($status)
+    public function status(bool $status)
     {
         return $this->where('status', $status);
     }
