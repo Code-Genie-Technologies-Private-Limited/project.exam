@@ -23,6 +23,7 @@ class StoreCourseRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
+            'description' => 'nullable'
         ];
     }
 }
