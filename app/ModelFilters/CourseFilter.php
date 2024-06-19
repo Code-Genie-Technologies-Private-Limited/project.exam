@@ -13,4 +13,19 @@ class CourseFilter extends ModelFilter
     * @var array
     */
     public $relations = [];
+    
+    public function name(string $name)
+    {
+        return $this->whereLike('name', $name);
+    }
+
+    public function user($user)
+    {
+        return $this->where('created_by', $user);
+    }
+
+    public function status($status)
+    {
+        return $this->where('status', $status);
+    }
 }
