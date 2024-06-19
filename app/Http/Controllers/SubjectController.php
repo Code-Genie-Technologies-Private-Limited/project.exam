@@ -25,7 +25,7 @@ class SubjectController extends Controller
         $subjects = Subject::filter($request->all())
             ->with('creator')
             ->withCount('topics')
-            ->orderBy('order')
+            ->orderBy('order','desc')
             ->paginate($perPage)
             ->appends($request->query());
 
