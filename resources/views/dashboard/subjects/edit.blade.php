@@ -24,6 +24,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="description">Description</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') ?? $subject->description }}</textarea>
+                                    @error('description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="order">Priority Order</label>
                                 <div class="col-md-9">
                                     <input class="form-control" id="order" type="number" name="order" placeholder="Enter Priority Order" step="0.01" value="{{ old('order', number_format($subject->order, 2)) }}">
@@ -61,5 +70,16 @@
 @endsection
 
 @section('javascript')
-
+<!-- Include TinyMCE from CDN -->
+<script src="https://cdn.tiny.cloud/1/uc3ovxfl48d9aye0eek5ugch5zzqgaqsa9lckdlhni364yvz/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount  linkchecker',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
+</script>
 @endsection
