@@ -90,8 +90,12 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy(Course $course, Request $request): RedirectResponse
     {
-        //
+        $filters = $request->except('_token', '_method');
+        $course->delete();
+
+        return redirect()->route('subjects.index', $filters)
+            ->with('message', 'The subject has been deleted successfully.');
     }
 }

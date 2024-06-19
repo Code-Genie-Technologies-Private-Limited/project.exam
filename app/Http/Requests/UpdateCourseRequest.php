@@ -23,7 +23,7 @@ class UpdateCourseRequest extends FormRequest
     {
         return [
             'name' => 'required|min:1|max:160',
-            'description' => 'nullable|text',
+            'description' => 'nullable',
             'order' => 'decimal:2',
             'status' => 'boolean',
         ];
