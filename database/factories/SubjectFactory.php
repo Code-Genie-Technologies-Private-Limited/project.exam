@@ -16,6 +16,7 @@ class SubjectFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
             'order' => $this->faker->randomFloat(2, 1, 100),
             'status' => $this->faker->boolean,
             'created_by' => User::query()->inRandomOrder()->value('id'),

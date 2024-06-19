@@ -90,6 +90,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Description</th>
                                     <th>Order</th>
                                     <th>Created By</th>
                                     <th>View</th>
@@ -106,6 +107,7 @@
                                             <span class="badge badge-secondary">{{ $subject->topics_count }}</span>
                                         </a>
                                     </td>
+                                    <td>{{ $subject->description }}</td>
                                     <td>{{ $subject->order }}</td>
                                     <td>{{ $subject->creator->name }}</td>
                                     <td>
