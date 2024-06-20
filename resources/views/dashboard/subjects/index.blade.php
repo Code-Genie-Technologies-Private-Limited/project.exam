@@ -107,7 +107,10 @@
                                             <span class="badge badge-secondary">{{ $subject->topics_count }}</span>
                                         </a>
                                     </td>
-                                    <td>{{ $subject->description }}</td>
+                                    <td>
+                                        {!! strtoupper(trim(strip_tags($subject->description))) !!}
+                                    </td>
+                                    <!-- <td>{{ $subject->description }}</td> -->
                                     <td>{{ $subject->order }}</td>
                                     <td>{{ $subject->creator->name }}</td>
                                     <td>
