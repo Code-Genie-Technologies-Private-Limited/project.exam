@@ -96,6 +96,11 @@ class CourseController extends Controller
     {
         $filters = $request->except('_token', '_method');
 
+        if ($course->subCourses()->exists()) {
+            return redirect()->route('courses.index', $filters)
+                ->with('error', 'Course can not be deleted because it has one or more subcourses.');
+        }
+
         $course->delete();
 
         return redirect()->route('courses.index', $filters)
