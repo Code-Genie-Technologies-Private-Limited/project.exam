@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('sub_courses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 160);
             $table->foreignId('course_id')->constrained('courses')->restrictOnDelete();
-            $table->decimal('order');
-            $table->boolean('status');
+            $table->decimal('order', 10, 2);
+            $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
         });

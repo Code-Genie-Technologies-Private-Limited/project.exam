@@ -23,6 +23,7 @@ class StoreSubCourseRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:160',
+            'course_id' => 'required|integer|exists:courses,id',
         ];
     }
 }
