@@ -20,7 +20,7 @@ class SubCourse extends Model
 
         static::creating(function ($subCourse) {
             // Set 'order' to the next available number
-            $maxOrder = Topic::where('course_id', $subCourse->course_id)->max('order');
+            $maxOrder = SubCourse::where('course_id', $subCourse->course_id)->max('order');
             $subCourse->order = $maxOrder ? $maxOrder + 1 : 1;
         });
     }
