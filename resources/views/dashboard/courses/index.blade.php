@@ -103,7 +103,7 @@
                                 <tr class="{{ $course->status == 0 ? 'table-danger' : '' }}">
                                     <td>{{ $loop->iteration + ($courses->currentPage() - 1) * $courses->perPage() }}</td>
                                     <td>{{ $course->name }}
-                                        <a href="{{ route('topics.index', ['course' => $course->id]) }}">
+                                        <a href="{{ route('sub-courses.index', ['course' => $course->id]) }}">
                                             <span class="badge badge-secondary">{{ $course->topics_count }}</span>
                                         </a>
                                     </td>

@@ -20,7 +20,7 @@ class Course extends Model
 
         static::creating(function ($course) {
             // Set 'order' to the next available number
-            $maxOrder = Subject::max('order');
+            $maxOrder = Course::max('order');
             $course->order = $maxOrder ? $maxOrder + 1 : 1;
         });
     }
@@ -30,10 +30,10 @@ class Course extends Model
         return $this->provideFilter(CourseFilter::class);
     }
 
-    // public function topics()
-    // {
-    //     return $this->hasMany(Topic::class);
-    // }
+    public function subcourse()
+    {
+        return $this->hasMany(SubCourse::class);
+    }
 
     public function creator()
     {

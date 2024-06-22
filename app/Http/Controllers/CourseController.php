@@ -17,7 +17,7 @@ class CourseController extends Controller
      */
     public function index(Request $request): View
     {
-        
+
         $perPage = $request->input('per_page', 10);
 
         $courses = Course::filter($request->all())
@@ -51,7 +51,7 @@ class CourseController extends Controller
         Course::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
         return redirect()->route('courses.index', $request->query())
-            ->with('message', 'The subject has been created successfully.');
+            ->with('message', 'The Sub Course has been created successfully.');
     }
 
     /**
@@ -93,9 +93,14 @@ class CourseController extends Controller
     public function destroy(Course $course, Request $request): RedirectResponse
     {
         $filters = $request->except('_token', '_method');
+
+        if ($course->subCourses()->exists()) {
+            return redirect()->route('courses.index', $filters)
+                ->with('error', 'Cannot delete this Sub Course as it has one or more associated topics.');
+        }
         $course->delete();
 
-        return redirect()->route('subjects.index', $filters)
-            ->with('message', 'The subject has been deleted successfully.');
+        return redirect()->route('courses.index', $filters)
+            ->with('message', 'The Sub Course has been deleted successfully.');
     }
 }
