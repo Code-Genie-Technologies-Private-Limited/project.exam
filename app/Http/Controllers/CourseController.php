@@ -7,13 +7,14 @@ use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $perpage = $request->input('per-page', 10);
 
@@ -35,7 +36,7 @@ class CourseController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('dashboard.courses.create');
     }
@@ -45,25 +46,32 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        Course::create(array_merge($request->validated(), ['created_by'=>auth()->user()->id]));
+        Course::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
-        return redirect()->route('')
+        return redirect()->route('courses.index', $request->query())
+            ->with('message', 'Course has been added successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show(Course $course, Request $request): View
     {
-        //
+        return view('dashboard.courses.show', [
+            'course' => $course,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course)
+    public function edit(Course $course, Request $request): View
     {
-        //
+        return view('dashboard.courses.edit', [
+            'course' => $course,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
@@ -71,14 +79,22 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        //
+        $course->update($request->validated());
+
+        return redirect()->route('courses.index', $request->query())
+            ->with('message', 'Course has been updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy(Course $course, Request $request)
     {
-        //
+        $filters = $request->except('_token', '_method');
+
+        $course->delete();
+
+        return redirect()->route('courses.index', $filters)
+            ->with('message', 'Course has been deleted successfully.');
     }
 }
