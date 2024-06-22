@@ -24,11 +24,12 @@ class TopicController extends Controller
         $perPage = $request->input('per_page', 10);
 
         $topics = Topic::with(['subject', 'creator'])
-            ->orderBy('order', 'desc')
-            ->filter($request->all())
-            ->paginate($perPage);
+        ->orderBy('order', 'desc')
+        ->orderBy('name', 'desc')
+        ->filter($request->all())
+        ->paginate($perPage);
 
-        $subjects = Subject::orderBy('order')->get();
+        $subjects = Subject::orderBy('order','desc')->get();
 
         $creators = User::all();
 

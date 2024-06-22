@@ -38,6 +38,6 @@ class SubCourse extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class, 'Course_id');
+        return $this->belongsTo(Course::class);
     }
 }

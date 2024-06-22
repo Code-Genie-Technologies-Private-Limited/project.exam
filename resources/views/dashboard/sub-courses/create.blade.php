@@ -23,14 +23,23 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="course-id">Subject</label>
+                                <label class="col-md-3 col-form-label" for="course-id">Course</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" id="course-id" name="course-id">
+                                    <select class="form-control" id="course_id" name="course_id">
                                         @foreach($courses as $course)
-                                        <option value="{{ $course->id }}" @selected( old('course-id')==$course->id)>{{ $course->name }}</option>
+                                        <option value="{{ $course->id }}" @selected( old('course_id')==$course->id)>{{ $course->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('course-id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="description">Description</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
+                                    @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
