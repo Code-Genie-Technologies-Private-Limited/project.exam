@@ -25,6 +25,7 @@ class UpdateSubjectRequest extends FormRequest
     {
         return [
             'name' => 'required|min:1|max:160',
+            'description' => 'nullable|text',
             'order' => 'decimal:2',
             'status' => 'boolean',
         ];
