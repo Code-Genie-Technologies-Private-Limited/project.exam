@@ -23,6 +23,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="description">Description</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
+                                    @error('description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                 <div class="col-md-9">
                                     <select class="form-control" id="course_id" name="course_id">
