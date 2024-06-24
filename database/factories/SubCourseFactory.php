@@ -20,6 +20,7 @@ class SubCourseFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
             'course_id' => Course::query()->where('status', 1)->inRandomOrder()->value('id'),
             'order' => $this->faker->randomFloat(2, 1, 100),
             'status' => $this->faker->boolean,

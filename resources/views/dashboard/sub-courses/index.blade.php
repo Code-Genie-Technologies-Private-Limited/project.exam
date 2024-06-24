@@ -101,6 +101,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Description</th>
                                     <th>Course</th>
                                     <th>Order</th>
                                     <th>Created By</th>
@@ -114,6 +115,7 @@
                                 <tr class="{{ $subCourse->status == 0 ? 'table-danger' : '' }}">
                                     <td>{{ $loop->iteration + ($subCourses->currentPage() - 1) * $subCourses->perPage() }}</td>
                                     <td>{{ $subCourse->name }}<span class="badge badge-secondary">{{ $subCourse->questions_count }}</span></td>
+                                    <td>{{ $subCourse->description }}</td>
                                     <td>{{ $subCourse->course->name }}</td>
 
                                     <td>{{ $subCourse->order }}</td>

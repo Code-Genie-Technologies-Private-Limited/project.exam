@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sub_courses', function (Blueprint $table) {
             $table->id();
             $table->string('name', 160);
+            $table->text('description')->nullable();
             $table->foreignId('course_id')->constrained('courses')->restrictOnDelete();
             $table->decimal('order', 10, 2);
             $table->boolean('status')->default(1);
