@@ -66,15 +66,14 @@ class SubCourseController extends Controller
      */
     public function show(SubCourse $subCourse, Request $request)
     {
+        // dd($subCourse);
 
-        $courses = Subject::where('status', 1)->orderBy('order')->get();
+        $courses = Course::where('status', 1)->orderBy('order')->get();
 
         return view('dashboard.sub-courses.show', [
             'subcourses' => $subCourse,
             'courses' => $courses,
             'filters' => $request->query(),
-
-
         ]);
     }
 

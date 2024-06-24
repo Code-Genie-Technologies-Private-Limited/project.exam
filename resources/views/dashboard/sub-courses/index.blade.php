@@ -13,7 +13,7 @@
                                 <i class="fa fa-align-left"></i><strong>Subcourse List</strong>
                             </div>
                             <div class="col-md-6 text-right">
-                                <a href="{{ route('sub-courses.create') }}" class="btn btn-primary">Add Topic</a>
+                                <a href="{{ route('sub-courses.create') }}" class="btn btn-primary">Add SubCourse</a>
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ class UpdateSubCourseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class UpdateSubCourseRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
-            'descreption' => 'nullable',
+            'descreption' => 'required|',
             'status' => 'numeric',
             'order' => 'numeric',
         ];
