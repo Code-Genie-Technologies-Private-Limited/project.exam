@@ -28,7 +28,7 @@
                                 <div class="col-md-9">
                                     <select class="form-control" id="course_id" name="course_id">
                                         @foreach($courses as $course)
-                                        <option value="{{ $course->id }}" @selected( old('course_id')==$course->id)>{{ $course->name }}</option>
+                                        <option value="{{ $course->id }}" @if (( old('course_id') ?? $subCourse->course_id) == $course->id) selected @endif >{{ $course->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('course-id')

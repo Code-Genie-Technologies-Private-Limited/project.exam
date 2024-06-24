@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    use HasFactory,Filterable;
+    use HasFactory, Filterable;
 
     protected $guarded = [];
 
@@ -34,5 +34,9 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
-    
+    public function SubCourse()
+    {
+
+        return $this->hasMany(SubCourse::class);
+    }
 }

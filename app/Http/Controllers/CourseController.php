@@ -19,7 +19,7 @@ class CourseController extends Controller
         $perPage = $request->input('per_page', 10);
         $courses = Course::filter($request->all())
             ->with('creator')
-            ->orderBy('order','desc')
+            ->orderBy('order', 'desc')
             ->paginate($perPage)
             ->appends($request->query());
 
@@ -47,7 +47,8 @@ class CourseController extends Controller
     {
         Course::create(array_merge(
             $request->validated(),
-            ['created_by' => auth()->user()->id]));
+            ['created_by' => auth()->user()->id]
+        ));
 
         $request->session()->flash('message', 'Created Successfully.');
         return redirect()->route('courses.index');
@@ -92,10 +93,14 @@ class CourseController extends Controller
     public function destroy(Course $course, Request $request)
     {
         $filters = $request->except('_token', '_method');
+        if ($course->SubCourse()->exists()) {
+            return redirect()->route('courses.index', ['page' => $request->input('page', 1)])
+                ->with('error', 'Cannot delete this topic as it has one or more associated questions.');
+        }
 
         $course->delete();
 
         return redirect()->route('courses.index', $filters)
-            ->with('message', 'The subject has been deleted successfully.');
+            ->with('message', 'The Course has been deleted successfully.');
     }
 }
