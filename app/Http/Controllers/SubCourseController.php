@@ -18,16 +18,23 @@ class SubCourseController extends Controller
     {
         $perPage = $request->input('per_page', 10);
 
-        $suCourses = SubCourse::with(['creator', 'course'])
+        $subCourses = SubCourse::with(['creator', 'course'])
             ->orderBy('order', 'desc')
             ->filter($request->all())
-            ->paginate($perPage);
+            ->paginate($perPage)
+            ->appends($request->query());
 
         $courses = Course::orderBy('order')->get();
-
+        // dd($courses);
         $creators = User::all();
 
-        return view('dashboard.sub-courses.index', []);
+
+        return view('dashboard.sub-courses.index', [
+            'subCourses' => $subCourses,
+            'courses' => $courses,
+            'creators' => $creators,
+            'filters' => $request->all(),
+        ]);
     }
 
     /**
@@ -35,7 +42,11 @@ class SubCourseController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::where('status', 1)
+            ->orderBy('order')
+            ->get();
+
+        return view('dashboard.sub-courses.create', compact('courses'));
     }
 
     /**
@@ -43,23 +54,43 @@ class SubCourseController extends Controller
      */
     public function store(StoreSubCourseRequest $request)
     {
-        //
+
+        SubCourse::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
+
+        return redirect()->route('sub-courses.index', $request->query())
+            ->with('message', 'Sub Course has been added successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(SubCourse $subCourse)
+    public function show(SubCourse $subCourse, Request $request)
     {
-        //
+        $courses = Course::where('status', 1)
+            ->orderBy('order')->get();
+
+        return view('dashboard.sub-courses.show', [
+            'subCourse' => $subCourse,
+            'courses' => $courses,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubCourse $subCourse)
+    public function edit(SubCourse $subCourse, Request $request)
     {
-        //
+        $courses = Course::where('status', 1)
+            ->orWhere('id', $subCourse->course_id)
+            ->orderBy('order')
+            ->get();
+
+        return view('dashboard.sub-courses.edit', [
+            'subCourse' => $subCourse,
+            'courses' => $courses,
+            'filters' => $request->query()
+        ]);
     }
 
     /**
@@ -67,14 +98,27 @@ class SubCourseController extends Controller
      */
     public function update(UpdateSubCourseRequest $request, SubCourse $subCourse)
     {
-        //
+        $subCourse->update($request->validated());
+
+        return redirect()->route('sub-courses.index', $request->query())
+            ->with('message', 'Sub Course has been updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubCourse $subCourse)
+    public function destroy(SubCourse $subCourse, Request $request)
     {
-        //
+        $filters = $request->except('_token', '_method');
+
+        // if ($topic->questions()->exists()) {
+        //     return redirect()->route('topics.index', ['page' => $request->input('page', 1)])
+        //         ->with('error', 'Cannot delete this topic as it has one or more associated questions.');
+        // }
+
+        $subCourse->delete();
+
+        return redirect()->route('sub-courses.index', $request->query())
+            ->with('message', 'Sub Course has been deleted successfully.');
     }
 }
