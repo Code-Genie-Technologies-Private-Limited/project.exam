@@ -88,7 +88,7 @@ class SubCourseController extends Controller
             ->get();
 
         return view('dashboard.sub-courses.edit', [
-            'subcourses' => $subCourse,
+            'subCourse' => $subCourse,
             'courses' => $courses,
             'filters' => $request->query(),
         ]);

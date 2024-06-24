@@ -36,10 +36,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="description">Description</label>
+                                <label class="col-md-3 col-form-label" for="descreption">Description</label>
                                 <div class="col-md-9">
-                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
-                                    @error('description')
+                                    <textarea class="form-control @error('descreption') is-invalid @enderror" name="descreption" id="descreption">{{ old('descreption') }}</textarea>
+                                    @error('descreption')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
