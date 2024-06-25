@@ -127,7 +127,7 @@
                                         <a href="{{ url('/sub-courses/' . $subCourse->id . '/edit') . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('sub-courses.destroy', ['sub_course' => $subCourse->id]) }}" method="POST">
+                                        <form action="{{ route('sub-courses.destroy', ['id' => $subCourse->id]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             @foreach(request()->query() as $key => $value)

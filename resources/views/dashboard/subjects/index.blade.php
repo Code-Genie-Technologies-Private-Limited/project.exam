@@ -20,6 +20,15 @@
                     <div class="card-body">
                         <form method="GET" action="{{ url()->current() }}">
                             <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="short_name">Short Name</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="short_name" type="text" name="sort_name" placeholder="Enter subject short name" length="160" autofocus value="{{ $filters['short_name'] ?? '' }}">
+                                    @error('short_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="name">Subject Name</label>
                                 <div class="col-md-9">
                                     <input class="form-control" id="name" type="text" name="name" placeholder="Enter subject name" length="160" autocomplete="subject" autofocus value="{{ $filters['name'] ?? '' }}">
@@ -31,10 +40,10 @@
                             <div class="form-group row">
                                 <label for="user" class="col-md-3 col-form-label">Creator</label>
                                 <div class="col-md-9">
-                                    <select name="user" id="user" class="form-control">
+                                    <select name="creatoooor" id="user" class="form-control">
                                         <option value="">All</option>
                                         @foreach($creators as $creator)
-                                        <option value="{{ $creator->id }}" {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
+                                        <option value="{{ $creator->id }}" {{ ($filters['user'] ?? '') == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -107,7 +116,7 @@
                                             <span class="badge badge-secondary">{{ $subject->topics_count }}</span>
                                         </a>
                                     </td>
-                                    <td>{{ $subject->description }}</td>
+                                    <td>{{!! $subject->description }}</td>
                                     <td>{{ $subject->order }}</td>
                                     <td>{{ $subject->creator->name }}</td>
                                     <td>

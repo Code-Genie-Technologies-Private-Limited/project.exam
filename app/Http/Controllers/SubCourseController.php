@@ -29,7 +29,7 @@ class SubCourseController extends Controller
         $creators = User::all();
 
 
-        return view('dashboard.sub-courses.index', [
+        return view('dashboard.sub_courses.index', [
             'subCourses' => $subCourses,
             'courses' => $courses,
             'creators' => $creators,
@@ -46,7 +46,7 @@ class SubCourseController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('dashboard.sub-courses.create', compact('courses'));
+        return view('dashboard.sub_courses.create', compact('courses'));
     }
 
     /**
@@ -69,7 +69,7 @@ class SubCourseController extends Controller
         $courses = Course::where('status', 1)
             ->orderBy('order')->get();
 
-        return view('dashboard.sub-courses.show', [
+        return view('dashboard.sub_courses.show', [
             'subCourse' => $subCourse,
             'courses' => $courses,
             'filters' => $request->query(),
@@ -86,7 +86,7 @@ class SubCourseController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('dashboard.sub-courses.edit', [
+        return view('dashboard.sub_courses.edit', [
             'subCourse' => $subCourse,
             'courses' => $courses,
             'filters' => $request->query()

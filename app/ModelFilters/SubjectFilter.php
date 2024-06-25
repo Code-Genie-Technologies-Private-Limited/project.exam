@@ -28,4 +28,9 @@ class SubjectFilter extends ModelFilter
     {
         return $this->where('status', $status);
     }
+
+    public function sort_name($shortName)
+    {
+        return $this->where('short_name', $shortName);
+    }
 }
