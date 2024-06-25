@@ -25,7 +25,7 @@ class SubCourseController extends Controller
             ->filter($request->all())
             ->paginate($perPage);
 
-        $courses = Course::orderBy('orer')
+        $courses = Course::orderBy('order')
             ->get();
 
         $creators = User::all();
@@ -46,7 +46,7 @@ class SubCourseController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('dashboard.sub-courses', compact('courses'));
+        return view('dashboard.sub-courses.create', compact('courses'));
     }
 
     /**
@@ -84,7 +84,7 @@ class SubCourseController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('dashboard.topics.edit', [
+        return view('dashboard.sub-courses.edit', [
             'subCourse' => $subCourse,
             'courses' => $courses,
             'filters' => $request->query(),
