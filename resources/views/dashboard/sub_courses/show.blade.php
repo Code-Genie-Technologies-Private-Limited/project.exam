@@ -14,7 +14,9 @@
                         <h4>Name</h4>
                         <p>{{ $subCourse->name }}</p>
                         <h4>Description</h4>
-                        <p>{{ $subCourse->description }}</p>
+                        <p>
+                            {!! trim($subCourse->description) !!}
+                        </p>
                         <h4>Course</h4>
                         <p>{{ $subCourse->course->name }}</p>
                         <h4>Order</h4>
