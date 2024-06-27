@@ -19,7 +19,7 @@ class SubCourseController extends Controller
     {
         $perPage = $request->input('per_page', 10);
 
-        $subCourse = SubCourse::with('course', 'creator')
+        $subcourses = SubCourse::with('course', 'creator')
             ->orderBy('order', 'desc')
             ->filter($request->all())
             ->paginate($perPage);
@@ -27,22 +27,23 @@ class SubCourseController extends Controller
         $courses = Course::orderBy('order')->get();
 
         $creators = User::all();
-
-        return view('dashboard.SubCourses.index', [
-            'SubCourse' => $subCourse,
+        // dd($courses->toarray());
+        return view('dashboard.subcourses.index', [
+            'subcourses' => $subcourses,
             'courses' => $courses,
             'creators' => $creators,
             'filters' => $request->all(),
         ]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $course = Course::where('status', 1)->orderBy('order')->get();
-        return view('dashboard.SubCourses.create', compact('subjects'));
+        $courses = Course::where('status', 1)->orderBy('order')->get();
+        return view('dashboard.subcourses.create', compact('courses'));
     }
 
     /**
@@ -52,7 +53,7 @@ class SubCourseController extends Controller
     {
         SubCourse::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
-        return redirect()->route('SubCourses.index', $request->query())
+        return redirect()->route('subcourses.index', $request->query())
             ->with('message', 'The SubCourses has been created successfully.');
     }
 
@@ -63,8 +64,8 @@ class SubCourseController extends Controller
     {
         $courses = Course::where('status', 1)->orderBy('order')->get();
 
-        return view('dashboard.SubCourses.show', [
-            'SubCourse' => $subCourse,
+        return view('dashboard.subcourses.show', [
+            'subCourse' => $subCourse,
             'courses' => $courses,
             'filters' => $request->query(),
         ]);
@@ -73,17 +74,17 @@ class SubCourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubCourse $subCourse,Request $request)
+    public function edit(SubCourse $subCourse, Request $request)
     {
 
         $course = Course::where('status', 1)
-        ->orWhere('id', $subCourse->course_id)
+            ->orWhere('id', $subCourse->course_id)
             ->orderBy('order')
             ->get();
 
-        return view('dashboard.SubCourses.edit', [
-            'SubCourse' => $subCourse,
-            'course' => $course,
+        return view('dashboard.subcourses.edit', [
+            'subCourse' => $subCourse,
+            'courses' => $course,
             'filters' => $request->query(),
         ]);
     }
@@ -95,7 +96,7 @@ class SubCourseController extends Controller
     {
         $subCourse->update($request->validated());
 
-        return redirect()->route('SubCourses.index', $request->query())
+        return redirect()->route('subcourses.index', $request->query())
             ->with('message', 'The SubCourses has been updated successfully.');
     }
 
@@ -104,11 +105,12 @@ class SubCourseController extends Controller
      */
     public function destroy(SubCourse $subCourse, Request $request)
     {
+
         $filters = $request->except('_token', '_method');
 
         $subCourse->delete();
 
-        return redirect()->route('SubCourses.index', $filters)
+        return redirect()->route('subcourses.index', $filters)
             ->with('message', "The subCourse has been deleted successfully.");
     }
 }

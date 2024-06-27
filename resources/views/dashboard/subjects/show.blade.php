@@ -14,7 +14,7 @@
                         <h4>Name</h4>
                         <p>{{ $subject->name }}</p>
                         <h4>Description</h4>
-                        <p>{{ $subject->description }}</p>
+                        <p>{!! trim($subject->description) !!}</p>
                         <h4>Order</h4>
                         <p>{{ $subject->order }}</p>
                         <h4>Status</h4>
@@ -33,5 +33,6 @@
 @endsection
 
 @section('javascript')
+
 
 @endsection

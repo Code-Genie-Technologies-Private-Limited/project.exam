@@ -21,6 +21,7 @@ class SubCourseFactory extends Factory
         return [
             'name' => $this->faker->sentence,
             'course_id' => Course::query()->where('status', 1)->inRandomOrder()->value('id'),
+            'description' => $this->faker->paragraph,
             'order' => $this->faker->randomFloat(2, 1, 100),
             'status' => $this->faker->boolean,
             'created_by' => User::query()->inRandomorder()->value('id'),

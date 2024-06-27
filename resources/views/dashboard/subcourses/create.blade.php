@@ -11,7 +11,7 @@
                         <h4>Add Topic</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('topics.store') }}">
+                        <form method="POST" action="{{ route('subcourses.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="name">Topic Name</label>
@@ -23,20 +23,29 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="subject_id">Subject</label>
+                                <label class="col-md-3 col-form-label" for="course_id">course</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" id="subject_id" name="subject_id">
-                                        @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}" @selected( old('subject_id')==$subject->id)>{{ $subject->name }}</option>
+                                    <select class="form-control" id="course_id" name="course_id">
+                                        @foreach($courses as $course)
+                                        <option value="{{ $course->id }}" @selected( old('course_id')==$course->id)>{{ $course->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('subject_id')
+                                    @error('course_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="description">Description</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
+                                    @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <button class="btn btn-success" type="submit">Add</button>
-                            <a href="{{ route('topics.index') }}" class="btn btn-primary">Return</a>
+                            <a href="{{ route('subcourses.index') }}" class="btn btn-primary">Return</a>
                         </form>
                     </div>
                 </div>

@@ -17,9 +17,8 @@ class SubCourse extends Model
     {
         parent::boot();
 
-        static::creating(function ($subCourse) {
-            // Set 'order' to the next available number
-            $maxOrder = Topic::where('course_id', $subCourse->course_id)->max('order');
+            static::creating(function ($subCourse) {
+            $maxOrder = SubCourse::where('course_id', $subCourse->course_id)->max('order');
             $subCourse->order = $maxOrder ? $maxOrder + 1 : 1;
         });
     }
@@ -38,8 +37,5 @@ class SubCourse extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function questions()
-    {
-        return $this->hasMany(Question::class);
-    }
+   
 }

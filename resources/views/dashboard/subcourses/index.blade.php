@@ -13,32 +13,34 @@
                                 <i class="fa fa-align-left"></i><strong>Sub Course List</strong>
                             </div>
                             <div class="col-md-6 text-right">
-                                <a href="{{ route('SubCourses.create') }}" class="btn btn-primary">Add SubCourse</a>
+                                <a href="{{ route('subcourses.create') }}" class="btn btn-primary">Add subcourse</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <form method="GET" action="{{ url()->current() }}">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="name">SubCourse Name</label>
+                                <label class="col-md-3 col-form-label" for="name">subcourse Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter SubCourse name" length="160" autocomplete="SubCourse" autofocus value="{{ $filters['name'] ?? '' }}">
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter subcourse name" length="160" autocomplete="subcourse" autofocus value="{{ $filters['name'] ?? '' }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label for="subject" class="col-md-3 col-form-label">Subject</label>
+                                <label for="course" class="col-md-3 col-form-label">Course</label>
                                 <div class="col-md-9">
-                                    <select name="subject" id="subject" class="form-control">
+                                    <select name="course" id="course" class="form-control">
                                         <option value="">All</option>
-                                        @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}" {{ $filters['subject'] == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
+                                        @foreach($courses as $course)
+                                        <option value="{{ $course->id }}" {{ $filters['course'] ?? '' == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label for="user" class="col-md-3 col-form-label">Creator</label>
                                 <div class="col-md-9">
@@ -61,7 +63,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Filter</button>
-                            <a href="{{ route('SubCourses.index') }}" class="btn btn-primary">Reset</a>
+                            <a href="{{ route('subcourses.index') }}" class="btn btn-primary">Reset</a>
                         </form>
                     </div>
                     <div class="card-body">
@@ -101,7 +103,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Subject</th>
+                                    <th>course</th>
                                     <th>Order</th>
                                     <th>Created By</th>
                                     <th>View</th>
@@ -110,35 +112,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($SubCourses as $SubCourse)
-                                <tr class="{{ $SubCourse->status == 0 ? 'table-danger' : '' }}">
-                                    <td>{{ $loop->iteration + ($SubCourses->currentPage() - 1) * $SubCourses->perPage() }}</td>
-                                    <td>{{ $SubCourse->name }}<span class="badge badge-secondary">{{ $SubCourse->questions_count }}</span></td>
-                                    <td>{{ $SubCourse->subject->name }}</td>
+                                @foreach($subcourses as $subcourse)
+                                <tr class="{{ $subcourse->status == 0 ? 'table-danger' : '' }}">
+                                    <td>{{ $loop->iteration + ($subcourses->currentPage() - 1) * $subcourses->perPage() }}</td>
+                                    <td>{{ $subcourse->name }}<span class="badge badge-secondary">{{ $subcourse->questions_count }}</span></td>
+                                    <td>{{ $subcourse->course->name }}</td>
 
-                                    <td>{{ $SubCourse->order }}</td>
-                                    <td>{{ $SubCourse->creator->name }}</td>
+                                    <td>{{ $subcourse->order }}</td>
+                                    <td>{{ $subcourse->creator->name }}</td>
                                     <td>
-                                        <a href="{{ url('/SubCourses/' . $SubCourse->id) . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">View</a>
+                                        <a href="{{ url('/subcourses/' . $subcourse->id) . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">View</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/SubCourses/' . $SubCourse->id . '/edit') . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('/subcourses/' . $subcourse->id . '/edit') . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('SubCourses.destroy', ['SubCourse' => $SubCourse->id]) }}" method="POST">
+                                        <form action="{{ route('subcourses.destroy', ['subcourse' => $subcourse->id]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             @foreach(request()->query() as $key => $value)
                                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                                             @endforeach
-                                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this SubCourse?')">Delete</button>
+                                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this subcourse?')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $SubCourses->appends($filters)->links() }}
+                        {{ $subcourses->appends($filters)->links() }}
                     </div>
                 </div>
             </div>
