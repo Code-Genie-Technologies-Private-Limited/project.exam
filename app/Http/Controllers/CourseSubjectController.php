@@ -17,11 +17,14 @@ class CourseSubjectController extends Controller
      */
     public function index(Request $request)
     {
+        $perPage = $request->input('per_page', 10);
+        
         $courseSubjects = CourseSubject::with('creator', 'course', 'subject')
             ->orderBy('id', 'desc')
             ->filter($request->all())
-            ->paginate()
+            ->paginate($perPage)
             ->appends($request->query());
+
         $subjects = Subject::where('status', 1)->get();
         $courses = Course::where('status', 1)->get();
         $creators = User::all();

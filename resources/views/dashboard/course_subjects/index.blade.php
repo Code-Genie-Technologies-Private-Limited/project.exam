@@ -25,7 +25,7 @@
                                     <select name="course" id="course" class="form-control">
                                         <option value="">All</option>
                                         @foreach($courses as $course)
-                                        <option value="{{ $course->id }}" {{ $filters['course'] ?? ''== $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
+                                        <option value="{{ $course->id }}" {{ ($filters['course'] ?? '') == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -36,7 +36,7 @@
                                     <select name="subject" id="subject" class="form-control">
                                         <option value="">All</option>
                                         @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}" {{ $filters['subject'] ?? ''== $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
+                                        <option value="{{ $subject->id }}" {{ ($filters['subject'] ?? '') == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -47,7 +47,7 @@
                                     <select name="user" id="user" class="form-control">
                                         <option value="">All</option>
                                         @foreach($creators as $creator)
-                                        <option value="{{ $creator->id }}" {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
+                                        <option value="{{ $creator->id }}" {{ ($filters['user'] ?? '') == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
