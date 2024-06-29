@@ -46,19 +46,19 @@
     <link href="{{ asset('css/coreui-chartjs.css') }}" rel="stylesheet">
 
     <style>
-        .td-content img {
+        .description img {
             max-width: 350px;
             /* Maximum width for images */
-            max-height: 100px;
+            max-height: 50px;
             /* Maximum height for images */
             width: auto;
             height: auto;
         }
 
-        .td-content {
+        .description {
             max-width: 500px;
             /* Maximum width for the <td> */
-            max-height: 100px;
+            max-height: 60px;
             /* Maximum height for the <td> */
             overflow: hidden;
             /* Hide overflow content */
@@ -94,6 +94,11 @@
             tinycomments_author: 'Author name',
             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
                 "See docs to implement AI Assistant")),
+        });
+    </script>
+    <script>
+        document.getElementById('perPage').addEventListener('change', function() {
+            this.form.submit();
         });
     </script>
     @yield('javascript')

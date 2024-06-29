@@ -15,8 +15,9 @@ class CreateTopicsTable extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 160);
             $table->foreignId('subject_id')->constrained('subjects')->restrictOnDelete();
+            $table->string('name', 160);
+            $table->longText('description')->nullable();
             $table->decimal('order', 10, 2);
             $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
