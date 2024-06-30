@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Subject;
+use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,13 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'subject_id'=> Subject::query()->inRandomOrder()->value('id'),
+            'topic_id'=> Topic::query()->inRandomOrder()->value('id'),
+            'difficulty_level'=> $this->faker->sentence,
+            'name'=> $this->faker->sentence,
+            'status'=> $this->faker->boolean,
+            'order'=>$this->faker->randomFloat(2,1,100),
+            'created_by'=>User::query()->inRandomOrder()->value('id'),
         ];
     }
 }

@@ -11,7 +11,7 @@ class UpdatequestionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdatequestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|min:1|max:160',
+            'subject_id' => 'nullable',
+            'topic_id' => 'nullable',
+            'difficulty_level' => 'nullable',
+            'order' => 'decimal:2',
+            'status' => 'boolean',
         ];
     }
 }
