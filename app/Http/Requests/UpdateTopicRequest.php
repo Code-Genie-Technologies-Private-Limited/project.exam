@@ -26,6 +26,7 @@ class UpdateTopicRequest extends FormRequest
         return [
             'name' => 'required|min:1|max:160',
             'subject_id' => 'required|exists:subjects,id',
+            'description' => 'nullable',
             'order' => 'decimal:2',
             'status' => 'boolean',
         ];
