@@ -1,0 +1,127 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\CourseSubject;
+use App\Http\Requests\StoreCourseSubjectRequest;
+use App\Http\Requests\UpdateCourseSubjectRequest;
+use App\Models\Course;
+use App\Models\Subject;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class CourseSubjectController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request): View
+    {
+        $perPage = $request->input('per_page', 10);
+        $courseSubjects = CourseSubject::with('creator', 'course', 'subject')
+            ->filter($request->all())
+            ->orderBy('id', 'desc')
+            ->paginate($perPage)
+            ->appends($request->query());
+
+        $subjects = Subject::where('status', 1)
+            ->get();
+        $courses = Course::where('status', 1)
+            ->get();
+
+        $creators = User::all();
+
+        return view('dashboard.course_subjects.index', [
+            'courseSubjects' => $courseSubjects,
+            'subjects' => $subjects,
+            'courses' => $courses,
+            'creators' => $creators,
+            'filters' => $request->all()
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(Request $request): View
+    {
+        $subjects = Subject::where('status', 1)
+            ->get();
+        $courses = Course::where('status', 1)
+            ->get();
+        $creators = User::all();
+
+        return view('dashboard.course_subjects.create', [
+            'courses' => $courses,
+            'subjects' => $subjects,
+            'creators' => $creators,
+            'filters' => $request->query()
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreCourseSubjectRequest $request)
+    {
+        CourseSubject::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
+        return redirect()->route('course-subjects.index', $request->query())
+            ->with('message', 'Courses-Subject is created successfully');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(CourseSubject $courseSubject, Request $request): View
+    {
+        return view('dashboard.course_subjects.show', [
+            'courseSubject' => $courseSubject,
+            'filters' => $request->query()
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(CourseSubject $courseSubject, Request $request): View
+    {
+        $subjects = Subject::where('status', 1)
+            ->get();
+        $courses = Course::where('status', 1)
+            ->get();
+        $creators = User::all();
+
+        return view('dashboard.course_subjects.edit', [
+            'courseSubject' => $courseSubject,
+            'courses' => $courses,
+            'subjects' => $subjects,
+            'creators' => $creators,
+            'filters' => $request->query()
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateCourseSubjectRequest $request, CourseSubject $courseSubject): RedirectResponse
+    {
+        $courseSubject->update($request->validated());
+        return redirect()->route('course-subjects.index', $request->query())
+            ->with('message', 'Course Subject is updated successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(CourseSubject $courseSubject, Request $request): RedirectResponse
+    {
+        $filters = $request->except('_token', '_method');
+
+        $courseSubject->delete();
+
+        return redirect()->route('course-subjects.index', $filters)
+            ->with('message', 'Course Subject Is deleted Successfully');
+    }
+}
