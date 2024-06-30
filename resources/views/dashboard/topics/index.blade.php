@@ -88,7 +88,8 @@
                                     </div>
                                 </div>
                             @endif
-                            @include('dashboard.shared.pagination')
+
+                           
                             <table class="table table-responsive-sm table-bordered table-striped table-sm mt-2">
                                 <thead>
                                     <tr>

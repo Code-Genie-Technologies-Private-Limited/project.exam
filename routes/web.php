@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\SubjectController;
+
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
         return view('dashboard.homepage');
@@ -146,6 +148,8 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('students',        'StudentController');
         Route::resource('subjects',        'SubjectController');
         Route::resource('topics',        'TopicController');
+        Route::get('/subjects/{id}/download-pdf', [SubjectController::class, 'downloadPDF'])->name('subjects.downloadPDF');
+        Route::get('/subjects/{id}/download-html', [SubjectController::class, 'downloadHTML'])->name('subjects.downloadHTML');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
         Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');

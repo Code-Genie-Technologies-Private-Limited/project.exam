@@ -83,6 +83,7 @@
                                         <th>Description</th>
                                         <th>Order</th>
                                         <th>Created By</th>
+                                        <th>Download</th>
                                         <th>View</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -101,6 +102,12 @@
                                             <td class="description">{!! $subject->description !!}</td>
                                             <td>{{ $subject->order }}</td>
                                             <td>{{ $subject->creator->name }}</td>
+                                            <td>
+                                                <a href="{{ route('subjects.downloadPDF', ['id' => $subject->id]) }}"
+                                                    class="btn btn-info">Download PDF</a>
+                                                <a href="{{ route('subjects.downloadHTML', ['id' => $subject->id]) }}"
+                                                    class="btn btn-info">Download HTML</a>
+                                            </td>
                                             <td>
                                                 <a href="{{ url('/subjects/' . $subject->id) . '?' . http_build_query(request()->query()) }}"
                                                     class="btn btn-primary">View</a>
