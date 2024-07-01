@@ -1,7 +1,6 @@
 @extends('dashboard.base')
 
 @section('content')
-
 <div class="container-fluid">
     <div class="animated fadeIn">
         <div class="row">
@@ -33,8 +32,10 @@
                                 <div class="col-md-9">
                                     <select name="subject" id="subject" class="form-control">
                                         <option value="">All</option>
-                                        @foreach($subjects as $subject)
-                                        <option value="{{ $subject->id }}" {{ $filters['subject'] ?? '' == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
+                                        @foreach ($subjects as $subject)
+                                        <option value="{{ $subject->id }}" {{ $filters['subject'] ?? '' == $subject->id ? 'selected' : '' }}>
+                                            {{ $subject->name }}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -44,8 +45,10 @@
                                 <div class="col-md-9">
                                     <select name="user" id="user" class="form-control">
                                         <option value="">All</option>
-                                        @foreach($creators as $creator)
-                                        <option value="{{ $creator->id }}" {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
+                                        @foreach ($creators as $creator)
+                                        <option value="{{ $creator->id }}" {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>
+                                            {{ $creator->name }}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -56,7 +59,8 @@
                                     <select name="status" id="status" class="form-control">
                                         <option value="">All</option>
                                         <option value="1" {{ ($filters['status'] ?? '') === '1' ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ ($filters['status'] ?? '') === '0' ? 'selected' : '' }}>Inactive</option>
+                                        <option value="0" {{ ($filters['status'] ?? '') === '0' ? 'selected' : '' }}>Inactive
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -65,7 +69,7 @@
                         </form>
                     </div>
                     <div class="card-body">
-                        @if(Session::has('message'))
+                        @if (Session::has('message'))
                         <div class="row">
                             <div class="col-12">
                                 <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
@@ -73,35 +77,21 @@
                         </div>
                         @endif
 
-                        @if(Session::has('error'))
+                        @if (Session::has('error'))
                         <div class="row">
                             <div class="col-12">
                                 <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
                             </div>
                         </div>
                         @endif
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <form method="GET" action="{{ url()->current() }}">
-                                    <select id="perPage" name="per_page" class="form-control w-auto d-inline" onchange="this.form.submit()">
-                                        <option value="5" {{ ($filters['per_page'] ?? 10) == 5 ? 'selected' : '' }}>5</option>
-                                        <option value="10" {{ ($filters['per_page'] ?? 10) == 10 ? 'selected' : '' }}>10</option>
-                                        <option value="25" {{ ($filters['per_page'] ?? 10) == 25 ? 'selected' : '' }}>25</option>
-                                        <option value="50" {{ ($filters['per_page'] ?? 10) == 50 ? 'selected' : '' }}>50</option>
-                                        <option value="100" {{ ($filters['per_page'] ?? 10) == 100 ? 'selected' : '' }}>100</option>
-                                    </select>
-                                    @foreach(request()->except('per_page') as $key => $value)
-                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                                    @endforeach
-                                </form>
-                            </div>
-                        </div>
+                        @include('dashboard.shared.pagination')
                         <table class="table table-responsive-sm table-bordered table-striped table-sm mt-2">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Subject</th>
+                                    <th>Description</th>
                                     <th>Order</th>
                                     <th>Created By</th>
                                     <th>View</th>
@@ -110,12 +100,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($topics as $topic)
+                                @foreach ($topics as $topic)
                                 <tr class="{{ $topic->status == 0 ? 'table-danger' : '' }}">
-                                    <td>{{ $loop->iteration + ($topics->currentPage() - 1) * $topics->perPage() }}</td>
+                                    <td>{{ $loop->iteration + ($topics->currentPage() - 1) * $topics->perPage() }}
+                                    </td>
                                     <td>{{ $topic->name }}<span class="badge badge-secondary">{{ $topic->questions_count }}</span></td>
                                     <td>{{ $topic->subject->name }}</td>
-
+                                    <td class="description">{!! $topic->description !!}</td>
                                     <td>{{ $topic->order }}</td>
                                     <td>{{ $topic->creator->name }}</td>
                                     <td>
@@ -128,7 +119,7 @@
                                         <form action="{{ route('topics.destroy', ['topic' => $topic->id]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            @foreach(request()->query() as $key => $value)
+                                            @foreach (request()->query() as $key => $value)
                                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                                             @endforeach
                                             <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this topic?')">Delete</button>
@@ -145,13 +136,4 @@
         </div>
     </div>
 </div>
-
-@endsection
-
-@section('javascript')
-<script>
-    document.getElementById('perPage').addEventListener('change', function() {
-        this.form.submit();
-    });
-</script>
 @endsection

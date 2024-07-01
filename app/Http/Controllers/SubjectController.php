@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Documents\SubjectDocument;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 use App\Models\Subject;
@@ -127,5 +128,33 @@ class SubjectController extends Controller
 
         return redirect()->route('subjects.index', $filters)
             ->with('message', 'The subject has been deleted successfully.');
+    }
+
+    /**
+     * Download the specified resource in PDF format.
+     *
+     * @param Subject $subject
+     * @param Request $request
+     * @return View
+     */
+    public function downloadPDF($id)
+    {
+        $subject = Subject::find($id);
+        $subjectPDF = new SubjectDocument($subject);
+        return $subjectPDF->generate();
+    }
+
+    /**
+     * Download the specified resource in HTML format.
+     *
+     * @param $id
+     * @param Request $request
+     * @return View
+     */
+    public function downloadHTML($id)
+    {
+        $subject = Subject::find($id);
+        $subjectHTML = new SubjectDocument($subject);
+        return $subjectHTML->generate('html');
     }
 }
