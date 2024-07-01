@@ -11,6 +11,7 @@
                                 <div class="col-md-6">
                                     <i class="fa fa-align-left"></i><strong>Subject List</strong>
                                 </div>
+                                
                                 <div class="col-md-6 text-right">
                                     <a href="{{ route('subjects.create') }}" class="btn btn-primary">Add Subject</a>
                                 </div>
