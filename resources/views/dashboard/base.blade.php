@@ -44,6 +44,28 @@
     @yield('css')
 
     <link href="{{ asset('css/coreui-chartjs.css') }}" rel="stylesheet">
+
+    <style>
+        .description img {
+            max-width: 350px;
+            /* Maximum width for images */
+            max-height: 50px;
+            /* Maximum height for images */
+            width: auto;
+            height: auto;
+        }
+
+        .description {
+            max-width: 500px;
+            /* Maximum width for the <td> */
+            max-height: 60px;
+            /* Maximum height for the <td> */
+            overflow: hidden;
+            /* Hide overflow content */
+            word-wrap: break-word;
+            /* Wrap text to avoid overflow */
+        }
+    </style>
 </head>
 
 <body class="c-app">
@@ -61,7 +83,8 @@
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
     <script src="{{ asset('js/coreui-utils.js') }}"></script>
     <!-- Include TinyMCE from CDN -->
-    <script src="https://cdn.tiny.cloud/1/uc3ovxfl48d9aye0eek5ugch5zzqgaqsa9lckdlhni364yvz/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/uc3ovxfl48d9aye0eek5ugch5zzqgaqsa9lckdlhni364yvz/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: 'textarea',
@@ -69,7 +92,13 @@
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
             tinycomments_mode: 'embedded',
             tinycomments_author: 'Author name',
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
+                "See docs to implement AI Assistant")),
+        });
+    </script>
+    <script>
+        document.getElementById('perPage').addEventListener('change', function() {
+            this.form.submit();
         });
     </script>
     @yield('javascript')
