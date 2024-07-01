@@ -11,7 +11,7 @@
 |
 */
 
-use App\Http\Controllers\SubCourseController;
+use App\Http\Controllers\SubjectController;
 
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
