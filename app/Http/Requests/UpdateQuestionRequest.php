@@ -28,7 +28,6 @@ class UpdateQuestionRequest extends FormRequest
             'name' => 'required|min:3|max:160',
             'order' => 'numeric',
             'status' => 'boolean',
-            'created_by' => 'required|exists:users,id',
         ];
     }
 }

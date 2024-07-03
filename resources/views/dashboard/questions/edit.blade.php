@@ -26,6 +26,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="select1">Difficulty Level</label>
+                          <div class="col-md-9">
+                            <select class="form-control" id="select1" name="select1">
+                              <option value="0">Please select</option>
+                              <option value="1">Easy</option>
+                              <option value="2">Medium</option>
+                              <option value="3">Hard</option>
+                            </select>
+                          </div>
+                        </div>
+                                <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="topic_id">Topic</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="topic_id" name="topic_id">

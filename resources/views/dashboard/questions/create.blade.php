@@ -13,7 +13,7 @@
                             <form method="POST" action="{{ route('questions.store') }}">
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="name">Question Name</label>
+                                    <label class="col-md-3 col-form-label" for="name">Question</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('name') is-invalid @enderror" id="name"
                                             type="text" name="name" placeholder="Enter question..." length="160"
@@ -23,6 +23,17 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="select1">Difficulty Level</label>
+                          <div class="col-md-9">
+                            <select class="form-control" id="select1" name="select1">
+                              <option value="0">Please select</option>
+                              <option value="Easy">Easy</option>
+                              <option value="Medium">Medium</option>
+                              <option value="Hard">Hard</option>
+                            </select>
+                          </div>
+                        </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="subject_id">Subject</label>
                                     <div class="col-md-9">

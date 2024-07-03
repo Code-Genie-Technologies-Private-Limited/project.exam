@@ -9,7 +9,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <i class="fa fa-align-left"></i><strong>Topic List</strong>
+                                    <i class="fa fa-align-left"></i><strong>Question List</strong>
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <a href="{{ route('questions.create') }}" class="btn btn-primary">Add Question</a>
@@ -109,6 +109,7 @@
                                         <th>Question Name</th>
                                         <th>Topic</th>
                                         <th>Subject</th>
+                                        <th>Difficulty Level</th>
                                         <th>Order</th>
                                         <th>Created By</th>
                                         <th>View</th>
@@ -125,6 +126,7 @@
                                                     class="badge badge-secondary">{{ $question->questions_count }}</span></td>
                                             <td>{{ $question->topic->name }}</td>
                                             <td>{{ $question->subject->name }}</td>
+                                            <td>{{ $question->difficulty_level }}</td>
                                             <td>{{ $question->order }}</td>
                                             <td>{{ $question->creator->name }}</td>
                                             <td>
