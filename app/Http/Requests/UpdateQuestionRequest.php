@@ -11,7 +11,7 @@ class UpdateQuestionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateQuestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'subject_id' => 'required|exists:subjects,id',
+            'topic_id' => 'required|exists:topics,id',
+            'difficulty_level' => 'required|in:easy,medium,hard',
+            'name' => 'required|min:3|max:160',
+            'order' => 'numeric',
+            'status' => 'boolean',
+            'created_by' => 'required|exists:users,id',
         ];
     }
 }
