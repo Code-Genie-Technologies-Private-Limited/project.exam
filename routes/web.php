@@ -11,9 +11,7 @@
 |
 */
 
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\CourseSubjectController;
-use App\Http\Controllers\SubCourseController;
+use App\Http\Controllers\SubjectController;
 
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
@@ -153,6 +151,8 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('courses',        'CourseController');
         Route::resource('sub-courses',        'SubCourseController');
         Route::resource('course-subjects',        'CourseSubjectController');
+        Route::get('/subjects/{id}/download-pdf', [SubjectController::class, 'downloadPDF'])->name('subjects.downloadPDF');
+        Route::get('/subjects/{id}/download-html', [SubjectController::class, 'downloadHTML'])->name('subjects.downloadHTML');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
         Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');
