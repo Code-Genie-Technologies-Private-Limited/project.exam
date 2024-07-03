@@ -32,14 +32,10 @@ class QuestionFilter extends ModelFilter
     public function topic(int $topic)
     {
         return $this->where($topic);
-    }  
+    }
 
     public function status($status)
     {
         return $this->where($status);
     }
-
-    
-
-
 }
