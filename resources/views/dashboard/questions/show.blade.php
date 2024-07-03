@@ -10,12 +10,14 @@
                             <h4>Question: {{ $question->name }}</h4>
                         </div>
                         <div class="card-body">
-                            <h4>Question Name</h4>
+                            <h4>Question</h4>
                             <p>{{ $question->name }}</p>
                             <h4>Topic</h4>
                             <p>{{ $question->topic->name }}</p>
                             <h4>Subject</h4>
                             <p>{{ $question->subject->name }}</p>
+                            <h4>Difficulty Level</h4>
+                            <p>{{ $question->difficulty_level }}</p>
                             <h4>Order</h4>
                             <p>{{ $question->order }}</p>
                             <h4>Status</h4>

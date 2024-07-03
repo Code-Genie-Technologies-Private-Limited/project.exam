@@ -53,7 +53,9 @@ class QuestionController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('dashboard.questions.create', compact('subjects', 'topics'));
+        $difficultyLevels = ['Easy', 'Medium', 'Hard'];
+
+        return view('dashboard.questions.create', compact('subjects', 'topics', 'difficultyLevels'));
     }
 
     /**
@@ -61,6 +63,10 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
+        $request->validated([
+            'difficulty_level' => 'required|string'
+        ]);
+
         Question::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
         return redirect()->route('questions.index', $request->query())
@@ -114,6 +120,7 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
+
         $question->update($request->validated());
 
         return redirect()->route('questions.index', $request->query())

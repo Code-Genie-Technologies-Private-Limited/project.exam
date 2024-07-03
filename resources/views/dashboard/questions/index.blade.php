@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <form method="GET" action="{{ url()->current() }}">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="name">Question Name</label>
+                                    <label class="col-md-3 col-form-label" for="name">Question</label>
                                     <div class="col-md-9">
                                         <input class="form-control" id="name" type="text" name="name"
                                             placeholder="Enter question name" length="160" autocomplete="question" autofocus
@@ -29,6 +29,17 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="select1">Difficulty Level</label>
+                                    <div class="col-md-9">
+                                    <select class="form-control" id="select1" name="select1">
+                                        <option value="0">Please select</option>
+                                        <option value="Easy">Easy</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Hard">Hard</option>
+                                    </select>
+                                    </div>
+                                 </div>
                                 <div class="form-group row">
                                     <label for="topic" class="col-md-3 col-form-label">Topic</label>
                                     <div class="col-md-9">
@@ -106,7 +117,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Question Name</th>
+                                        <th>Question</th>
                                         <th>Topic</th>
                                         <th>Subject</th>
                                         <th>Difficulty Level</th>

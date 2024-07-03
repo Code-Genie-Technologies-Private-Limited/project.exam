@@ -38,4 +38,9 @@ class QuestionFilter extends ModelFilter
     {
         return $this->where('status', $status);
     }
+
+    public function difficulty_level( $level)
+    {
+        return $this->where('difficulty_level', $level);
+    }
 }
