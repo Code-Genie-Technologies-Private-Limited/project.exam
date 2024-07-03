@@ -5,15 +5,38 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
+use App\Models\Subject;
+use App\Models\Topic;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page', 10);
+
+        $questions = Question::with(['creator', 'subject', 'topic'])
+            ->orderBy('order', 'asc')
+            ->filter($request->all())
+            ->paginate($perPage)
+            ->appends($request->all());
+
+        $subjects = Subject::orderBy('order')->get();
+
+        $topics = Topic::orderBy('order')->get();
+
+        $creators = User::all();
+
+        return view('dashboard.question.index', [
+            'questions' => $questions,
+            'subjects' => $subjects,
+            'topics' => $topics,
+            'creators' => $creators,
+        ]);
     }
 
     /**

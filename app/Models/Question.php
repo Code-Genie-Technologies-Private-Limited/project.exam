@@ -13,6 +13,18 @@ class Question extends Model
 
     protected $guarded = [];
 
+    // Automatically set the 'order' field when creating a new topic
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($question) {
+            // Set 'order' to the next available number
+            $maxOrder = Question::where('subject_id', $question->subject_id)->max('order');
+            $question->order = $maxOrder ? $maxOrder + 1 : 1;
+        });
+    }
+
     public function modelFilter()
     {
         return $this->provideFilter(QuestionFilter::class);
