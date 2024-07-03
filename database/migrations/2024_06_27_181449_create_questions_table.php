@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('topic_id')->constrained('topics')->restrictOnDelete();
             $table->enum('difficulty_level', ['easy', 'medium', 'hard'])->default('easy');
             $table->string('name', 160);
-            $table->decimal('order', 10, 2);
+            $table->decimal('order', 10, 2)->default(0.00);
             $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();

@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubjectController;
 
 Route::group(['middleware' => ['get.menu']], function () {
@@ -149,6 +150,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('subjects',        'SubjectController');
         Route::resource('topics',        'TopicController');
         Route::resource('courses',        'CourseController');
+        Route::resource('questions',        'QuestionController');
         Route::resource('sub-courses',        'SubCourseController');
         Route::resource('course-subjects',        'CourseSubjectController');
         Route::get('/subjects/{id}/download-pdf', [SubjectController::class, 'downloadPDF'])->name('subjects.downloadPDF');

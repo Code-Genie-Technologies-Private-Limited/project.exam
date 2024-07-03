@@ -16,26 +16,26 @@ class QuestionFilter extends ModelFilter
 
     public function name(string $name)
     {
-        return $this->whereLike($name);
+        return $this->whereLike('name', $name);
     }
 
     public function user(int $creator)
     {
-        return $this->where($creator);
+        return $this->where('created_by', $creator);
     }
 
     public function subject(int $subject)
     {
-        return $this->where($subject);
+        return $this->where('subject_id', $subject);
     }
 
     public function topic(int $topic)
     {
-        return $this->where($topic);
+        return $this->where('topic_id', $topic);
     }
 
     public function status($status)
     {
-        return $this->where($status);
+        return $this->where('status', $status);
     }
 }

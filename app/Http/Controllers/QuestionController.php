@@ -31,11 +31,12 @@ class QuestionController extends Controller
 
         $creators = User::all();
 
-        return view('dashboard.question.index', [
+        return view('dashboard.questions.index', [
             'questions' => $questions,
             'subjects' => $subjects,
             'topics' => $topics,
             'creators' => $creators,
+            'filters' => $request->all(),
         ]);
     }
 
@@ -44,7 +45,15 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order')
+            ->get();
+
+        $topics = Topic::where('status', 1)
+            ->orderBy('order')
+            ->get();
+
+        return view('dashboard.questions.create', compact('subjects', 'topics'));
     }
 
     /**
@@ -52,23 +61,52 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        //
+        Question::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
+
+        return redirect()->route('questions.index', $request->query())
+            ->with('message', 'Question has been added successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Question $question)
+    public function show(Question $question, Request $request)
     {
-        //
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order')
+            ->get();
+
+        $topics = Topic::where('status', 1)
+            ->orderBy('order')
+            ->get();
+
+        return view('dashboard.questions.show', [
+            'question' => $question,
+            'topics' => $topics,
+            'subjects' => $subjects,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Question $question)
+    public function edit(Question $question, Request $request)
     {
-        //
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order')
+            ->get();
+
+        $topics = Topic::where('status', 1)
+            ->orderBy('order')
+            ->get();
+
+        return view('dashboard.questions.edit', [
+            'question' => $question,
+            'topics' => $topics,
+            'subjects' => $subjects,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
@@ -76,14 +114,22 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
-        //
+        $question->update($request->validated());
+
+        return redirect()->route('questions.index', $request->query())
+            ->with('message', 'Question has been updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy(Question $question, Request $request)
     {
-        //
+        $filters = $request->except('_token', '_method');
+
+        $question->delete();
+
+        return redirect()->route('questions.index', $filters)
+            ->with('message', 'Question has been deleted successfully.');
     }
 }

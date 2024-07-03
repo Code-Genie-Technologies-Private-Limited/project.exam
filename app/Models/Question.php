@@ -20,7 +20,7 @@ class Question extends Model
 
         static::creating(function ($question) {
             // Set 'order' to the next available number
-            $maxOrder = Question::where('subject_id', $question->subject_id)->max('order');
+            $maxOrder = Question::max('order');
             $question->order = $maxOrder ? $maxOrder + 1 : 1;
         });
     }
