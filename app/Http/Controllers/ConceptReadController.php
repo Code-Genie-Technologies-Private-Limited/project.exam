@@ -5,23 +5,59 @@ namespace App\Http\Controllers;
 use App\Models\ConceptRead;
 use App\Http\Requests\StoreConceptReadRequest;
 use App\Http\Requests\UpdateConceptReadRequest;
+use App\Models\Course;
+use App\Models\Subject;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class ConceptReadController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page', 10);
+
+        $conceptReads = ConceptRead::with('creator', 'subject', 'course')
+            ->orderBy('order', 'asc')
+            ->filter($request->all())
+            ->paginate($perPage)
+            ->appends($request->query());
+
+        $courses = Course::orderBy('order')->get();
+
+        $subjects = Subject::orderBy('order')->get();
+
+        $creators = User::all();
+
+        return view('dashboard.concept_reads.index', [
+
+            'conceptReads' => $conceptReads,
+            'courses' => $courses,
+            'subjects' => $subjects,
+            'creators' => $creators,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $courses = Course::where('status', 1)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        return view('dashboard.concept_reads.create', [
+            'courses' => $courses,
+            'subjects' => $subjects,
+            // 'filters' => $request->all(),
+        ]);
     }
 
     /**
@@ -29,7 +65,10 @@ class ConceptReadController extends Controller
      */
     public function store(StoreConceptReadRequest $request)
     {
-        //
+        ConceptRead::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
+
+        return redirect()->route('concept-reads.index', $request->query())
+            ->with('message', 'Concept & read has been added successfully.');
     }
 
     /**
@@ -37,7 +76,7 @@ class ConceptReadController extends Controller
      */
     public function show(ConceptRead $conceptRead)
     {
-        //
+        
     }
 
     /**

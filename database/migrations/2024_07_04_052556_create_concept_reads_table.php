@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained('courses')->restrictOnDelete();
             $table->foreignId('subject_id')->constrained('subjects')->restrictOnDelete();
             $table->string('content_type_name', 160);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->decimal('order', 10, 2)->default(0.00);
             $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();

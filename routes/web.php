@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\ConceptReadController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubjectController;
 
@@ -152,6 +153,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('courses',        'CourseController');
         Route::resource('questions',        'QuestionController');
         Route::resource('sub-courses',        'SubCourseController');
+        Route::resource('concept-reads',        'ConceptReadController');
         Route::resource('course-subjects',        'CourseSubjectController');
         Route::get('/subjects/{id}/download-pdf', [SubjectController::class, 'downloadPDF'])->name('subjects.downloadPDF');
         Route::get('/subjects/{id}/download-html', [SubjectController::class, 'downloadHTML'])->name('subjects.downloadHTML');
