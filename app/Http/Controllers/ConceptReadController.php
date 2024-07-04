@@ -76,7 +76,6 @@ class ConceptReadController extends Controller
      */
     public function show(ConceptRead $conceptRead)
     {
-        
     }
 
     /**
