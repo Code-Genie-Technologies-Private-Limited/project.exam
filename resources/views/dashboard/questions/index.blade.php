@@ -23,20 +23,20 @@
                                     <div class="col-md-9">
                                         <input class="form-control" id="name" type="text" name="name"
                                             placeholder="Enter question name" length="160" autocomplete="question" autofocus
-                                            value="{{ $filters['name'] ?? '' }}">
+                                            value="{{ ($filters['name'] ?? '') }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="select1">Difficulty Level</label>
+                                    <label class="col-md-3 col-form-label" for="difficulty_level">Difficulty Level</label>
                                     <div class="col-md-9">
-                                    <select class="form-control" id="select1" name="select1">
-                                        <option value="0">Please select</option>
-                                        <option value="Easy">Easy</option>
-                                        <option value="Medium">Medium</option>
-                                        <option value="Hard">Hard</option>
+                                    <select class="form-control" id="difficulty_level" name="difficulty">
+                                        <option value="">Please select</option>
+                                        <option value="easy" {{ ($filters['difficulty'] ?? '') == 'easy' ? 'selected' : '' }}>Easy</option>
+                                        <option value="medium" {{ ($filters['difficulty'] ?? '') == 'medium' ? 'selected' : '' }}>Medium</option>
+                                        <option value="hard" {{ ($filters['difficulty'] ?? '')  == 'hard' ? 'selected' : '' }}>Hard</option>
                                     </select>
                                     </div>
                                  </div>
@@ -47,7 +47,7 @@
                                             <option value="">All</option>
                                             @foreach ($topics as $topic)
                                                 <option value="{{ $topic->id }}"
-                                                    {{ $filters['topic'] ?? '' == $topic->id ? 'selected' : '' }}>
+                                                    {{ ($filters['topic'] ?? '') == $topic->id ? 'selected' : '' }}>
                                                     {{ $topic->name }}</option>
                                             @endforeach
                                         </select>
@@ -60,7 +60,7 @@
                                             <option value="">All</option>
                                             @foreach ($subjects as $subject)
                                                 <option value="{{ $subject->id }}"
-                                                    {{ $filters['subject'] ?? '' == $subject->id ? 'selected' : '' }}>
+                                                    {{ ($filters['subject'] ?? '') == $subject->id ? 'selected' : '' }}>
                                                     {{ $subject->name }}</option>
                                             @endforeach
                                         </select>
@@ -73,7 +73,7 @@
                                             <option value="">All</option>
                                             @foreach ($creators as $creator)
                                                 <option value="{{ $creator->id }}"
-                                                    {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>
+                                                    {{ ($filters['user'] ?? '') == $creator->id ? 'selected' : '' }}>
                                                     {{ $creator->name }}</option>
                                             @endforeach
                                         </select>

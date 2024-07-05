@@ -23,7 +23,7 @@ class QuestionController extends Controller
             ->orderBy('order', 'asc')
             ->filter($request->all())
             ->paginate($perPage)
-            ->appends($request->all());
+            ->appends($request->query());
 
         $subjects = Subject::orderBy('order')->get();
 
