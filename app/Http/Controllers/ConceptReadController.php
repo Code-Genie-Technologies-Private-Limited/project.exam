@@ -56,7 +56,6 @@ class ConceptReadController extends Controller
         return view('dashboard.concept_reads.create', [
             'courses' => $courses,
             'subjects' => $subjects,
-            // 'filters' => $request->all(),
         ]);
     }
 
@@ -74,16 +73,43 @@ class ConceptReadController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ConceptRead $conceptRead)
+    public function show(ConceptRead $conceptRead, Request $request)
     {
+        $courses = Course::where('status', 1)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        return view('dashboard.concept_reads.show', [
+            'conceptRead' => $conceptRead,
+            'courses' => $courses,
+            'subjects' => $subjects,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ConceptRead $conceptRead)
+    public function edit(ConceptRead $conceptRead, Request $request)
     {
-        //
+        $courses = Course::where('status', 1)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $subjects = Subject::where('status', 1)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        return view('dashboard.concept_reads.edit', [
+            'conceptRead' => $conceptRead,
+            'courses' => $courses,
+            'subjects' => $subjects,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
@@ -91,7 +117,10 @@ class ConceptReadController extends Controller
      */
     public function update(UpdateConceptReadRequest $request, ConceptRead $conceptRead)
     {
-        //
+        $conceptRead->update($request->validated());
+
+        return redirect()->route('concept-reads.index', $request->query())
+            ->with('message', 'Concept & read has been updated successfully.');
     }
 
     /**
@@ -99,6 +128,8 @@ class ConceptReadController extends Controller
      */
     public function destroy(ConceptRead $conceptRead)
     {
-        //
+        
+        $conceptRead->delete();
+
     }
 }
