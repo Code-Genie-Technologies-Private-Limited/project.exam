@@ -128,8 +128,7 @@ class ConceptReadController extends Controller
      */
     public function destroy(ConceptRead $conceptRead)
     {
-        
-        $conceptRead->delete();
 
+        $conceptRead->delete();
     }
 }
