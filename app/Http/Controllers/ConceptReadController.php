@@ -37,6 +37,7 @@ class ConceptReadController extends Controller
             'courses' => $courses,
             'subjects' => $subjects,
             'creators' => $creators,
+            'filters' => $request->all(),
         ]);
     }
 
@@ -126,9 +127,12 @@ class ConceptReadController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ConceptRead $conceptRead)
+    public function destroy(ConceptRead $conceptRead, Request $request)
     {
-
+        $filters = $request->except('_token', '_method');
         $conceptRead->delete();
+
+        return redirect()->route('concept-reads.index', $filters)
+            ->with('message', 'Concept & read has been deleted successfully.');
     }
 }

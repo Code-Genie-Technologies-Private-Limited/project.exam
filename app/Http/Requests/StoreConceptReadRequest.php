@@ -25,9 +25,6 @@ class StoreConceptReadRequest extends FormRequest
             'course_id' => 'required|exists:courses,id',
             'subject_id' => 'required|exists:subjects,id',
             'content_type_name' => 'required|min:3|max:160',
-            // 'description'=>'required|min:3|max:160',
-            // 'order'=>'decimal',
-            // 'status'=>'boolean',
         ];
     }
 }
