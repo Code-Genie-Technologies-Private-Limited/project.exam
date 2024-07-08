@@ -34,16 +34,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="form-group row">
-                          <label class="col-md-3 col-form-label" for="difficulty_level">Difficulty Level</label>
-                          <div class="col-md-9">
-                            <select class="form-control" id="difficulty_level" name="difficulty_level">
-                              <option value="easy" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'easy') selected @endif>Easy</option>
-                              <option value="medium" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'medium') selected @endif>Medium</option>
-                              <option value="hard" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'hard') selected @endif>Hard</option>
-                            </select>
-                          </div> --}}
-                        </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                     <div class="col-md-9">
