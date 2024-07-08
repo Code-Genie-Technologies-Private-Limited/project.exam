@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,8 +22,9 @@ class GeneralKnowledgeFactory extends Factory
             'course_id' => Course::query()->where('status', 1)->inRandomOrder()->value('id'),
             'type' => $this->faker->randomElement(['static', 'current affairs']),
             'description' => $this->faker->paragraph,
-            'order' => $this->faker->inrandomFloat(2, 1, 100),
+            'order' => $this->faker->randomFloat(2, 1, 100),
             'status' => $this->faker->boolean,
+            'created_by' => User::query()->inRandomOrder()->value('id'),
         ];
     }
 }
