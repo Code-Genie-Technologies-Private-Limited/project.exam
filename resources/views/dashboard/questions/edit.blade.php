@@ -26,15 +26,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                          <label class="col-md-3 col-form-label" for="difficulty_level">Difficulty Level</label>
-                          <div class="col-md-9">
-                            <select class="form-control" id="difficulty_level" name="difficulty_level">
-                              <option value="easy" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'easy') selected @endif>Easy</option>
-                              <option value="medium" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'medium') selected @endif>Medium</option>
-                              <option value="hard" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'hard') selected @endif>Hard</option>
-                            </select>
-                          </div>
-                        </div>
+                                    <label class="col-md-3 col-form-label" for="difficulty_level">Difficulty Level</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" id="difficulty_level" name="difficulty_level">
+                                            <option value="easy" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'easy') selected @endif>Easy
+                                            </option>
+                                            <option value="medium" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'medium') selected @endif>Medium
+                                            </option>
+                                            <option value="hard" @if ((old('difficulty_level') ?? $question->difficulty_level) == 'hard') selected @endif>Hard
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="topic_id">Topic</label>
                                     <div class="col-md-9">
@@ -95,7 +98,8 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-success" type="submit">Update</button>
-                                <a href="{{ url('/questions?' . http_build_query($filters)) }}" class="btn btn-secondary">Back
+                                <a href="{{ url('/questions?' . http_build_query($filters)) }}"
+                                    class="btn btn-secondary">Back
                                     to list</a>
                             </form>
                         </div>
