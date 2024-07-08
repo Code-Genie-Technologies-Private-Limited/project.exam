@@ -18,8 +18,8 @@ class GeneralKnowledgeController extends Controller
     {
         $perPage = $request->input('per_page', 10);
 
-        $generalKnowledges = GeneralKnowledge::with('creator', 'course')
-            ->orderBy('order')
+        $generalKnowledges = GeneralKnowledge::with(['creator', 'course'])
+            ->orderBy('order', 'asc')
             ->filter($request->all())
             ->paginate($perPage)
             ->appends($request->query());
