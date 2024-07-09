@@ -11,7 +11,7 @@ class UpdateTestTypeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateTestTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|min:3|max160',
+            'course_id' => 'required|exists:courses,id',
+            'order' => 'decimal:2',
+            'status' => 'boolean',
+            'created_by' => 'required|exists:users,id',
         ];
     }
 }

@@ -15,6 +15,7 @@ use App\Http\Controllers\ConceptReadController;
 use App\Http\Controllers\GeneralKnowledgeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TestTypeController;
 
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {
@@ -153,6 +154,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('topics',        'TopicController');
         Route::resource('courses',        'CourseController');
         Route::resource('questions',        'QuestionController');
+        Route::resource('test-types',        'TestTypeController');
         Route::resource('sub-courses',        'SubCourseController');
         Route::resource('concept-reads',        'ConceptReadController');
         Route::resource('course-subjects',        'CourseSubjectController');
