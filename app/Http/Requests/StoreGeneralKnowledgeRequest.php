@@ -23,6 +23,7 @@ class StoreGeneralKnowledgeRequest extends FormRequest
     {
         return [
             'course_id' => 'required|exists:courses,id',
+            'description' => 'nullable',
         ];
     }
 }
