@@ -9,61 +9,48 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <i class="fa fa-align-left"></i><strong>Question List</strong>
+                                    <i class="fa fa-align-left"></i><strong>G & K  List</strong>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ route('questions.create') }}" class="btn btn-primary">Add Question</a>
+                                    <a href="{{ route('general-knowledges.create') }}" class="btn btn-primary">Add G & K</a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <form method="GET" action="{{ url()->current() }}">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="name">Question</label>
+                                    <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="name" type="text" name="name"
-                                            placeholder="Enter question name" length="160" autocomplete="question" autofocus
-                                            value="{{ ($filters['name'] ?? '') }}">
-                                        @error('name')
+                                        <select class="form-control" id="course_id" name="course_id">
+                                            @foreach ($courses as $course)
+                                                <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                                                    {{ $course->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('course_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="difficulty_level">Difficulty Level</label>
+                                    <label class="col-md-3 col-form-label" for="type">Type</label>
                                     <div class="col-md-9">
-                                    <select class="form-control" id="difficulty_level" name="difficulty">
-                                        <option value="">Please select</option>
-                                        <option value="easy" {{ ($filters['difficulty'] ?? '') == 'easy' ? 'selected' : '' }}>Easy</option>
-                                        <option value="medium" {{ ($filters['difficulty'] ?? '') == 'medium' ? 'selected' : '' }}>Medium</option>
-                                        <option value="hard" {{ ($filters['difficulty'] ?? '')  == 'hard' ? 'selected' : '' }}>Hard</option>
-                                    </select>
-                                    </div>
-                                 </div>
-                                <div class="form-group row">
-                                    <label for="topic" class="col-md-3 col-form-label">Topic</label>
-                                    <div class="col-md-9">
-                                        <select name="topic" id="topic" class="form-control">
-                                            <option value="">All</option>
-                                            @foreach ($topics as $topic)
-                                                <option value="{{ $topic->id }}"
-                                                    {{ ($filters['topic'] ?? '') == $topic->id ? 'selected' : '' }}>
-                                                    {{ $topic->name }}</option>
-                                            @endforeach
+                                        <select class="form-control" id="type" name="type">
+                                            <option value="static"
+                                                {{ ($filters['type'] ?? '') == 'static' ? 'selected' : '' }}>static</option>
+                                            <option value="current affairs"
+                                                {{ ($filters['type'] ?? '') == 'current affairs' ? 'selected' : '' }}>
+                                                current affairs</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="subject" class="col-md-3 col-form-label">Subject</label>
+                                    <label class="col-md-3 col-form-label" for="description">Description</label>
                                     <div class="col-md-9">
-                                        <select name="subject" id="subject" class="form-control">
-                                            <option value="">All</option>
-                                            @foreach ($subjects as $subject)
-                                                <option value="{{ $subject->id }}"
-                                                    {{ ($filters['subject'] ?? '') == $subject->id ? 'selected' : '' }}>
-                                                    {{ $subject->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -93,7 +80,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Filter</button>
-                                <a href="{{ route('questions.index') }}" class="btn btn-primary">Reset</a>
+                                <a href="{{ route('general-knowledges.index') }}" class="btn btn-primary">Reset</a>
                             </form>
                         </div>
                         <div class="card-body">
@@ -117,10 +104,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Question</th>
-                                        <th>Topic</th>
-                                        <th>Subject</th>
-                                        <th>Difficulty Level</th>
+                                        <th>G & K</th>
+                                        <th>Course</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
                                         <th>Order</th>
                                         <th>Created By</th>
                                         <th>View</th>
@@ -129,27 +116,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($questions as $question)
-                                        <tr class="{{ $question->status == 0 ? 'table-danger' : '' }}">
-                                            <td>{{ $loop->iteration + ($questions->currentPage() - 1) * $questions->perPage() }}
+                                    @foreach ($generalKnowledges as $generalKnowledge)
+                                        <tr class="{{ $generalKnowledge->status == 0 ? 'table-danger' : '' }}">
+                                            <td>{{ $loop->iteration + ($generalKnowledge->currentPage() - 1) * $generalKnowledge->perPage() }}
                                             </td>
-                                            <td>{{ $question->name }}<span
-                                                    class="badge badge-secondary">{{ $question->questions_count }}</span></td>
-                                            <td>{{ $question->topic->name }}</td>
-                                            <td>{{ $question->subject->name }}</td>
-                                            <td>{{ $question->difficulty_level }}</td>
-                                            <td>{{ $question->order }}</td>
-                                            <td>{{ $question->creator->name }}</td>
+                                            <td>{{ $generalKnowledge->name }}<span
+                                                    class="badge badge-secondary">{{ $generalKnowledge->generalKnowledge_count }}</span>
+                                            </td>
+                                            <td>{{ $generalKnowledge->course->name }}</td>
+                                            <td>{{ $generalKnowledge->type }}</td>
+                                            <td>{{ $generalKnowledge->description }}</td>
+                                            <td>{{ $generalKnowledge->order }}</td>
+                                            <td>{{ $generalKnowledge->creator->name }}</td>
                                             <td>
-                                                <a href="{{ url('/questions/' . $question->id) . '?' . http_build_query(request()->query()) }}"
+                                                <a href="{{ url('/general-knowledges/' . $generalKnowledge->id) . '?' . http_build_query(request()->query()) }}"
                                                     class="btn btn-primary">View</a>
                                             </td>
                                             <td>
-                                                <a href="{{ url('/questions/' . $question->id . '/edit') . '?' . http_build_query(request()->query()) }}"
+                                                <a href="{{ url('/general-knowledges/' . $generalKnowledge->id . '/edit') . '?' . http_build_query(request()->query()) }}"
                                                     class="btn btn-primary">Edit</a>
                                             </td>
                                             <td>
-                                                <form action="{{ route('questions.destroy', ['question' => $question->id]) }}"
+                                                <form
+                                                    action="{{ route('general-knowledges.destroy', ['general_knowledge' => $generalKnowledge->id]) }}"
                                                     method="POST">
                                                     @method('DELETE')
                                                     @csrf
@@ -158,14 +147,14 @@
                                                             value="{{ $value }}">
                                                     @endforeach
                                                     <button class="btn btn-danger"
-                                                        onclick="return confirm('Are you sure you want to delete this question?')">Delete</button>
+                                                        onclick="return confirm('Are you sure you want to delete this generalKnowledge?')">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $questions->appends($filters)->links() }}
+                            {{ $generalKnowledges->appends($filters)->links() }}
                         </div>
                     </div>
                 </div>
