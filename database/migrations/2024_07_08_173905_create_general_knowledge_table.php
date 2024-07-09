@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('type', ['static', 'current affairs'])->default('current affairs');
             $table->longText('description')->nullable();
             $table->decimal('order')->default(0.00);
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
         });

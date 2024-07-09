@@ -30,6 +30,7 @@
                                     <label class="col-md-3 col-form-label" for="type">Type</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="type" name="type">
+                                            <option value="">Please select</option>
                                             <option value="static">static</option>
                                             <option value="current affairs">current affairs</option>
                                         </select>

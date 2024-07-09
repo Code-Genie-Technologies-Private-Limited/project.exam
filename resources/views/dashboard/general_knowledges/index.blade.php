@@ -9,7 +9,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <i class="fa fa-align-left"></i><strong>G & K  List</strong>
+                                    <i class="fa fa-align-left"></i><strong>G & K List</strong>
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <a href="{{ route('general-knowledges.create') }}" class="btn btn-primary">Add G & K</a>
@@ -21,9 +21,9 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" id="course_id" name="course_id">
+                                        <select class="form-control" id="course_id" name="course">
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                                                <option value="{{ $course->id }}" {{ ($filters['course'] ?? '') == $course->id ? 'selected' : '' }}>
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>
@@ -36,21 +36,13 @@
                                     <label class="col-md-3 col-form-label" for="type">Type</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="type" name="type">
+                                            <option value="">Please select</option>
                                             <option value="static"
                                                 {{ ($filters['type'] ?? '') == 'static' ? 'selected' : '' }}>static</option>
                                             <option value="current affairs"
                                                 {{ ($filters['type'] ?? '') == 'current affairs' ? 'selected' : '' }}>
                                                 current affairs</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="description">Description</label>
-                                    <div class="col-md-9">
-                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
-                                        @error('description')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -118,7 +110,7 @@
                                 <tbody>
                                     @foreach ($generalKnowledges as $generalKnowledge)
                                         <tr class="{{ $generalKnowledge->status == 0 ? 'table-danger' : '' }}">
-                                            <td>{{ $loop->iteration + ($generalKnowledge->currentPage() - 1) * $generalKnowledge->perPage() }}
+                                            <td>{{ $loop->iteration + ($generalKnowledges->currentPage() - 1) * $generalKnowledges->perPage() }}
                                             </td>
                                             <td>{{ $generalKnowledge->name }}<span
                                                     class="badge badge-secondary">{{ $generalKnowledge->generalKnowledge_count }}</span>

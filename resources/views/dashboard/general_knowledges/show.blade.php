@@ -11,7 +11,7 @@
                         </div>
                         <div class="card-body">
                             <h4>G & K</h4>
-                            <p>{{ $question->name }}</p>
+                            <p>{{ $generalKnowledge->name }}</p>
                             <h4>Course</h4>
                             <p>{{ $generalKnowledge->course->name }}</p>
                             <h4>Type</h4>

@@ -32,6 +32,7 @@
                                     <label class="col-md-3 col-form-label" for="type">Type</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="type" name="type">
+                                            <option value="">Please select</option>
                                             <option value="static">static</option>
                                             <option value="current affairs">current affairs</option>
                                         </select>
@@ -51,7 +52,7 @@
                                     <div class="col-md-9">
                                         <input class="form-control" id="order" type="number" name="order"
                                             placeholder="Enter Priority Order" step="0.01"
-                                            value="{{ old('order', number_format($generalknowledge->order, 2)) }}">
+                                            value="{{ old('order', number_format($generalKnowledge->order, 2)) }}">
                                         @error('order')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -62,12 +63,12 @@
                                     <div class="col-md-9 col-form-label">
                                         <div class="form-check form-check-inline mr-1">
                                             <input class="form-check-input" id="active" type="radio" value="1"
-                                                name="status" @checked(old('status', $generalknowledge->status) == 1)>
+                                                name="status" @checked(old('status', $generalKnowledge->status) == 1)>
                                             <label class="form-check-label" for="active">Active</label>
                                         </div>
                                         <div class="form-check form-check-inline mr-1">
                                             <input class="form-check-input" id="in-active" type="radio" value="0"
-                                                name="status" @checked(old('status', $generalknowledge->status) == 0)>
+                                                name="status" @checked(old('status', $generalKnowledge->status) == 0)>
                                             <label class="form-check-label" for="in-active">In Active</label>
                                         </div>
                                         @error('status')
