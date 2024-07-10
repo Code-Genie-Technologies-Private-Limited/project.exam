@@ -22,10 +22,10 @@ class UpdateTestTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|max160',
+            'name' => 'required|min:3|max:160',
             'course_id' => 'required|exists:courses,id',
-            'order' => 'decimal:2',
-            'status' => 'boolean',
+            'order' => 'required|decimal:2',
+            'status' => 'required|boolean',
             'created_by' => 'required|exists:users,id',
         ];
     }

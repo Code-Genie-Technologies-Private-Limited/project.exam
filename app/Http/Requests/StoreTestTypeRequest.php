@@ -22,8 +22,9 @@ class StoreTestTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|max160',
+            'name' => 'required|min:3|max:160',
             'course_id' => 'required|exists:courses,id',
+            // 'created_by' => 'required|exists:users,id',
         ];
     }
 }

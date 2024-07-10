@@ -18,8 +18,8 @@ class TestTypeController extends Controller
     {
         $perPage = $request->input('per_page', 10);
 
-        $testTypes = TestType::filter($request->all())
-            ->with('creator', 'course')
+        $testTypes = TestType::with(['creator', 'course'])
+            ->filter($request->all())
             ->orderBy('order')
             ->paginate($perPage)
             ->appends($request->query());
@@ -34,7 +34,7 @@ class TestTypeController extends Controller
             'testTypes' => $testTypes,
             'courses' => $courses,
             'creators' => $creators,
-            'filters' => $request->query(),
+            'filters' => $request->all(),
         ]);
     }
 
@@ -47,7 +47,9 @@ class TestTypeController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('dashboard.test_types.create', compact('courses'));
+        $creators = User::all();
+
+        return view('dashboard.test_types.create', compact('courses', 'creators'));
     }
 
     /**
@@ -64,7 +66,7 @@ class TestTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(TestType $testType)
+    public function show(TestType $testType, Request $request)
     {
         $courses = Course::where('status', 1)
             ->orderBy('order')
@@ -73,21 +75,26 @@ class TestTypeController extends Controller
         return view('dashboard.test_types.show', [
             'testType' => $testType,
             'courses' => $courses,
+            'filters' => $request->query(),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TestType $testType)
+    public function edit(TestType $testType, Request $request)
     {
         $courses = Course::where('status', 1)
             ->orderBy('order')
             ->get();
 
+        $creators = User::all();
+
         return view('dashboard.test_types.edit', [
             'testType' => $testType,
             'courses' => $courses,
+            'creators' => $creators,
+            'filters' => $request->query(),
         ]);
     }
 
@@ -111,7 +118,7 @@ class TestTypeController extends Controller
 
         $testType->delete();
 
-        return redirect()->route('test-types.index', $filters->query())
+        return redirect()->route('test-types.index', $filters)
             ->with('message', 'Test type has been deleted.');
     }
 }
