@@ -23,7 +23,8 @@
                                     <div class="col-md-9">
                                         <input class="form-control @error('name') is-invalid @enderror" id="name"
                                             type="text" name="name" placeholder="Enter testtype..." length="160"
-                                            autocomplete="testtype" autofocus required value="{{ old('name') }}">
+                                            autocomplete="testtype" autofocus required
+                                            value="{{ $filters['name'] ?? '' }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -33,6 +34,7 @@
                                     <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="course_id" name="course">
+                                            <option value="">All</option>
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}"
                                                     {{ ($filters['course'] ?? '') == $course->id ? 'selected' : '' }}>
