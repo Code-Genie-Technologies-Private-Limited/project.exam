@@ -23,8 +23,7 @@
                                     <div class="col-md-9">
                                         <input class="form-control @error('name') is-invalid @enderror" id="name"
                                             type="text" name="name" placeholder="Enter testtype..." length="160"
-                                            autocomplete="testtype" autofocus required
-                                            value="{{ $filters['name'] ?? '' }}">
+                                            autocomplete="testtype" autofocus required value="{{ $filters['name'] ?? '' }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
