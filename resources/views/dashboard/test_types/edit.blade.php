@@ -32,7 +32,8 @@
                                         <select class="form-control" id="course_id" name="course_id">
                                             <option value="">All</option>
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" @if ((old('course_id') ?? $testType->course_id) == $course->id) selected @endif> {{ $course->name }}
+                                                <option value="{{ $course->id }}"
+                                                    @if ((old('course_id') ?? $testType->course_id) == $course->id) selected @endif> {{ $course->name }}
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>
