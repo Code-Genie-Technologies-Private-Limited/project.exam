@@ -16,8 +16,9 @@
                                     <label class="col-md-3 col-form-label" for="name">Concept & read</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('name') is-invalid @enderror" id="name"
-                                            type="text" name="name" placeholder="Enter conceptRead..." length="160"
-                                            autocomplete="conceptRead" autofocus required value="{{ old('name') }}">
+                                            type="text" name="content_type_name" placeholder="Enter conceptRead..."
+                                            length="160" autocomplete="conceptRead" autofocus required
+                                            value="{{ old('name') }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -46,7 +47,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                 <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="subject_id">Subject</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="subject_id" name="subject_id">

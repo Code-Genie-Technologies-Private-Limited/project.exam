@@ -22,10 +22,10 @@ class StoreConceptReadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'course_id' => 'required|exists:courses,id',
-            // 'subject_id' => 'required|exists:subjects,id',
+            'course_id' => 'required|exists:courses,id',
+            'subject_id' => 'required|exists:subjects,id',
             'content_type_name' => 'required|min:3|max:160',
-            'description' => 'required',
+            'description' => 'nullable',
         ];
     }
 }

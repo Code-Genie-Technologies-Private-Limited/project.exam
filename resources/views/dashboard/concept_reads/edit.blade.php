@@ -17,7 +17,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="name">ConceptRead</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="name" type="text" name="name"
+                                        <input class="form-control" id="name" type="text" name="content_type_name"
                                             placeholder="Enter conceptRead..." autocomplete="conceptRead" autofocus required
                                             value="{{ old('name') ?? $conceptRead->content_type_name }}">
                                         @error('name')
@@ -94,7 +94,8 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-success" type="submit">Update</button>
-                                <a href="{{ url('/concept-reads?' . http_build_query($filters)) }}" class="btn btn-secondary">Back
+                                <a href="{{ url('/concept-reads?' . http_build_query($filters)) }}"
+                                    class="btn btn-secondary">Back
                                     to list</a>
                             </form>
                         </div>
