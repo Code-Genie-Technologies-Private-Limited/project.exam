@@ -43,7 +43,11 @@ class PreviousYearPaperController extends Controller
      */
     public function create()
     {
-        return view('dashboard.previous_year_papers.create');
+        $courses = Course::where('status', 1)
+            ->orderBy('order')
+            ->get();
+
+        return view('dashboard.previous_year_papers.create', compact('courses'));
     }
 
     /**
@@ -124,7 +128,7 @@ class PreviousYearPaperController extends Controller
 
         $previousYearPaper->delete();
 
-        return redirect()->route('prevoius-year-papers.index', $filters)
+        return redirect()->route('previous-year-papers.index', $filters)
             ->with('message', 'Previous year paper has been deleted.');
     }
 }
