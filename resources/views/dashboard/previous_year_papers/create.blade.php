@@ -16,7 +16,7 @@
                                     <label class="col-md-3 col-form-label" for="name">Previous Year Paper</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('name') is-invalid @enderror" id="name"
-                                            type="text" name="name" placeholder="Enter Previous year paper..."
+                                            type="text" name="content_type_name" placeholder="Enter Previous year paper..."
                                             length="160" autocomplete="prevois year paper" autofocus required
                                             value="{{ old('name') }}">
                                         @error('name')

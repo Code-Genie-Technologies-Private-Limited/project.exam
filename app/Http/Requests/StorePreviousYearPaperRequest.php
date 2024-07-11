@@ -25,7 +25,6 @@ class StorePreviousYearPaperRequest extends FormRequest
             'course_id' => 'required|exists:courses,id',
             'content_type_name' => 'required|min:3|max:160',
             'description' => 'nullable',
-            'created_by' => 'required|exists:users,id',
         ];
     }
 }

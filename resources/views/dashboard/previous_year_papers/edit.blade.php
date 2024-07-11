@@ -18,9 +18,9 @@
                                     <label class="col-md-3 col-form-label" for="name">Previous Year Paper</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('name') is-invalid @enderror" id="name"
-                                            type="text" name="name" placeholder="Enter Previous year paper..."
+                                            type="text" name="content_type_name" placeholder="Enter Previous year paper..."
                                             length="160" autocomplete="prevois year paper" autofocus required
-                                            value="{{ old('name') }}">
+                                            value="{{ old('name') ?? $previousYearPaper->content_type_name }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -32,7 +32,7 @@
                                         <select class="form-control" id="course_id" name="course_id">
                                             <option value="">All</option>
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                                                <option value="{{ $course->id }}" @if ((old('course_id') ?? $previousYearPaper->course_id) == $course->id) selected @endif> {{ $course->name }}
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>
@@ -54,7 +54,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="description">Description</label>
                                     <div class="col-md-9">
-                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') ?? $previousYearPaper->description }}</textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

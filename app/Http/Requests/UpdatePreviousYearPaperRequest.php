@@ -27,7 +27,6 @@ class UpdatePreviousYearPaperRequest extends FormRequest
             'description' => 'nullable',
             'order' => 'numeric',
             'status' => 'boolean',
-            'created_by' => 'required|exists:users,id',
         ];
     }
 }

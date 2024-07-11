@@ -63,7 +63,7 @@ class PreviousYearPaperController extends Controller
 
         PreviousYearPaper::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
-        return redirect()->route('prevoius-year-papers.index', [
+        return redirect()->route('previous-year-papers.index', [
             'courses' => $courses,
             'creators' => $creators,
             'filters' => $request->query(),
@@ -115,7 +115,7 @@ class PreviousYearPaperController extends Controller
     {
         $previousYearPaper->update($request->validated());
 
-        return redirect()->route('prevoius-year-papers.index', $request->query())
+        return redirect()->route('previous-year-papers.index', $request->query())
             ->with('message', 'Prevoius year paper has been updated.');
     }
 

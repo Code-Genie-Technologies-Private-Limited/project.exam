@@ -24,7 +24,7 @@
                                     <div class="col-md-9">
                                         <input class="form-control @error('name') is-invalid @enderror" id="name"
                                             type="text" name="name" placeholder="Enter Previous year paper..."
-                                            length="160" autocomplete="prevois year paper" autofocus required
+                                            length="160" autocomplete="prevois year paper" autofocus
                                             value="{{ old('name') }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
@@ -113,6 +113,7 @@
                                         <th>#</th>
                                         <th>Prevoius Year Paper</th>
                                         <th>Course</th>
+                                        <th>Description</th>
                                         <th>Order</th>
                                         <th>Created By</th>
                                         <th>View</th>
@@ -129,6 +130,7 @@
                                                     class="badge badge-secondary">{{ $previousYearPaper->previousYearPaper_count }}</span>
                                             </td>
                                             <td>{{ $previousYearPaper->course->name }}</td>
+                                            <td>{{ $previousYearPaper->description }}</td>
                                             <td>{{ $previousYearPaper->order }}</td>
                                             <td>{{ $previousYearPaper->creator->name }}</td>
                                             <td>
