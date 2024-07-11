@@ -22,8 +22,10 @@
                                     <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="course_id" name="course">
+                                            <option value="">All</option>
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" {{ ($filters['course'] ?? '') == $course->id ? 'selected' : '' }}>
+                                                <option value="{{ $course->id }}"
+                                                    {{ ($filters['course'] ?? '') == $course->id ? 'selected' : '' }}>
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>

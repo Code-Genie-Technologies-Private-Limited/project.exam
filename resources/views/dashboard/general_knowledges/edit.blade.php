@@ -19,7 +19,7 @@
                                     <div class="col-md-9">
                                         <select class="form-control" id="course_id" name="course_id">
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                                                <option value="{{ $course->id }}" @if ((old('course_id') ?? $generalKnowledge->course_id) == $course->id) selected @endif>
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>
@@ -41,7 +41,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="description">Description</label>
                                     <div class="col-md-9">
-                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') ?? $generalKnowledge->description }}</textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

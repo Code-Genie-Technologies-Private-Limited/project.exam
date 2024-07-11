@@ -16,6 +16,7 @@
                                     <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="course_id" name="course_id">
+                                            <option value="">All</option>
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
                                                     {{ $course->name }}</option>
