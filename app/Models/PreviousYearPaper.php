@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\ModelFilters\TestTypeFilter;
+use App\ModelFilters\PreviousYearPaperFilter;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestType extends Model
+class PreviousYearPaper extends Model
 {
     use HasFactory, Filterable;
 
@@ -18,10 +18,10 @@ class TestType extends Model
     {
         parent::boot();
 
-        static::creating(function ($testType) {
+        static::creating(function ($previousYearPaper) {
             // Set 'order' to the next available number
-            $maxOrder = TestType::max('order');
-            $testType->order = $maxOrder ? $maxOrder + 1 : 1;
+            $maxOrder = PreviousYearPaper::max('order');
+            $previousYearPaper->order = $maxOrder ? $maxOrder + 1 : 1;
         });
     }
 
@@ -37,6 +37,6 @@ class TestType extends Model
 
     public function modelFilter()
     {
-        return $this->provideFilter(TestTypeFilter::class);
+        return $this->provideFilter(PreviousYearPaperFilter::class);
     }
 }

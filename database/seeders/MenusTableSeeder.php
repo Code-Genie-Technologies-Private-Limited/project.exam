@@ -154,6 +154,7 @@ class MenusTableSeeder extends Seeder
         $this->insertLink('admin', 'Topic', '/topics');
         $this->insertLink('admin', 'Question', '/questions');
         $this->insertLink('admin', 'Course', '/courses');
+        $this->insertLink('admin', 'Prevoius Year Paper', '/previous-year-papers');
         $this->insertLink('admin', 'TestType', '/test-types');
         $this->insertLink('admin', 'General & Knowledge', '/general-knowledges');
         $this->insertLink('admin', 'Sub Course', '/sub-courses');

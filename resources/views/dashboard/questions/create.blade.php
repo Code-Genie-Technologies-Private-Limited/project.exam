@@ -24,15 +24,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                          <label class="col-md-3 col-form-label" for="difficulty_level">Difficulty Level</label>
-                          <div class="col-md-9">
-                            <select class="form-control" id="difficulty_level" name="difficulty_level">
-                              <option value="Easy">Easy</option>
-                              <option value="Medium">Medium</option>
-                              <option value="Hard">Hard</option>
-                            </select>
-                          </div>
-                        </div>
+                                    <label class="col-md-3 col-form-label" for="difficulty_level">Difficulty Level</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" id="difficulty_level" name="difficulty_level">
+                                            <option value="Easy">Easy</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Hard">Hard</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="subject_id">Subject</label>
                                     <div class="col-md-9">

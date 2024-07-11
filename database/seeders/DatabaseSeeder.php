@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             ConceptReadSeeder::class,
             GeneralKnowledgeSeeder::class,
             TestTypeSeeder::class,
+            PreviousYearPaperSeeder::class,
         ]);
     }
 }
