@@ -26,7 +26,6 @@ class UpdateTestTypeRequest extends FormRequest
             'course_id' => 'required|exists:courses,id',
             'order' => 'required|decimal:2',
             'status' => 'required|boolean',
-            'created_by' => 'required|exists:users,id',
         ];
     }
 }

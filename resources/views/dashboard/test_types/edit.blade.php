@@ -15,7 +15,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="name">Testtype</label>
+                                    <label class="col-md-3 col-form-label" for="name">Test Type</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('name') is-invalid @enderror" id="name"
                                             type="text" name="name" placeholder="Enter Test Type..." length="160"
@@ -32,7 +32,7 @@
                                         <select class="form-control" id="course_id" name="course_id">
                                             <option value="">All</option>
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                                                <option value="{{ $course->id }}" @if ((old('course_id') ?? $testType->course_id) == $course->id) selected @endif> {{ $course->name }}
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>

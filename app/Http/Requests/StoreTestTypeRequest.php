@@ -24,7 +24,6 @@ class StoreTestTypeRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:160',
             'course_id' => 'required|exists:courses,id',
-            // 'created_by' => 'required|exists:users,id',
         ];
     }
 }
