@@ -19,7 +19,8 @@
                                     <div class="col-md-9">
                                         <select class="form-control" id="course_id" name="course_id">
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" @if ((old('course_id') ?? $generalKnowledge->course_id) == $course->id) selected @endif>
+                                                <option value="{{ $course->id }}"
+                                                    @if ((old('course_id') ?? $generalKnowledge->course_id) == $course->id) selected @endif>
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>
