@@ -45,7 +45,7 @@
                                 <div class="form-group row">
                                     <label for="status" class="col-md-3 col-form-label">Status</label>
                                     <div class="col-md-9">
-                                        <select name="status" id="status" class="form-control">
+                                         <select name="status" id="status" class="form-control">
                                             <option value="">All</option>
                                             <option value="1"
                                                 {{ ($filters['status'] ?? '') === '1' ? 'selected' : '' }}>Active</option>
@@ -95,7 +95,7 @@
                                             <td>{{ $loop->iteration + ($blogs->currentPage() - 1) * $blogs->perPage() }}
                                             </td>
                                             <td>{{ $blog->title }} </td>
-                                            <td class="content">{!! $blog->content !!}</td>
+                                            <td class="description">{!! $blog->content !!}</td>
                                             <td class="description">{!! $blog->description !!}</td>
                                             <td>{{ $blog->order }}</td>
                                             <td>{{ $blog->creator->name }}</td>

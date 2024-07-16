@@ -15,19 +15,22 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
+        
         $perPage = $request->input('per_page', 10);
 
-        $blogs = Blog::with('creator')
+        $blogs = Blog::filter($request->all())
+           ->with('creator')
             ->orderBy('order', 'desc')
             ->paginate($perPage)
             ->appends($request->query());
 
         $creators = User::all();
-
+        
         return view('dashboard.blogs.index', [
             'blogs' => $blogs,
             'creators' => $creators,
             'filters' => $request->all(),
+            
         ]);
     }
 
