@@ -134,8 +134,8 @@
                                             </td>
                                             <td>{{ $blog->title }}<span
                                                     class="badge badge-secondary">{{ $blog->blogs_count }}</span></td>
-                                            <td>{{ $blog->content }}</td>
-                                            <td>{{ $blog->description }}</td>
+                                            <td class="description">{!! $blog->content !!}</td>
+                                            <td class="description">{!! $blog->description !!} </td>
                                             <td>{{ $blog->order }}</td>
                                             <td>{{ $blog->creator->name }}</td>
                                             <td>

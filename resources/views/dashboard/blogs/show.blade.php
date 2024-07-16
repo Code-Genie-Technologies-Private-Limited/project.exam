@@ -13,9 +13,9 @@
                             <h4>Blog Title</h4>
                             <p>{{ $blog->title }}</p>
                             <h4>Content</h4>
-                            <p>{{ $blog->content }}</p>
+                            <p>{!! $blog->content !!}</p>
                             <h4>Description</h4>
-                            <p>{{ $blog->description }}</p>
+                            <p>{!! $blog->description !!}</p>
                             <h4>Order</h4>
                             <p>{{ $blog->order }}</p>
                             <h4>Status</h4>
