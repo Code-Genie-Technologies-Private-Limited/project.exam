@@ -13,8 +13,10 @@
                     <div class="card-body">
                         <h4>Name</h4>
                         <p>{{ $blog->title }}</p>
+                        <h4>Content</h4>
+                        <p class="description">{!! $blog->content !!}</p>
                         <h4>Description</h4>
-                        <p>{{ $blog->description }}</p>
+                        <p class="description">{!! $blog->description !!}</p>
                         <h4>Order</h4>
                         <p>{{ $blog->order }}</p>
                         <h4>Status</h4>
