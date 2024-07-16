@@ -19,7 +19,7 @@ class BlogController extends Controller
 
         $blogs = Blog::with('creator')
             ->filter($request->all())
-            ->orderBy('order', 'asc')
+            ->orderBy('order', 'desc')
             ->paginate($perPage)
             ->appends($request->query());
 

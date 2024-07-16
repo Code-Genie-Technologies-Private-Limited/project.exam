@@ -23,7 +23,7 @@
                                     <div class="col-md-9">
                                         <input class="form-control" id="name" type="text" name="name"
                                             placeholder="Enter blog name" length="160" autocomplete="blog" autofocus
-                                            value="{{ ($filters['name'] ?? '') }}">
+                                            value="{{ $filters['name'] ?? '' }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

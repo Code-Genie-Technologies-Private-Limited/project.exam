@@ -17,8 +17,8 @@
                                     <label class="col-md-3 col-form-label" for="title">Blog</label>
                                     <div class="col-md-9">
                                         <input class="form-control" id="title" type="text" name="title"
-                                            placeholder="Enter blog..." autocomplete="blog" autofocus required
-                                            value="{{ old('title') ?? $blog->title }}">
+                                            length="160" placeholder="Enter blog..." autocomplete="blog" autofocus
+                                            required value="{{ old('title') ?? $blog->title }}">
                                         @error('title')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
