@@ -89,7 +89,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
+                                    <th>Title</th>
+                                    <th>Content</th>
                                     <th>Description</th>
                                     <th>Order</th>
                                     <th>Created By</th>
@@ -102,11 +103,12 @@
                                 @foreach($blogs as $blog)
                                 <tr class="{{ $blog->status == 0 ? 'table-danger' : '' }}">
                                     <td>{{ $loop->iteration + ($blogs->currentPage() - 1) * $blogs->perPage() }}</td>
-                                    <td>{{ $blog->name }}
+                                    <td>{{ $blog->title }}
                                         <a href="{{ route('topics.index', ['blog' => $blog->id]) }}">
                                             <span class="badge badge-secondary">{{ $blog->topics_count }}</span>
                                         </a>
                                     </td>
+                                    <td>{{ $blog->content }}</td>
                                     <td>{{ $blog->description }}</td>
                                     <td>{{ $blog->order }}</td>
                                     <td>{{ $blog->creator->name }}</td>

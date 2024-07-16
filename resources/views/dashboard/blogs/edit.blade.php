@@ -15,10 +15,19 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="name">Blog Name</label>
+                                <label class="col-md-3 col-form-label" for="title">Blog Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="title" placeholder="Enter Blog Name" autocomplete="blog" autofocus required value="{{ old('name') ?? $blog->name }}">
-                                    @error('name')
+                                    <input class="form-control" id="title" type="text" name="title" placeholder="Enter Blog Name" autocomplete="blog" autofocus required value="{{ old('title') ?? $blog->title }}">
+                                    @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="content">Content</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="content" type="text" name="content" placeholder="Enter content Name" autocomplete="blog" autofocus required value="{{ old('content') ?? $blog->content }}">
+                                    @error('content')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -58,7 +67,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-success" type="submit">Update</button>
-                            <a href="{{ url('/subjects?' . http_build_query($filters)) }}" class="btn btn-secondary">Back to list</a>
+                            <a href="{{ url('/blogs?' . http_build_query($filters)) }}" class="btn btn-secondary">Back to list</a>
                         </form>
                     </div>
                 </div>

@@ -25,7 +25,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="content">Contant</label>
                                 <div class="col-md-9">
-                                    <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content">{{ old('content') }}</textarea>
+                                    <textarea class="form-control @error('content') is-invalid @enderror" id="content" type="text" name="content" placeholder="Enter Blog Name" length="160" autocomplete="blog" autofocus required value="{{ old('content') }}"></textarea>
                                     @error('content')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

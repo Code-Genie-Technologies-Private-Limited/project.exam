@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title', 160);
-            $table->text('content');
+            $table->longText('content');
             $table->longText('description');
             $table->boolean('status')->default(1);
             $table->decimal('order', 10, 2);

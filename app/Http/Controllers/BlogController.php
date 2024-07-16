@@ -21,7 +21,7 @@ class BlogController extends Controller
 
         $blogs = Blog::filter($request->all())
             ->with('creator')
-            ->orderBy('order')
+            ->orderBy('order','desc')
             ->paginate($perPage)
             ->appends($request->query());
 
@@ -37,7 +37,7 @@ class BlogController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create():View
     {
         return view('dashboard.blogs.create');
     }
@@ -49,7 +49,7 @@ class BlogController extends Controller
     {
         Blog::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
-        return redirect('blogs.index', $request->query())
+        return redirect()->route('blogs.index', $request->query())
             ->with('message', 'Blog is created successfully');
     }
 
@@ -80,7 +80,7 @@ class BlogController extends Controller
      */
     public function update(UpdateBlogRequest $request, Blog $blog): RedirectResponse
     {
-        $blog->update($request->valideted());
+        $blog->update($request->validated());
 
         return redirect()->route('blogs.index', $request->query())
             ->with('message', 'Blog is updated successfully!!!');

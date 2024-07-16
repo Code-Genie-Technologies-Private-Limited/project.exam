@@ -22,9 +22,9 @@ class StoreBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:160',
-            'content' => 'required|string',
-            'description' => 'required|string',
+            'title' => 'required|min:3|max:160',
+            'content' => 'required',
+            'description' => 'required',
         ];
     }
 }
