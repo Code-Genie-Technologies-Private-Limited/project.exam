@@ -17,7 +17,7 @@
                                 <label class="col-md-3 col-form-label" for="name">blog Name</label>
                                 <div class="col-md-9">
                                     <input class="form-control" id="name" type="text" name="title" placeholder="Enter Title Name" autocomplete="blog" autofocus required value="{{ old('name') ?? $blog->title }}">
-                                    @error('name')
+                                    @error('title')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -26,7 +26,7 @@
                                 <label class="col-md-3 col-form-label" for="name">Content</label>
                                 <div class="col-md-9">
                                     <input class="form-control" id="name" type="text" name="content" placeholder="Enter Content Name" autocomplete="blog" autofocus required value="{{ old('name') ?? $blog->content }}">
-                                    @error('name')
+                                    @error('content')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

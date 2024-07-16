@@ -99,7 +99,7 @@
                                     <td>{{ $blog->order }}</td>
                                     <td>{{ $blog->creator->name }}</td>
                                     <td>
-                                        <p>{{ $blog->status == 1 ? 'Active' : 'In Active' }}</p>
+ <p>{{ $blog->status == 1 ? 'Active' : 'In Active' }}</p>
                                     </td>
                                     <td>
                                         <a href="{{ url('/blogs/' . $blog->id) . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">View</a>

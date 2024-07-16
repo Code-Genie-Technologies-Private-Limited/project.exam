@@ -23,7 +23,7 @@ class UpdateBlogRequest extends FormRequest
     {
         return [
             'title' => 'required|min:1|max:160',
-            'content' => 'required|min:1|max:160',
+            'content' => 'nullable',
             'description' => 'nullable',
             'order' => 'decimal:2',
             'status' => 'boolean',
