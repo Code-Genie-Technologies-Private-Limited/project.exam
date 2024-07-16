@@ -34,7 +34,7 @@
                                     <select name="user" id="user" class="form-control">
                                         <option value="">All</option>
                                         @foreach($creators as $creator)
-                                        <option value="{{ $creator->id }}" {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
+                                        <option value="{{ $creator->id }}" {{ ($filters['user'] ?? '') == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
