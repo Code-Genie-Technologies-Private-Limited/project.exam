@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->string('content', 160);
-            $table->text('description', 255)->nullable();
+            $table->longText('description', 255)->nullable();
             $table->decimal('order', 10, 2);
             $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
