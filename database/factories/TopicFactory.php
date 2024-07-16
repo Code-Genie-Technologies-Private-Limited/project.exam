@@ -16,8 +16,9 @@ class TopicFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence,
             'subject_id' => Subject::query()->where('status', 1)->inRandomOrder()->value('id'),
+            'name' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
             'order' => $this->faker->randomFloat(2, 1, 100),
             'status' => $this->faker->boolean,
             'created_by' => User::query()->inRandomOrder()->value('id'),
