@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             GeneralKnowledgeSeeder::class,
             TestTypeSeeder::class,
             PreviousYearPaperSeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }
