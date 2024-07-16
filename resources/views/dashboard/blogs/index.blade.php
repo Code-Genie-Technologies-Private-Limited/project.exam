@@ -20,10 +20,10 @@
                     <div class="card-body">
                         <form method="GET" action="{{ url()->current() }}">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="name">Blog Name</label>
+                                <label class="col-md-3 col-form-label" for="title">Blog Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="title" placeholder="Enter blog name" length="160" autocomplete="blog" autofocus value="{{ $filters['name'] ?? '' }}">
-                                    @error('name')
+                                    <input class="form-control" id="title" type="text" name="title" placeholder="Enter blog title" length="160" autocomplete="blog" autofocus value="{{ $filters['title'] ?? '' }}">
+                                    @error('title')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -34,7 +34,7 @@
                                     <select name="user" id="user" class="form-control">
                                         <option value="">All</option>
                                         @foreach($creators as $creator)
-                                        <option value="{{ $creator->id }}" {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
+                                        <option value="{{ $creator->id }}" {{ ($filters['user'] ?? '') == $creator->id ? 'selected' : '' }}>{{ $creator->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -44,8 +44,8 @@
                                 <div class="col-md-9">
                                     <select name="status" id="status" class="form-control">
                                         <option value="">All</option>
-                                        <option value="1" {{ ($filters['status'] ?? '') === '1' ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ ($filters['status'] ?? '') === '0' ? 'selected' : '' }}>Inactive</option>
+                                        <option value="1" {{ ($filters['status'] ?? '') == '1' ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ ($filters['status'] ?? '') == '0' ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,8 +108,8 @@
                                             <span class="badge badge-secondary">{{ $blog->topics_count }}</span>
                                         </a>
                                     </td>
-                                    <td>{{ $blog->content }}</td>
-                                    <td>{{ $blog->description }}</td>
+                                    <td class="description">{!! $blog->content !!}</td>
+                                    <td class="description">{!! $blog->description !!}</td>
                                     <td>{{ $blog->order }}</td>
                                     <td>{{ $blog->creator->name }}</td>
                                     <td>

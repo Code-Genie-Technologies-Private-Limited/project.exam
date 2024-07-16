@@ -27,7 +27,6 @@ class UpdateBlogRequest extends FormRequest
             'description' => 'required',
             'status' => 'required|boolean',
             'order' => 'required|numeric',
-            'created_by' => 'required|exists:users,id',
         ];
     }
 }
