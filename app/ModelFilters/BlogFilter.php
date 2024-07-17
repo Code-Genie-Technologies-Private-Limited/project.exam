@@ -14,30 +14,13 @@ class BlogFilter extends ModelFilter
      */
     public $relations = [];
 
-    public function scopeFilter($blog, array $filters)
+    public function keyword(string $keyword)
     {
-        foreach ($filters as $key => $value) {
-            if (method_exists($this, $key)) {
-                $blog->{$key}($value);
-            }
-        }
-
-        return $blog;
-    }
-
-    public function title(string $title)
-    {
-        return $this->whereLike('title', $title);
-    }
-
-    public function content(string $content)
-    {
-        return $this->whereLike('content', $content);
-    }
-
-    public function description(string $description)
-    {
-        return $this->whereLike('description', $description);
+        return $this->where(function ($query) use ($keyword) {
+            $query->where('title', 'like', "%$keyword%")
+            ->orWhere('description', 'like', "%$keyword%")
+            ->orWhere('content', 'like', "%$keyword%");
+        });
     }
 
     public function user($user)

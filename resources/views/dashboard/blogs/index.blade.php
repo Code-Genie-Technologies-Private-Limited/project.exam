@@ -19,30 +19,22 @@
                     <div class="card-body">
                         <form method="GET" action="{{ url()->current() }}">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="keyword">Keyward search </label>
+                                <label class="col-md-3 col-form-label" for="keyword">Keyword search </label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="keyword" placeholder="Enter keyword name" length="160" autocomplete="keyword" autofocus value="{{ $filters['keyword'] ?? '' }}">
+                                    <input class="form-control" id="name" type="text" name="keyword" placeholder="Enter keyword... " length="160" autocomplete="keyword" autofocus value="{{ $filters['keyword'] ?? '' }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="name">Title </label>
-                                <div class="col-md-9">
-                                    <input class="form-control" id="name" type="text" name="title" placeholder="Enter title name" length="160" autocomplete="title" autofocus value="{{ $filters['title'] ?? '' }}">
-                                    @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+                           
                             <div class="form-group row">
                                 <label for="user" class="col-md-3 col-form-label">Creator</label>
                                 <div class="col-md-9">
                                     <select name="user" id="user" class="form-control">
                                         <option value="">All</option>
                                         @foreach ($creators as $creator)
-                                        <option value="{{ $creator->id }}" {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>
+                                        <option value="{{ $creator->id }}" {{ ($filters['user'] ?? '') == $creator->id ? 'selected' : '' }}>
                                             {{ $creator->name }}
                                         </option>
                                         @endforeach
@@ -54,8 +46,8 @@
                                 <div class="col-md-9">
                                     <select name="status" id="status" class="form-control">
                                         <option value="">All</option>
-                                        <option value="1" {{ ($filters['status'] ?? '') === '1' ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ ($filters['status'] ?? '') === '0' ? 'selected' : '' }}>Inactive</option>
+                                        <option value="1" {{ ($filters['status'] ?? '') == 1 ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ ($filters['status'] ?? '') == 0 ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                 </div>
                             </div>

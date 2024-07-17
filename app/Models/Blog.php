@@ -32,24 +32,4 @@ class Blog extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
-
-
-    public function scopeFilter($blog, array $filters)
-    {
-        if (isset($filters['keyword']) && $filters['keyword']) {
-            $blog->keyword($filters['keyword']);
-        }
-
-        // Add other filters here if needed
-    }
-
-    public function scopeKeyword($blog, string $keyword)
-    {
-        return $blog->where(function ($blog) use ($keyword) {
-            $blog->where('title', 'like', "%$keyword%")
-            ->orWhere('description', 'like', "%$keyword%")
-            ->orWhere('content', 'like', "%$keyword%");
-        });
-    }
-
 }
