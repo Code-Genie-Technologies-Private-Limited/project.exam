@@ -47,10 +47,10 @@
                                     <div class="col-md-9">
                                         <select name="status" id="status" class="form-control">
                                             <option value="">All</option>
-                                            <option value="1"
-                                                {{ ($filters['status'] ?? '') === '1' ? 'selected' : '' }}>Active</option>
-                                            <option value="0"
-                                                {{ ($filters['status'] ?? '') === '0' ? 'selected' : '' }}>Inactive</option>
+                                            <option value=1
+                                                {{ ($filters['status'] ?? '') == 1 ? 'selected' : '' }}>Active</option>
+                                            <option value=0
+                                                {{ ($filters['status'] ?? '') == 0 ? 'selected' : '' }}>Inactive</option>
                                         </select>
                                     </div>
                                 </div>
