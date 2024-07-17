@@ -14,6 +14,17 @@ class BlogFilter extends ModelFilter
      */
     public $relations = [];
 
+    public function scopeFilter($blog, array $filters)
+    {
+        foreach ($filters as $key => $value) {
+            if (method_exists($this, $key)) {
+                $blog->{$key}($value);
+            }
+        }
+
+        return $blog;
+    }
+
     public function title(string $title)
     {
         return $this->whereLike('title', $title);

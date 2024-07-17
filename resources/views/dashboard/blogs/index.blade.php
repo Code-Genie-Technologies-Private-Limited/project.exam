@@ -19,6 +19,15 @@
                     <div class="card-body">
                         <form method="GET" action="{{ url()->current() }}">
                             <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="keyword">Keyward search </label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="name" type="text" name="keyword" placeholder="Enter keyword name" length="160" autocomplete="keyword" autofocus value="{{ $filters['keyword'] ?? '' }}">
+                                    @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="name">Title </label>
                                 <div class="col-md-9">
                                     <input class="form-control" id="name" type="text" name="title" placeholder="Enter title name" length="160" autocomplete="title" autofocus value="{{ $filters['title'] ?? '' }}">
@@ -78,6 +87,7 @@
                                     <th>Title</th>
                                     <th>Content</th>
                                     <th>Description</th>
+                                    <th>Order</th>
                                     <th>Created By</th>
                                     <th>Status</th>
                                     <th>View</th>
@@ -95,11 +105,12 @@
                                             <span class="badge badge-secondary">{{ $blog->topics_count }}</span>
                                         </a>
                                     </td>
+                                    <td >{{ $blog->content }}</td>
                                     <td class="description">{!! $blog->description !!}</td>
                                     <td>{{ $blog->order }}</td>
                                     <td>{{ $blog->creator->name }}</td>
                                     <td>
- <p>{{ $blog->status == 1 ? 'Active' : 'In Active' }}</p>
+                                        <p>{{ $blog->status == 1 ? 'Active' : 'In Active' }}</p>
                                     </td>
                                     <td>
                                         <a href="{{ url('/blogs/' . $blog->id) . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">View</a>
