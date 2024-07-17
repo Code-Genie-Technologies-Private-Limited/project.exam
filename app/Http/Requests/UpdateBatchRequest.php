@@ -23,7 +23,7 @@ class UpdateBatchRequest extends FormRequest
     {
         return [
             'course_id' => 'required|exists:courses,id',
-            'subcourse_id' => 'required|exist:sub_courses,id',
+            'subCourse_id' => 'required|exist:sub_courses,id',
             'name' => 'required|min:3|max:160',
             'code' => 'required|min:3|max:160',
             'order' => 'decimal:2',

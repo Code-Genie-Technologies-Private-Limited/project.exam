@@ -142,7 +142,7 @@
                                             </td>
                                             <td>{{ $batch->code }}</td>
                                             <td>{{ $batch->course->name }}</td>
-                                            <td>{{ $batch->subCourse }}</td>
+                                            <td>{{ $batch->subCourse->name }}</td>
                                             <td>{{ $batch->order }}</td>
                                             <td>{{ $batch->creator->name }}</td>
                                             {{-- <td>
