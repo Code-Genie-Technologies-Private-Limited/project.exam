@@ -30,7 +30,7 @@ class SubCourse extends Model
         return $this->provideFilter(SubCourseFilter::class);
     }
 
-    public function creator():BolongTo
+    public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
