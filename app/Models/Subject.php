@@ -30,7 +30,7 @@ class Subject extends Model
         return $this->provideFilter(SubjectFilter::class);
     }
 
-    public function topics(): HasMany
+    public function topics()
     {
         return $this->hasMany(Topic::class);
     }
