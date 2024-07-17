@@ -19,12 +19,12 @@
                         <div class="card-body">
                             <form method="GET" action="{{ url()->current() }}">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="name">Batch Name</label>
+                                    <label class="col-md-3 col-form-label" for="title">Batch Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="name" type="text" name="name"
-                                            placeholder="Enter batch name" length="160" autocomplete="batch" autofocus
-                                            value="{{ $filters['name'] ?? '' }}">
-                                        @error('name')
+                                        <input class="form-control" id="title" type="text" name="title"
+                                            placeholder="Enter batch title" length="160" autocomplete="batch" autofocus
+                                            value="{{ $filters['title'] ?? '' }}">
+                                        @error('title')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -33,7 +33,7 @@
                                     <label class="col-md-3 col-form-label" for="code">Batch Code</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('code') is-invalid @enderror" id="code"
-                                            type="text" name="code" placeholder="Enter Batch Code" length="160"
+                                            type="text" name="code" placeholder="Enter Batch Name" length="160"
                                             autocomplete="batch" autofocus required value="{{ old('code') }}">
                                         @error('code')
                                             <span class="text-danger">{{ $message }}</span>
@@ -55,15 +55,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="subCourse_id">SubCourse</label>
+                                    <label class="col-md-3 col-form-label" for="subcourse_id">SubCourse</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" id="subCourse_id" name="subCourse">
+                                        <select class="form-control" id="subcourse_id" name="subCourse">
                                             @foreach ($subCourses as $subCourse)
-                                                <option value="{{ $subCourse->id }}" @selected(old('course_id') == $subCourse->id)>
+                                                <option value="{{ $subCourse->id }}" @selected(old('subcourse_id') == $subCourse->id)>
                                                     {{ $subCourse->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('course_id')
+                                        @error('subcourse_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -120,11 +120,12 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Batch Name</th>
-                                        <th>Batch Code</th>
+                                        <th>Batch code</th>
                                         <th>Course</th>
                                         <th>SubCourse</th>
                                         <th>Order</th>
                                         <th>Created By</th>
+                                        <th>Download</th>
                                         <th>View</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -135,7 +136,7 @@
                                         <tr class="{{ $batch->status == 0 ? 'table-danger' : '' }}">
                                             <td>{{ $loop->iteration + ($batches->currentPage() - 1) * $batches->perPage() }}
                                             </td>
-                                            <td>{{ $batch->name }}
+                                            <td>{{ $batch->title }}
                                                 <a href="{{ route('topics.index', ['batch' => $batch->id]) }}">
                                                     <span class="badge badge-secondary">{{ $batch->topics_count }}</span>
                                                 </a>
@@ -143,6 +144,7 @@
                                             <td>{{ $batch->code }}</td>
                                             <td>{{ $batch->course->name }}</td>
                                             <td>{{ $batch->subCourse->name }}</td>
+                                            <td class="description">{!! $batch->description !!}</td>
                                             <td>{{ $batch->order }}</td>
                                             <td>{{ $batch->creator->name }}</td>
                                             {{-- <td>
