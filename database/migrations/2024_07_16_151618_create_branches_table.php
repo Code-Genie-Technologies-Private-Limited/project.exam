@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('branch_code');
             $table->string('branch_name');
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->decimal('order', 10, 2);
             $table->boolean('status')->default(1);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();

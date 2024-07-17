@@ -24,6 +24,7 @@ class StoreBranchRequest extends FormRequest
         return [
             'branch_code' => 'required|min:3|max:160',
             'branch_name' => 'required|min:3|max:160',
+            'start_date' => 'required|date',
         ];
     }
 }

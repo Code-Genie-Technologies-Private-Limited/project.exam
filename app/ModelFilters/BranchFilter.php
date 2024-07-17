@@ -14,9 +14,18 @@ class BranchFilter extends ModelFilter
      */
     public $relations = [];
 
-    public function name(string $name)
+    public function branchname(string $branchname)
     {
-        return $this->whereLike('branch_name', $name);
+        return $this->whereLike('branch_name', $branchname);
+    }
+
+    public function branchcode(string $name)
+    {
+        return $this->whereLike('branch_code', $name);
+    }
+    public function startdate(string $startdate)
+    {
+        return $this->whereLike('start_date', $startdate);
     }
 
     public function user(int $creator)

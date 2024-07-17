@@ -19,7 +19,7 @@ class BranchController extends Controller
 
         $branches = Branch::with('creator')
             ->filter($request->all())
-            ->orderBy('order', 'asc')
+            ->orderBy('order', 'desc')
             ->paginate($perPage)
             ->appends($request->query());
 
@@ -37,7 +37,7 @@ class BranchController extends Controller
      */
     public function create()
     {
-        return view('dashboard.branches.crfeate');
+        return view('dashboard.branches.create');
     }
 
     /**
@@ -54,17 +54,29 @@ class BranchController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Branch $branch)
+    public function show(Branch $branch, Request $request)
     {
-        //
+        $creators = User::all();
+
+        return view('dashboard.branches.show', [
+            'branch' => $branch,
+            'creators' => $creators,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Branch $branch)
+    public function edit(Branch $branch, Request $request)
     {
-        //
+        $creators = User::all();
+
+        return view('dashboard.branches.edit', [
+            'branch' => $branch,
+            'creators' => $creators,
+            'filters' => $request->query(),
+        ]);
     }
 
     /**
@@ -72,14 +84,22 @@ class BranchController extends Controller
      */
     public function update(UpdateBranchRequest $request, Branch $branch)
     {
-        //
+        $branch->update($request->validated());
+
+        return redirect()->route('branches.index', $request->query())
+            ->with('message', 'Branch has been updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Branch $branch)
+    public function destroy(Branch $branch, Request $request)
     {
-        //
+        $filters = $request->input('_token', '_method');
+
+        $branch->delete();
+
+        return redirect()->route('branches.index', $filters)
+            ->with('message', 'Branch has been deleted successfully.');
     }
 }
