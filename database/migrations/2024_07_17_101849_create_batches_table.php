@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained('courses')->restrictOnDelete();
-            $table->foreignId('subCourse_id')->constrained('sub_courses')->restrictOnDelete();
+            $table->foreignId('sub_course_id')->constrained('sub_courses')->restrictOnDelete();
             $table->string('name', 160);
             $table->string('code');
             $table->decimal('order', 10, 2);

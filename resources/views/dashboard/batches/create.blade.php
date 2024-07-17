@@ -49,28 +49,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="subcourse_id">SubCourse</label>
+                                    <label class="col-md-3 col-form-label" for="sub_course_id">SubCourse</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" id="subcourse_id" name="subCourse">
+                                        <select class="form-control" id="sub_course_id" name="sub_course_id">
                                             @foreach ($subCourses as $subCourse)
-                                                <option value="{{ $subCourse->id }}" @selected(old('subcourse_id') == $subCourse->id)>
+                                                <option value="{{ $subCourse->id }}" @selected(old('sub_course_id') == $subCourse->id)>
                                                     {{ $subCourse->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('subcourse_id')
+                                        @error('sub_course_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="description">Description</label>
-                                    <div class="col-md-9">
-                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
-                                        @error('description')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
                                 <button class="btn btn-success" type="submit">Add</button>
                                 <a href="{{ route('batches.index') }}" class="btn btn-primary">Return</a>
                             </form>

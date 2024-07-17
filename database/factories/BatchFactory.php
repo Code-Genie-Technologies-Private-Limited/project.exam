@@ -21,7 +21,7 @@ class BatchFactory extends Factory
     {
         return [
             'course_id' => Course::query()->where('status', 1)->inRandomOrder()->value('id'),
-            'subCourse_id' => SubCourse::query()->where('status', 1)->inRandomOrder()->value('id'),
+            'sub_course_id' => SubCourse::query()->where('status', 1)->inRandomOrder()->value('id'),
             'name' => $this->faker->sentence,
             'code' => $this->faker->sentence,
             'order' => $this->faker->randomFloat(2, 1, 100),

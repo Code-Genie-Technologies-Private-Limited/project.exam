@@ -23,7 +23,7 @@ class StoreBatchRequest extends FormRequest
     {
         return [
             'course_id' => 'required|exists:courses,id',
-            'subCourse_id' => 'required|exists:sub_courses,id',
+            'sub_course_id' => 'required|exists:sub_courses,id',
             'name' => 'required|min:3|max:160',
             'code' => 'required|min:3|max:160',
         ];

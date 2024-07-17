@@ -19,7 +19,7 @@ class BatchController extends Controller
     {
         $perPage = $request->input('per_page', 10);
 
-        $batches = Batch::with(['creator', 'course', 'subCourse'])
+        $batches = Batch::with(['creator'])
             ->filter($request->all())
             ->orderBy('order', 'desc')
             ->paginate($perPage)
@@ -37,8 +37,8 @@ class BatchController extends Controller
 
         return view('dashboard.batches.index', [
             'batches' => $batches,
-            'courses' => $courses,
-            'subCourses' => $subCourses,
+            'courses' => [],
+            'subCourses' => [],
             'creators' => $creators,
             'filters' => $request->all(),
         ]);

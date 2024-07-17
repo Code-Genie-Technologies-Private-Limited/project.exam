@@ -34,7 +34,7 @@
                                     <div class="col-md-9">
                                         <input class="form-control @error('code') is-invalid @enderror" id="code"
                                             type="text" name="code" placeholder="Enter Batch Name" length="160"
-                                            autocomplete="batch" autofocus required value="{{ old('code') }}">
+                                            autocomplete="batch" autofocus value="{{ old('code') }}">
                                         @error('code')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -125,7 +125,6 @@
                                         <th>SubCourse</th>
                                         <th>Order</th>
                                         <th>Created By</th>
-                                        <th>Download</th>
                                         <th>View</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -137,22 +136,15 @@
                                             <td>{{ $loop->iteration + ($batches->currentPage() - 1) * $batches->perPage() }}
                                             </td>
                                             <td>{{ $batch->title }}
-                                                <a href="{{ route('topics.index', ['batch' => $batch->id]) }}">
+                                                {{-- <a href="{{ route('topics.index', ['batch' => $batch->id]) }}">
                                                     <span class="badge badge-secondary">{{ $batch->topics_count }}</span>
-                                                </a>
+                                                </a> --}}
                                             </td>
                                             <td>{{ $batch->code }}</td>
                                             <td>{{ $batch->course->name }}</td>
                                             <td>{{ $batch->subCourse->name }}</td>
-                                            <td class="description">{!! $batch->description !!}</td>
                                             <td>{{ $batch->order }}</td>
                                             <td>{{ $batch->creator->name }}</td>
-                                            {{-- <td>
-                                                <a href="{{ route('batches.downloadPDF', ['id' => $batch->id]) }}"
-                                                    class="btn btn-info">Download PDF</a>
-                                                <a href="{{ route('batches.downloadHTML', ['id' => $batch->id]) }}"
-                                                    class="btn btn-info">Download HTML</a>
-                                            </td> --}}
                                             <td>
                                                 <a href="{{ url('/batches/' . $batch->id) . '?' . http_build_query(request()->query()) }}"
                                                     class="btn btn-primary">View</a>
@@ -161,6 +153,7 @@
                                                 <a href="{{ url('/batches/' . $batch->id . '/edit') . '?' . http_build_query(request()->query()) }}"
                                                     class="btn btn-primary">Edit</a>
                                             </td>
+                                            
                                             <td>
                                                 <form action="{{ route('batches.destroy', ['batch' => $batch->id]) }}"
                                                     method="POST">
