@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title', 160);
-            $table->longText('content');
-            $table->longText('description');
+            $table->longText('content')->nullable();
+            $table->longText('description')->nullable();
             $table->boolean('status')->default(1);
             $table->decimal('order', 10, 2);
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();

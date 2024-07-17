@@ -23,8 +23,8 @@ class StoreBlogRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:160',
-            'content' => 'required',
-            'description' => 'required',
+            'content' => 'nullable',
+            'description' => 'nullable',
         ];
     }
 }
