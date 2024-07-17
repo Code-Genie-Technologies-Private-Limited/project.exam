@@ -19,9 +19,9 @@ class BlogFilter extends ModelFilter
         return $this->whereLike('title', $name);
     }
 
-    public function user(int $creator)
+    public function content($content)
     {
-        return $this->where('created_by', $creator);
+        return $this->where('content', $content);
     }
 
     public function status($status)
@@ -29,8 +29,9 @@ class BlogFilter extends ModelFilter
         return $this->where('status', $status);
     }
 
-    public function content($content)
+    public function user(int $creator)
     {
-        return $this->where('content', $content);
+        return $this->where('created_by', $creator);
     }
+
 }
