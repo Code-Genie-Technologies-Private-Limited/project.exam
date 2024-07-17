@@ -21,7 +21,7 @@ class BlogController extends Controller
 
         $blogs = Blog::filter($request->all())
             ->with('creator')
-            ->orderBy('order','desc')
+            ->orderBy('order', 'desc')
             ->paginate($perPage)
             ->appends($request->query());
 
@@ -37,7 +37,7 @@ class BlogController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create():View
+    public function create(): View
     {
         return view('dashboard.blogs.create');
     }
