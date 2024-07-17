@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Documents\BlogDocument;
 use App\Models\Blog;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
@@ -97,5 +98,33 @@ class BlogController extends Controller
 
         return redirect()->route('blogs.index', $filters)
             ->with('message', 'The blog has been deleted successfully.');
+    }
+
+    /**
+     * Download the specified resource in PDF format.
+     *
+     * @param Blog $subject
+     * @param Request $request
+     * @return View
+     */
+    public function downloadPDF($id)
+    {
+        $subject = Blog::find($id);
+        $subjectPDF = new BlogDocument($subject);
+        return $subjectPDF->generate();
+    }
+
+    /**
+     * Download the specified resource in HTML format.
+     *
+     * @param $id
+     * @param Request $request
+     * @return View
+     */
+    public function downloadHTML($id)
+    {
+        $blogs = Blog::find($id);
+        $blogHTML = new BlogDocument($blogs);
+        return $blogHTML->generate('html');
     }
 }

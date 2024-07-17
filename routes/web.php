@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SubjectController;
 
 Route::group(['middleware' => ['get.menu']], function () {
@@ -147,9 +148,13 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('mail',        'MailController');
         Route::resource('students',        'StudentController');
         Route::resource('subjects',        'SubjectController');
+        Route::get('/subjects/{id}/download-pdf', [SubjectController::class, 'downloadPDF'])->name('subjects.downloadPDF');
+        Route::get('/subjects/{id}/download-html', [SubjectController::class, 'downloadHTML'])->name('subjects.downloadHTML');
         Route::resource('topics',        'TopicController');
         Route::resource('courses',        'CourseController');
         Route::resource('blogs',        'BlogController');
+        Route::get('/blogs/{id}/download-pdf', [BlogController::class, 'downloadPDF'])->name('blogs.downloadPDF');
+        Route::get('/blogs/{id}/download-html', [BlogController::class, 'downloadHTML'])->name('blogs.downloadHTML');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
         Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');

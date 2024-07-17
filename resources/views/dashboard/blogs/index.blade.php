@@ -19,10 +19,10 @@
                     <div class="card-body">
                         <form method="GET" action="{{ url()->current() }}">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="title">Title</label>
+                                <label class="col-md-3 col-form-label" for="keyword">Keyword Search</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="title" type="text" name="title" placeholder="Enter title" length="160" autocomplete="title" autofocus value="{{ $filters['title'] ?? '' }}">
-                                    @error('name')
+                                    <input class="form-control" id="keyword" type="text" name="keyword" placeholder="Enter title" length="160" autocomplete="keyword" autofocus value="{{ $filters['keyword'] ?? '' }}">
+                                    @error('keyword')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -81,6 +81,7 @@
                                     <th>Description</th>
                                     <th>Order</th>
                                     <th>Created By</th>
+                                    <th>Download</th>
                                     <th>View</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
@@ -96,6 +97,10 @@
                                     <td class="description">{!! $blog->description !!}</td>
                                     <td>{{ $blog->order }}</td>
                                     <td>{{ $blog->creator->name }}</td>
+                                    <td>
+                                        <a href="{{ route('blogs.downloadPDF', ['id' => $blog->id]) }}" class="btn btn-info">Download PDF</a>
+                                        <a href="{{ route('blogs.downloadHTML', ['id' => $blog->id]) }}" class="btn btn-info">Download HTML</a>
+                                    </td>
                                     <td>
                                         <a href="{{ url('/blogs/' . $blog->id) . '?' . http_build_query(request()->query()) }}" class="btn btn-primary">View</a>
                                     </td>
