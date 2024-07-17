@@ -16,6 +16,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ConceptReadController;
 use App\Http\Controllers\GeneralKnowledgeController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PreviousYearPaperController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubjectController;
@@ -160,6 +161,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('blogs',        'BlogController');
         Route::resource('branches',        'BranchController');
         Route::resource('batches',        'BatchController');
+        Route::resource('notices',        'NoticeController');
         Route::resource('questions',        'QuestionController');
         Route::resource('previous-year-papers',        'PreviousYearPaperController');
         Route::resource('test-types',        'TestTypeController');
