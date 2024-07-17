@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
             PreviousYearPaperSeeder::class,
             BlogSeeder::class,
             BranchSeeder::class,
+            BatchSeeder::class,
         ]);
     }
 }
