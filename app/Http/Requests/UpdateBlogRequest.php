@@ -26,6 +26,7 @@ class UpdateBlogRequest extends FormRequest
             'content' => 'nullable',
             'description' => 'nullable',
             'status' => 'boolean',
+            'order' => 'required|numeric',
 
         ];
     }
