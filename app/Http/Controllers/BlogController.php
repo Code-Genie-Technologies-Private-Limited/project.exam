@@ -48,7 +48,7 @@ class BlogController extends Controller
      */
     public function store(StoreBlogRequest $request)
     {
-        Blog::create(array_merge(
+        Blog::create(array_merge( 
             $request->validated(),
             ['created_by' => auth()->user()->id]
         ));
