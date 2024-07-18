@@ -23,9 +23,9 @@
                                     <label class="col-md-3 col-form-label" for="branch_name">Branch Name</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('branch_name') is-invalid @enderror"
-                                            id="branch_name" type="text" name="name"
-                                            placeholder="Enter Branch Name" length="160" autocomplete="branch" autofocus
-                                            value="{{ old('name') }}">
+                                            id="branch_name" type="text" name="name" placeholder="Enter Branch Name"
+                                            length="160" autocomplete="branch" autofocus
+                                            value="{{ $filters['name'] ?? '' }}">
                                         @error('branch_name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -35,9 +35,9 @@
                                     <label class="col-md-3 col-form-label" for="branch_code">Branch Code</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('branch_code') is-invalid @enderror"
-                                            id="branch_code" type="text" name="code"
-                                            placeholder="Enter Branch Name" length="160" autocomplete="branch" autofocus
-                                            value="{{ old('name') }}">
+                                            id="branch_code" type="text" name="code" placeholder="Enter Branch Name"
+                                            length="160" autocomplete="branch" autofocus
+                                            value="{{ $filters['code'] ?? '' }}">
                                         @error('branch_code')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -48,7 +48,8 @@
                                     <div class="col-md-9">
                                         <input class="form-control @error('start_date') is-invalid @enderror"
                                             id="start_date" type="date" name="date" placeholder="Enter Branch Name"
-                                            length="160" autocomplete="branch" autofocus value="{{ old('name') }}">
+                                            length="160" autocomplete="branch" autofocus
+                                            value="{{ $filters['date'] ?? '' }}">
                                         @error('start_date')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
