@@ -100,7 +100,9 @@ class BranchController extends Controller
     {
         $filters = $request->input('_token', '_method');
 
+        $branch->delete();
+
         return redirect()->route('branches.index', $filters)
-            ->with('message', 'Branch has been added successfully.');
+            ->with('message', 'Branch has been deleted successfully.');
     }
 }
