@@ -37,8 +37,8 @@ class BatchController extends Controller
 
         return view('dashboard.batches.index', [
             'batches' => $batches,
-            'courses' => [],
-            'subCourses' => [],
+            'courses' => $courses,
+            'subCourses' => $subCourses,
             'creators' => $creators,
             'filters' => $request->all(),
         ]);
@@ -129,7 +129,7 @@ class BatchController extends Controller
     {
         $batch->update($request->validated());
 
-        return redirect('batches.index', $request->query())
+        return redirect()->route('batches.index', $request->query())
             ->with('message', 'Batch has been updated successfulluy.');
     }
 

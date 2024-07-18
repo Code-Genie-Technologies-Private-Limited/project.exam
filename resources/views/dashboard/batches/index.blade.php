@@ -19,12 +19,12 @@
                         <div class="card-body">
                             <form method="GET" action="{{ url()->current() }}">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="title">Batch Name</label>
+                                    <label class="col-md-3 col-form-label" for="name">Batch Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="title" type="text" name="title"
-                                            placeholder="Enter batch title" length="160" autocomplete="batch" autofocus
-                                            value="{{ $filters['title'] ?? '' }}">
-                                        @error('title')
+                                        <input class="form-control" id="name" type="text" name="name"
+                                            placeholder="Enter Batch Name" length="160" autocomplete="batch" autofocus
+                                            value="{{ $filters['name'] ?? '' }}">
+                                        @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -33,8 +33,8 @@
                                     <label class="col-md-3 col-form-label" for="code">Batch Code</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('code') is-invalid @enderror" id="code"
-                                            type="text" name="code" placeholder="Enter Batch Name" length="160"
-                                            autocomplete="batch" autofocus value="{{ old('code') }}">
+                                            type="text" name="code" placeholder="Enter Batch Code" length="160"
+                                            autocomplete="batch" autofocus value="{{ $filters['code'] ?? '' }}">
                                         @error('code')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -44,8 +44,10 @@
                                     <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="course_id" name="course_id">
+                                            <option value="">All</option>
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                                                <option value="{{ $course->id }}"
+                                                    {{ ($filters['course_id'] ?? '') == $course->id ? 'selected' : '' }}>
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>
@@ -55,15 +57,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="subcourse_id">SubCourse</label>
+                                    <label class="col-md-3 col-form-label" for="sub_course_id">SubCourse</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" id="subcourse_id" name="subCourse">
+                                        <select class="form-control" id="sub_course_id" name="sub_course_id">
+                                            <option value="">All</option>
                                             @foreach ($subCourses as $subCourse)
-                                                <option value="{{ $subCourse->id }}" @selected(old('subcourse_id') == $subCourse->id)>
+                                                <option value="{{ $subCourse->id }}"
+                                                    {{ ($filters['sub_course_id'] ?? '') == $subCourse->id ? 'selected' : '' }}>
                                                     {{ $subCourse->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('subcourse_id')
+                                        @error('sub_course_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -135,11 +139,7 @@
                                         <tr class="{{ $batch->status == 0 ? 'table-danger' : '' }}">
                                             <td>{{ $loop->iteration + ($batches->currentPage() - 1) * $batches->perPage() }}
                                             </td>
-                                            <td>{{ $batch->title }}
-                                                {{-- <a href="{{ route('topics.index', ['batch' => $batch->id]) }}">
-                                                    <span class="badge badge-secondary">{{ $batch->topics_count }}</span>
-                                                </a> --}}
-                                            </td>
+                                            <td>{{ $batch->name }}</td>
                                             <td>{{ $batch->code }}</td>
                                             <td>{{ $batch->course->name }}</td>
                                             <td>{{ $batch->subCourse->name }}</td>
@@ -153,7 +153,7 @@
                                                 <a href="{{ url('/batches/' . $batch->id . '/edit') . '?' . http_build_query(request()->query()) }}"
                                                     class="btn btn-primary">Edit</a>
                                             </td>
-                                            
+
                                             <td>
                                                 <form action="{{ route('batches.destroy', ['batch' => $batch->id]) }}"
                                                     method="POST">

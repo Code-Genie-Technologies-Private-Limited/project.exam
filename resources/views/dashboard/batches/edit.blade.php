@@ -30,7 +30,7 @@
                                     <div class="col-md-9">
                                         <input class="form-control @error('code') is-invalid @enderror" id="code"
                                             type="text" name="code" placeholder="Enter Batch Name" length="160"
-                                            autocomplete="batch" autofocus required value="{{ old('code') }}">
+                                            autocomplete="batch" autofocus required value="{{ old('code') ?? $batch->code}}">
                                         @error('code')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -41,7 +41,7 @@
                                     <div class="col-md-9">
                                         <select class="form-control" id="course_id" name="course_id">
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                                                <option value="{{ $course->id }}" @if ((old('course_id') ?? $batch->course_id) == $course->id) selected @endif>
                                                     {{ $course->name }}</option>
                                             @endforeach
                                         </select>
@@ -51,11 +51,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="subCourse_id">SubCourse</label>
+                                    <label class="col-md-3 col-form-label" for="sub_course_id">SubCourse</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" id="subCourse_id" name="subCourse">
+                                        <select class="form-control" id="sub_course_id" name="sub_course_id">
                                             @foreach ($subCourses as $subCourse)
-                                                <option value="{{ $subCourse->id }}" @selected(old('course_id') == $subCourse->id)>
+                                                <option value="{{ $subCourse->id }}" @if ((old('sub_course_id') ?? $batch->sub_course_id) == $subCourse->id) selected @endif>
                                                     {{ $subCourse->name }}</option>
                                             @endforeach
                                         </select>

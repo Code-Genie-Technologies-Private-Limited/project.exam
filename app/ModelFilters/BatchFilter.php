@@ -18,6 +18,7 @@ class BatchFilter extends ModelFilter
     {
         return $this->whereLike('name', $name);
     }
+    
     public function code(string $code)
     {
         return $this->whereLike('code', $code);
@@ -35,7 +36,7 @@ class BatchFilter extends ModelFilter
 
     public function subCourse(int $subCourse)
     {
-        return $this->where('subCourse_id', $subCourse);
+        return $this->where('sub_course_id', $subCourse);
     }
 
     public function status($status)

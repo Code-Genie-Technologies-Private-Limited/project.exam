@@ -27,7 +27,7 @@
                                     <label class="col-md-3 col-form-label" for="code">Batch Code</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('code') is-invalid @enderror" id="code"
-                                            type="text" name="code" placeholder="Enter Batch Name" length="160"
+                                            type="text" name="code" placeholder="Enter Batch Code" length="160"
                                             autocomplete="batch" autofocus required value="{{ old('code') }}">
                                         @error('code')
                                             <span class="text-danger">{{ $message }}</span>
@@ -38,6 +38,7 @@
                                     <label class="col-md-3 col-form-label" for="course_id">Course</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="course_id" name="course_id">
+                                            <option value="">All</option>
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
                                                     {{ $course->name }}</option>
@@ -52,6 +53,7 @@
                                     <label class="col-md-3 col-form-label" for="sub_course_id">SubCourse</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="sub_course_id" name="sub_course_id">
+                                            <option value="">All</option>
                                             @foreach ($subCourses as $subCourse)
                                                 <option value="{{ $subCourse->id }}" @selected(old('sub_course_id') == $subCourse->id)>
                                                     {{ $subCourse->name }}</option>
