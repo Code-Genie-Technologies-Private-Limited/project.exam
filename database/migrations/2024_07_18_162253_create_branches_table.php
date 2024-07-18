@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('branches', function (Blueprint $table) {
+            $table->id();
+            $table->string('branch_name', 160);
+            $table->string('branch_code');
+            $table->date('start_date')->nullable();
+            $table->decimal('order', 10, 2);
+            $table->boolean('status')->default(1);
+            $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('branches');
+    }
+};
