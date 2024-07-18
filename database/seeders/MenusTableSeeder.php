@@ -155,6 +155,7 @@ class MenusTableSeeder extends Seeder
         $this->insertLink('admin', 'Course', '/courses');
         $this->insertLink('admin', 'Sub-Course', '/sub-courses');
         $this->insertLink('admin', 'Blog', '/blogs');
+        $this->insertLink('admin', 'Branch', '/branches');
         $this->endDropdown();
         $this->insertLink('guest', 'Login', '/login', 'cil-account-logout');
         $this->insertLink('guest', 'Register', '/register', 'cil-account-logout');

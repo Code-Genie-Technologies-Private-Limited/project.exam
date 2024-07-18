@@ -151,6 +151,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('courses',        'CourseController');
         Route::resource('sub-courses',        'SubCourseController');
         Route::resource('blogs',        'BlogController');
+        Route::resource('branches',        'BranchController');
         Route::get('/subjects/{id}/download-pdf', [SubjectController::class, 'downloadPDF'])->name('subjects.downloadPDF');
         Route::get('/subjects/{id}/download-html', [SubjectController::class, 'downloadHTML'])->name('subjects.downloadHTML');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
