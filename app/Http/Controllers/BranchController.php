@@ -103,6 +103,6 @@ class BranchController extends Controller
         $branch->delete();
 
         return redirect()->route('branches.index', $filters)
-            ->with('message', 'Branch has been deleted successfully.');
+            ->with('error', 'Branch has been deleted successfully.');
     }
 }
