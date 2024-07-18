@@ -62,7 +62,7 @@
                                             <option value="">All</option>
                                             @foreach ($creators as $creator)
                                                 <option value="{{ $creator->id }}"
-                                                    {{ $filters['user'] ?? '' == $creator->id ? 'selected' : '' }}>
+                                                    {{ ($filters['user'] ?? '') == $creator->id ? 'selected' : '' }}>
                                                     {{ $creator->name }}</option>
                                             @endforeach
                                         </select>
