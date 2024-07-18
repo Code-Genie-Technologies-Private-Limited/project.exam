@@ -20,7 +20,7 @@
                                         <input class="form-control @error('branch_name') is-invalid @enderror"
                                             id="branch_name" type="text" name="branch_name"
                                             placeholder="Enter Branch Name" length="160" autocomplete="branch" autofocus
-                                            required value="{{ old('name') }}">
+                                            required value="{{ old('branch_name') ?? $branch->branch_name }}">
                                         @error('branch_name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -32,7 +32,7 @@
                                         <input class="form-control @error('branch_code') is-invalid @enderror"
                                             id="branch_code" type="text" name="branch_code"
                                             placeholder="Enter Branch Name" length="160" autocomplete="branch" autofocus
-                                            required value="{{ old('name') }}">
+                                            required value="{{ old('branch_name') ?? $branch->branch_code }}">
                                         @error('branch_code')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -44,7 +44,7 @@
                                         <input class="form-control @error('start_date') is-invalid @enderror"
                                             id="start_date" type="date" name="start_date"
                                             placeholder="Enter Branch Name" length="160" autocomplete="branch" autofocus
-                                            required value="{{ old('name') }}">
+                                            required value="{{ old('branch_name') ?? $branch->start_date }}">
                                         @error('start_date')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
