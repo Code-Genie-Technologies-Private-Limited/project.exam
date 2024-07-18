@@ -14,9 +14,10 @@ class BlogFilter extends ModelFilter
      */
     public $relations = [];
 
-    public function name(string $name)
+    public function keyword(string $keyword)
     {
-        return $this->whereLike('title', $name);
+        return $this->orWhere('title', 'Like', '%$keyword%')
+            ->orWhere('content', 'Like', '%$keyword%');
     }
 
     public function content($content)
@@ -33,5 +34,4 @@ class BlogFilter extends ModelFilter
     {
         return $this->where('created_by', $creator);
     }
-
 }

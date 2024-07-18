@@ -19,12 +19,12 @@
                         <div class="card-body">
                             <form method="GET" action="{{ url()->current() }}">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="name">Blog</label>
+                                    <label class="col-md-3 col-form-label" for="keyword">Blog</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="name" type="text" name="name"
-                                            placeholder="Enter blog name" length="160" autocomplete="blog" autofocus
-                                            value="{{ $filters['name'] ?? '' }}">
-                                        @error('name')
+                                        <input class="form-control" id="keyword" type="text" name="keyword"
+                                            placeholder="Enter keyword" length="160" autocomplete="blog" autofocus
+                                            value="{{ $filters['keyword'] ?? '' }}">
+                                        @error('keyword')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
