@@ -10,7 +10,7 @@
                         <h4>Add Blog</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('blogs.store') }}">
+                        <form method="POST" action="{{ route('blogs.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="title">Title</label>
@@ -35,6 +35,15 @@
                                 <div class="col-md-9">
                                     <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{ old('description') }}</textarea>
                                     @error('description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="filename">Upload Dcoument</label>
+                                <div class="col-md-9">
+                                    <input type="file" name="filename[]" id="filename" multiple>
+                                    @error('filename')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

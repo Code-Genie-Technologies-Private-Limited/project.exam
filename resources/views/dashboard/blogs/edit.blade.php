@@ -10,7 +10,7 @@
                         <h4>Edit Topic</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ url('/blogs/' . $blog->id) . '?' . http_build_query($filters) }}">
+                        <form method="POST" action="{{ url('/blogs/' . $blog->id) . '?' . http_build_query($filters) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
@@ -63,6 +63,27 @@
                                     @error('status')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="filename">Upload Dcoument</label>
+                                <div class="col-md-9">
+                                    <input type="file" name="filename[]" id="filename" multiple>
+                                    @error('filename')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="filename">Uploaded Dcoument</label>
+                                <div class="col-md-9">
+                                    @foreach($blog->blogFileDetails as $detail)
+                                    @if(in_array(pathinfo($detail->filename, PATHINFO_EXTENSION), ['jpg', 'png', 'jpeg']))
+                                    <img src="{{ asset('public/' . $detail->filename) }}" alt="{{ basename($detail->filename) }}" style="width: 300px; height: 300px; object-fit: cover;">
+                                    @else
+                                    <iframe src="{{ asset('public/' . $detail->filename) }}" style="width: 300px; height: 300px; border: none;"></iframe>
+                                    @endif
+                                    @endforeach
                                 </div>
                             </div>
                             <button class="btn btn-success" type="submit">Update</button>

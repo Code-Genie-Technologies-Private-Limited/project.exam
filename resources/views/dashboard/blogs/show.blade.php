@@ -20,6 +20,18 @@
                         <p>{{ $blog->order }}</p>
                         <h4>Status</h4>
                         <p>{{ $blog->status == 1 ? 'Active' : 'In Active' }}</p>
+                        <h4>Uploaded Dcoument</h4>
+                        <ul>
+                            @foreach($blog->blogFileDetails as $detail)
+                            <li>
+                                @if(in_array(pathinfo($detail->filename, PATHINFO_EXTENSION), ['jpg', 'png', 'jpeg']))
+                                <img src="{{ asset('public/' . $detail->filename) }}" alt="{{ basename($detail->filename) }}" style="width: 300px; height: 300px; object-fit: cover;">
+                                @else
+                                <iframe src="{{ asset('public/' . $detail->filename) }}" style="width: 300px; height: 300px; border: none;"></iframe>
+                                @endif
+                            </li>
+                            @endforeach
+                        </ul>
                         <h4>Created By User</h4>
                         <p>{{ $blog->creator->name }}</p>
                         <a href="{{ url('/blogs/' . $blog->id . '/edit') . '?' . http_build_query($filters) }}" class="btn btn-primary">Edit</a>
