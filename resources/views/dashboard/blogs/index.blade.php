@@ -18,6 +18,17 @@
                         </div>
                         <div class="card-body">
                             <form method="GET" action="{{ url()->current() }}">
+                                 <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="keyword"> Keyword</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" id="keyword" type="text" name="keyword"
+                                            placeholder="Enter keyword ..." length="160" autocomplete="keyword"focus
+                                            value="{{ $filters['keyword'] ?? '' }}">
+                                        @error('keyword')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="title"> Title</label>
                                     <div class="col-md-9">

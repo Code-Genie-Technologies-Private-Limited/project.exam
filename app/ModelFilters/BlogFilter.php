@@ -27,4 +27,20 @@ class BlogFilter extends ModelFilter
     {
         return $this->where('status', $status);
     }
+
+    // public function keyword(string $keyword)
+    // {
+    //     return $this->where(function ($query) use ($keyword) {
+    //         $query->where('title', 'like', '%$keyword%')
+    //             ->orWhere('content', 'like', '%$keyword%')
+    //             ->orWhere('description', 'like', '%$keyword%');
+    //     });
+    // }
+
+    public function keyword(string $keyword)
+    {
+        return $this->orWhere('title', 'like', "%$keyword%")
+            ->orWhere('description', 'like', "%$keyword%")
+            ->orWhere('content', 'like', "%$keyword%");
+    }
 }
