@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <form method="GET" action="{{ url()->current() }}">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="keyword">Blog</label>
+                                    <label class="col-md-3 col-form-label" for="keyword">Keyword</label>
                                     <div class="col-md-9">
                                         <input class="form-control" id="keyword" type="text" name="keyword"
                                             placeholder="Enter keyword" length="160" autocomplete="blog" autofocus
@@ -29,43 +29,17 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="difficulty_level">Difficulty Level</label>
-                                    <div class="col-md-9">
-                                    <select class="form-control" id="difficulty_level" name="difficulty">
-                                        <option value="">Please select</option>
-                                        <option value="easy" {{ ($filters['difficulty'] ?? '') == 'easy' ? 'selected' : '' }}>Easy</option>
-                                        <option value="medium" {{ ($filters['difficulty'] ?? '') == 'medium' ? 'selected' : '' }}>Medium</option>
-                                        <option value="hard" {{ ($filters['difficulty'] ?? '')  == 'hard' ? 'selected' : '' }}>Hard</option>
-                                    </select>
-                                    </div>
-                                 </div>
                                 <div class="form-group row">
-                                    <label for="topic" class="col-md-3 col-form-label">Topic</label>
+                                    <label class="col-md-3 col-form-label" for="content">Content</label>
                                     <div class="col-md-9">
-                                        <select name="topic" id="topic" class="form-control">
-                                            <option value="">All</option>
-                                            @foreach ($topics as $topic)
-                                                <option value="{{ $topic->id }}"
-                                                    {{ ($filters['topic'] ?? '') == $topic->id ? 'selected' : '' }}>
-                                                    {{ $topic->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input class="form-control" id="content" type="text" name="content"
+                                            placeholder="Enter content" length="160" autocomplete="blog" autofocus
+                                            value="{{ $filters['content'] ?? '' }}">
+                                        @error('content')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="subject" class="col-md-3 col-form-label">Subject</label>
-                                    <div class="col-md-9">
-                                        <select name="subject" id="subject" class="form-control">
-                                            <option value="">All</option>
-                                            @foreach ($subjects as $subject)
-                                                <option value="{{ $subject->id }}"
-                                                    {{ ($filters['subject'] ?? '') == $subject->id ? 'selected' : '' }}>
-                                                    {{ $subject->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div> --}}
                                 <div class="form-group row">
                                     <label for="user" class="col-md-3 col-form-label">Creator</label>
                                     <div class="col-md-9">

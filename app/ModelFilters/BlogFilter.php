@@ -16,8 +16,11 @@ class BlogFilter extends ModelFilter
 
     public function keyword(string $keyword)
     {
-        return $this->orWhere('title', 'Like', '%$keyword%')
-            ->orWhere('content', 'Like', '%$keyword%');
+        return $this->where(function ($query) use ($keyword) {
+            $query->where('title', 'like', "%$keyword%")
+                ->orWhere('description', 'like', "%$keyword%")
+                ->orWhere('content', 'like', "%$keyword%");
+        });
     }
 
     public function content($content)
