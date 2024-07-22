@@ -14,9 +14,12 @@ class BlogFilter extends ModelFilter
      */
     public $relations = [];
 
-    public function title(string $title)
+    public function keyword(string $keyword)
     {
-        return $this->whereLike('title', $title);
+        return $this
+            ->orWhere('title', 'like', "%$keyword%")
+            ->orWhere('content', 'like', "%$keyword%")
+            ->orWhere('description', 'like', "%$keyword%");
     }
 
     public function user($user)

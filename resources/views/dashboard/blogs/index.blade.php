@@ -20,10 +20,10 @@
                     <div class="card-body">
                         <form method="GET" action="{{ url()->current() }}">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="title">Blog Name</label>
+                                <label class="col-md-3 col-form-label" for="title">Keyword Search</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" id="title" type="text" name="title" placeholder="Enter blog title" length="160" autocomplete="blog" autofocus value="{{ $filters['title'] ?? '' }}">
-                                    @error('title')
+                                    <input class="form-control" id="title" type="text" name="keyword" placeholder="Enter blog title" length="160" autocomplete="blog" autofocus value="{{ $filters['keyword'] ?? '' }}">
+                                    @error('keyword')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
