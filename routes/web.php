@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\SubjectController;
 
 Route::group(['middleware' => ['get.menu']], function () {
@@ -152,6 +153,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('topics',        'TopicController');
         Route::resource('blogs',        'BlogController');
         Route::resource('branchs',        'BranchController');
+        Route::resource('notices',        'NoticeController');
 
 
 

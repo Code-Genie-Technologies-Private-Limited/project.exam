@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             TopicSeeder::class,
             BlogSeeder::class,
             BranchSeeder::class,
+            NoticeSeeder::class,
         ]);
     }
 }
