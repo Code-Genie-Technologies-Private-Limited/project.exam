@@ -16,10 +16,10 @@ class CourseFilter extends ModelFilter
 
     public function name(string $name)
     {
-        return $this->whereLike('name', $name);
+        return $this->wherelike('name', $name);
     }
 
-    public function user($user)
+    public function user(int $user)
     {
         return $this->where('created_by', $user);
     }

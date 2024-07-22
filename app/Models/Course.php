@@ -13,7 +13,6 @@ class Course extends Model
 
     protected $guarded = [];
 
-    // Automatically set the 'order' field when adding
     public static function boot()
     {
         parent::boot();

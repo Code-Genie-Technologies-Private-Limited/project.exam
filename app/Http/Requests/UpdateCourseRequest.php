@@ -22,9 +22,9 @@ class UpdateCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:1|max:160',
+            'name' => 'required|min:3|max:160',
             'description' => 'nullable',
-            'order' => 'decimal:2',
+            'order' => 'numeric',
             'status' => 'boolean',
         ];
     }

@@ -152,6 +152,18 @@ class MenusTableSeeder extends Seeder
         $this->insertLink('admin', 'Email',                   '/mail');
         $this->insertLink('admin', 'Subject', '/subjects');
         $this->insertLink('admin', 'Topic', '/topics');
+        $this->insertLink('admin', 'Question', '/questions');
+        $this->insertLink('admin', 'Course', '/courses');
+        $this->insertLink('admin', 'Blog', '/blogs');
+        $this->insertLink('admin', 'Branch', '/branches');
+        $this->insertLink('admin', 'Batch', '/batches');
+        $this->insertLink('admin', 'Notice', '/notices');
+        $this->insertLink('admin', 'Prevoius Year Paper', '/previous-year-papers');
+        $this->insertLink('admin', 'TestType', '/test-types');
+        $this->insertLink('admin', 'General & Knowledge', '/general-knowledges');
+        $this->insertLink('admin', 'Sub Course', '/sub-courses');
+        $this->insertLink('admin', 'Course Subject', '/course-subjects');
+        $this->insertLink('admin', 'Concept & Read', '/concept-reads');
         $this->endDropdown();
         $this->insertLink('guest', 'Login', '/login', 'cil-account-logout');
         $this->insertLink('guest', 'Register', '/register', 'cil-account-logout');

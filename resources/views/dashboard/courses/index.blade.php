@@ -92,7 +92,8 @@
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Order</th>
-                                    <th>Created By</th>
+                                    <th>Status</th>
+                                    <th>Creator</th>
                                     <th>View</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
@@ -108,6 +109,7 @@
                                         </a>
                                     </td>
                                     <td>{{ $course->description }}</td>
+                                    <td>{{ $course->status }}</td>
                                     <td>{{ $course->order }}</td>
                                     <td>{{ $course->creator->name }}</td>
                                     <td>

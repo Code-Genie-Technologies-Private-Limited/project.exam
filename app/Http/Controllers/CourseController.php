@@ -6,7 +6,6 @@ use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -17,12 +16,12 @@ class CourseController extends Controller
      */
     public function index(Request $request): View
     {
-        $perPage = $request->input('per_page', 10);
+        $perpage = $request->input('per-page', 10);
 
         $courses = Course::filter($request->all())
             ->with('creator')
-            ->orderBy('order')
-            ->paginate($perPage)
+            ->orderBy('order', 'desc')
+            ->paginate($perpage)
             ->appends($request->query());
 
         $creators = User::all();
@@ -45,12 +44,12 @@ class CourseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCourseRequest $request): RedirectResponse
+    public function store(StoreCourseRequest $request)
     {
         Course::create(array_merge($request->validated(), ['created_by' => auth()->user()->id]));
 
         return redirect()->route('courses.index', $request->query())
-            ->with('message', 'The course has been created successfully.');
+            ->with('message', 'Course has been added successfully.');
     }
 
     /**
@@ -78,24 +77,28 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCourseRequest $request, Course $course): RedirectResponse
+    public function update(UpdateCourseRequest $request, Course $course)
     {
         $course->update($request->validated());
 
         return redirect()->route('courses.index', $request->query())
-            ->with('message', 'The course has been updated successfully.');
+            ->with('message', 'Course has been updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course, Request $request): RedirectResponse
+    public function destroy(Course $course, Request $request)
     {
         $filters = $request->except('_token', '_method');
 
+        if ($course->subCourses()->exists()) {
+            return redirect()->route('courses.index', $filters)
+                ->with('error', 'Course can not be deleted as it has one or more subcourses.');
+        }
         $course->delete();
 
         return redirect()->route('courses.index', $filters)
-            ->with('message', 'The course has been deleted successfully.');
+            ->with('message', 'Course has been deleted successfully.');
     }
 }
