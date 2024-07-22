@@ -34,8 +34,8 @@ class BranchFilter extends ModelFilter
         return $this->where('status', $status);
     }
 
-    public function order($order)
+    public function user($user)
     {
-        return $this->where('order', $order);
+        return $this->where('created_by', $user);
     }
 }
