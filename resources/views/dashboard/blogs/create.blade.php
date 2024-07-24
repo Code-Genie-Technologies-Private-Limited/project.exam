@@ -10,13 +10,13 @@
                             <h4>Add Blog</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('blogs.store') }}">
+                            <form method="POST" action="{{ route('blogs.store') }}" enctype="multipart/fprm-data">
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="title">Title</label>
+                                    <label class="col-md-3 col-form-label" for="filename">Title</label>
                                     <div class="col-md-9">
-                                        <input class="form-control @error('title') is-invalid @enderror" id="title"
-                                            type="text" name="title" placeholder="Enter blog..." length="160"
+                                        <input class="form-control @error('title') is-invalid @enderror" id="filename"
+                                            type="file" name="title" placeholder="Enter blog..." length="160"
                                             autocomplete="blog" autofocus required value="{{ old('title') }}">
                                         @error('title')
                                             <span class="text-danger">{{ $message }}</span>
@@ -30,6 +30,15 @@
                                         @error('content')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="filename">Upload Document</label>
+                                    <div class="col-md-9">
+                                        <textarea class="form-control @error('filename') is-invalid @enderror" name="filename" id="filename">{{ old('filename') }}
+                                        @error('filename')
+<span class="text-danger">{{ $message }}</span>
+@enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
