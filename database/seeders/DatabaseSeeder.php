@@ -36,17 +36,7 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             TopicSeeder::class,
             CourseSeeder::class,
-            SubCourseSeeder::class,
-            CourseSubjectSeeder::class,
-            QuestionSeeder::class,
-            ConceptReadSeeder::class,
-            GeneralKnowledgeSeeder::class,
-            TestTypeSeeder::class,
-            PreviousYearPaperSeeder::class,
             BlogSeeder::class,
-            BranchSeeder::class,
-            BatchSeeder::class,
-            NoticeSeeder::class,
         ]);
     }
 }

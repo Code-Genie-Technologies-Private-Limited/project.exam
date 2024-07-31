@@ -13,7 +13,7 @@ class Blog extends Model
 
     protected $guarded = [];
 
-    // Automatically set the 'order' field when creating a new topic
+    // Automatically set the 'order' field when adding
     public static function boot()
     {
         parent::boot();
@@ -33,5 +33,10 @@ class Blog extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function blogFileDetails()
+    {
+        return $this->hasMany(BlogDetail::class);
     }
 }

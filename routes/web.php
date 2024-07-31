@@ -11,6 +11,7 @@
 |
 */
 
+<<<<<<< HEAD
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BranchController;
@@ -19,6 +20,9 @@ use App\Http\Controllers\GeneralKnowledgeController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PreviousYearPaperController;
 use App\Http\Controllers\QuestionController;
+=======
+use App\Http\Controllers\BlogController;
+>>>>>>> 40eb187d5845c3e620133c083fbb55c2f024462a
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TestTypeController;
 
@@ -156,21 +160,13 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('mail',        'MailController');
         Route::resource('students',        'StudentController');
         Route::resource('subjects',        'SubjectController');
+        Route::get('/subjects/{id}/download-pdf', [SubjectController::class, 'downloadPDF'])->name('subjects.downloadPDF');
+        Route::get('/subjects/{id}/download-html', [SubjectController::class, 'downloadHTML'])->name('subjects.downloadHTML');
         Route::resource('topics',        'TopicController');
         Route::resource('courses',        'CourseController');
         Route::resource('blogs',        'BlogController');
-        Route::resource('branches',        'BranchController');
-        Route::resource('batches',        'BatchController');
-        Route::resource('notices',        'NoticeController');
-        Route::resource('questions',        'QuestionController');
-        Route::resource('previous-year-papers',        'PreviousYearPaperController');
-        Route::resource('test-types',        'TestTypeController');
-        Route::resource('sub-courses',        'SubCourseController');
-        Route::resource('concept-reads',        'ConceptReadController');
-        Route::resource('course-subjects',        'CourseSubjectController');
-        Route::resource('general-knowledges',        'GeneralKnowledgeController');
-        Route::get('/subjects/{id}/download-pdf', [SubjectController::class, 'downloadPDF'])->name('subjects.downloadPDF');
-        Route::get('/subjects/{id}/download-html', [SubjectController::class, 'downloadHTML'])->name('subjects.downloadHTML');
+        Route::get('/blogs/{id}/download-pdf', [BlogController::class, 'downloadPDF'])->name('blogs.downloadPDF');
+        Route::get('/blogs/{id}/download-html', [BlogController::class, 'downloadHTML'])->name('blogs.downloadHTML');
         Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
         Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');

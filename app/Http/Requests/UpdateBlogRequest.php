@@ -22,10 +22,10 @@ class UpdateBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:3|max:160',
-            'content' => 'required',
+            'title' => 'required|min:1|max:100',
+            'content' => 'required|min:1|max:160',
             'description' => 'nullable',
-            'order' => 'decimal:2',
+            'order' => 'numeric',
             'status' => 'boolean',
         ];
     }

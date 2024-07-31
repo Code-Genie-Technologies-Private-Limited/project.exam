@@ -16,25 +16,18 @@ class BlogFilter extends ModelFilter
 
     public function keyword(string $keyword)
     {
-        return $this->where(function ($query) use ($keyword) {
-            $query->where('title', 'like', "%$keyword%")
-                ->orWhere('description', 'like', "%$keyword%")
-                ->orWhere('content', 'like', "%$keyword%");
-        });
+        return $this->orWhere('title', 'LIKE', "%$keyword%")
+            ->orWhere('content', 'LIKE', "%$keyword%")
+            ->orWhere('description', 'LIKE', "%$keyword%");
     }
 
-    public function content($content)
+    public function user($user)
     {
-        return $this->where('content', $content);
+        return $this->where('created_by', $user);
     }
 
     public function status($status)
     {
         return $this->where('status', $status);
-    }
-
-    public function user(int $creator)
-    {
-        return $this->where('created_by', $creator);
     }
 }
